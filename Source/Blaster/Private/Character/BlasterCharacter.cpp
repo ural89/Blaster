@@ -1,10 +1,11 @@
 #include "Character/BlasterCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "BlasterCharacter.h"
 
 ABlasterCharacter::ABlasterCharacter()
 {
- 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = true;
 
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(GetMesh());
@@ -16,24 +17,52 @@ ABlasterCharacter::ABlasterCharacter()
 	FollowCamera->bUsePawnControlRotation = false;
 }
 
-
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
-
 
 void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
-
-
-void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ABlasterCharacter::MoveForward);
+	PlayerInputComponent->BindAxis(TEXT("MoveRight"), this, &ABlasterCharacter::MoveRight);
+	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ABlasterCharacter::LookUp);
+	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ABlasterCharacter::Turn);
+	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::Jump);
+	
 }
 
+void ABlasterCharacter::MoveForward(float Value)
+{
+	if (Controller != nullptr && Value != 0.f)
+	{
+		const FRotator YawRotation(0, Controller->GetControlRotation().Yaw, 0);
+		const FVector Direction(FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X)); // X is forward in Unreal
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void ABlasterCharacter::MoveRight(float Value)
+{
+	if (Controller != nullptr && Value != 0.f)
+	{
+		const FRotator YawRotation(0, Controller->GetControlRotation().Yaw, 0);
+		const FVector Direction(FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y)); 
+		AddMovementInput(Direction, Value);
+	}
+}
+
+void ABlasterCharacter::Turn(float Value)
+{
+	AddControllerYawInput(Value);
+}
+
+void ABlasterCharacter::LookUp(float Value)
+{
+	AddControllerPitchInput(Value);
+}
