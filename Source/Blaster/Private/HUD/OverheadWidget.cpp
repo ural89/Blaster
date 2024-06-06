@@ -3,6 +3,7 @@
 #include "HUD/OverheadWidget.h"
 #include "OverheadWidget.h"
 #include "Components/TextBlock.h"
+#include "GameFramework/PlayerState.h"
 void UOverheadWidget::SetDisplayText(FString TextToDisplay)
 {
     if (DisplayText)
@@ -13,6 +14,14 @@ void UOverheadWidget::SetDisplayText(FString TextToDisplay)
 
 void UOverheadWidget::ShowPlayerNetRole(APawn *InPawn)
 {
+
+    FString PlayerName("None");
+    APlayerState *PlayerState = InPawn->GetPlayerState();
+    if (PlayerState)
+    {
+
+        PlayerName = InPawn->GetPlayerState()->GetPlayerName();
+    }
 
     ENetRole LocalRole = InPawn->GetLocalRole();
     FString Role;
@@ -36,6 +45,6 @@ void UOverheadWidget::ShowPlayerNetRole(APawn *InPawn)
         break;
     }
 
-    FString LocalRoleString = FString::Printf(TEXT("Local Role %s"), *Role);
+    FString LocalRoleString = FString::Printf(TEXT("Player Name %s"), *PlayerName);
     SetDisplayText(LocalRoleString);
 }
