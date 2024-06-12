@@ -6,6 +6,7 @@
 #include "BlasterCharacter.h"
 #include "Net/UnrealNetwork.h"
 #include "Weapon/Weapon.h"
+#include "Blaster/BlasterComponents/CombatComponent.h"
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -24,6 +25,9 @@ ABlasterCharacter::ABlasterCharacter()
 
 	OverheadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverheadWidget"));
 	OverheadWidget->SetupAttachment(RootComponent);
+
+	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
+	Combat->SetIsReplicated(true); // components do not need to be registered to replicated. this is enough
 }
 void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
 {
@@ -31,6 +35,16 @@ void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Ou
 
 	DOREPLIFETIME_CONDITION(ABlasterCharacter, OverlappingWeapon, COND_OwnerOnly); // registers replicated object
 }
+
+void ABlasterCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	if (Combat)
+	{
+		Combat->Character = this;
+	}
+}
+
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -48,6 +62,7 @@ void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &ABlasterCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ABlasterCharacter::Turn);
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::Jump);
+	PlayerInputComponent->BindAction(TEXT("Equip"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::EquipButtonPressed);
 }
 
 void ABlasterCharacter::MoveForward(float Value)
@@ -79,7 +94,13 @@ void ABlasterCharacter::LookUp(float Value)
 {
 	AddControllerPitchInput(Value);
 }
-
+void ABlasterCharacter::EquipButtonPressed()
+{
+	if (Combat && HasAuthority())
+	{
+		Combat->EquipWeapon(OverlappingWeapon);
+	}
+}
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
 {
 	if (OverlappingWeapon)
@@ -94,7 +115,7 @@ void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here las
 
 void ABlasterCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 {
-	if (OverlappingWeapon) //set false before this is set to nullptr. This line is also server only
+	if (OverlappingWeapon) // set false before this is set to nullptr. This line is also server only
 	{
 		OverlappingWeapon->ShowPickupWidget(false);
 	}

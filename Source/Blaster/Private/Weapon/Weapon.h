@@ -23,24 +23,23 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
-	
+
 	UFUNCTION()
 	virtual void OnSphereOverlap(
-		UPrimitiveComponent* OverlappedComponent,
-		AActor* OtherActor,
-		UPrimitiveComponent* OtherComp,
+		UPrimitiveComponent *OverlappedComponent,
+		AActor *OtherActor,
+		UPrimitiveComponent *OtherComp,
 		int32 OtherBodyIndex,
 		bool bFromSweep,
-		const FHitResult& SweepResult
-	);
+		const FHitResult &SweepResult);
 
 	UFUNCTION()
 	void OnSphereEndOverlap(
-		UPrimitiveComponent* OverlappedComponent,
-		AActor* OtherActor,
-		UPrimitiveComponent* OtherComp,
-		int32 OtherBodyIndex
-	);
+		UPrimitiveComponent *OverlappedComponent,
+		AActor *OtherActor,
+		UPrimitiveComponent *OtherComp,
+		int32 OtherBodyIndex);
+
 public:
 	virtual void Tick(float DeltaTime) override;
 	void ShowPickupWidget(bool bShowWidget);
@@ -56,5 +55,8 @@ private:
 	EWeaponState WeaponState;
 
 	UPROPERTY(VisibleAnywhere, CATEGORY = "Weapon Properties")
-	class UWidgetComponent* PickupWidget;
+	class UWidgetComponent *PickupWidget;
+
+public:
+	FORCEINLINE void SetWeaponState(EWeaponState State) { WeaponState = State; }
 };
