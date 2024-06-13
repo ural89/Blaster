@@ -2,6 +2,7 @@
 #include "Engine/SkeletalMeshSocket.h"
 #include "Weapon/Weapon.h"
 #include "Character/BlasterCharacter.h"
+#include "Components/SphereComponent.h"
 UCombatComponent::UCombatComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
@@ -28,8 +29,8 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
 	const USkeletalMeshSocket* HandSocket = Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
 	if(HandSocket)
 	{
-		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
+		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh()); //this is replicated because transform of weapon is replicated.
 	}
-	EquippedWeapon->SetOwner(Character);
-	EquippedWeapon->ShowPickupWidget(false);
+	EquippedWeapon->SetOwner(Character); //this is replicated (Actors have virtual OnRep_Owner() method)
+
 }

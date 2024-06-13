@@ -96,7 +96,21 @@ void ABlasterCharacter::LookUp(float Value)
 }
 void ABlasterCharacter::EquipButtonPressed()
 {
-	if (Combat && HasAuthority())
+	if (Combat)
+	{
+		if (HasAuthority())
+		{
+			Combat->EquipWeapon(OverlappingWeapon);
+		}
+		else //this is called from client
+		{
+			ServerEquipButtonPressed(); //RPC call
+		}
+	}
+}
+void ABlasterCharacter::ServerEquipButtonPressed_Implementation()
+{
+	if (Combat) // we dont need to check Authority since this is RPC to server from client
 	{
 		Combat->EquipWeapon(OverlappingWeapon);
 	}
@@ -121,7 +135,7 @@ void ABlasterCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 	}
 
 	OverlappingWeapon = Weapon;
-	if (IsLocallyControlled()) // is local player? //this line is for server. Since OnRep_ methods will be called for clients.
+	if (IsLocallyControlled()) // is local player? //this line is for server. Since OnRep_OverlappingWeapon methods will be called for clients.
 	{
 		if (OverlappingWeapon)
 		{
