@@ -28,6 +28,8 @@ ABlasterCharacter::ABlasterCharacter()
 
 	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
 	Combat->SetIsReplicated(true); // components do not need to be registered to replicated. this is enough
+
+	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 }
 
 void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -64,6 +66,7 @@ void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ABlasterCharacter::Turn);
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::Jump);
 	PlayerInputComponent->BindAction(TEXT("Equip"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::EquipButtonPressed);
+	PlayerInputComponent->BindAction(TEXT("Crouch"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::CrouchButtonPressed);
 }
 
 void ABlasterCharacter::MoveForward(float Value)
@@ -103,9 +106,9 @@ void ABlasterCharacter::EquipButtonPressed()
 		{
 			Combat->EquipWeapon(OverlappingWeapon);
 		}
-		else //this is called from client
+		else // this is called from client
 		{
-			ServerEquipButtonPressed(); //RPC call
+			ServerEquipButtonPressed(); // RPC call
 		}
 	}
 }
@@ -116,6 +119,20 @@ void ABlasterCharacter::ServerEquipButtonPressed_Implementation()
 		Combat->EquipWeapon(OverlappingWeapon);
 	}
 }
+
+void ABlasterCharacter::CrouchButtonPressed()
+{
+	if (bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
+	{
+		Crouch(); // this uses bIsCrouched in unreal. And this bool is replicated. and has OnRep_IsCrouched() callback in character class.
+				  // REMEMBER TO ENABLE CAN CROUCH IN CHAR BLUEPRINT
+	}
+}
+
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
 {
 	if (OverlappingWeapon)
@@ -148,5 +165,5 @@ void ABlasterCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 bool ABlasterCharacter::IsWeaponEquipped()
 {
 
-    return (Combat && Combat->EquippedWeapon);
+	return (Combat && Combat->EquippedWeapon);
 }
