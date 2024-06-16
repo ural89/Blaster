@@ -15,6 +15,9 @@ public:
 	// Sets default values for this component's properties
 	UCombatComponent();
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
+
+
 	friend class ABlasterCharacter;
 
 	void EquipWeapon(class AWeapon* WeaponToEquip);
@@ -24,6 +27,8 @@ protected:
 
 private:
 	class ABlasterCharacter *Character;
+
+	UPROPERTY(Replicated)
 	AWeapon *EquippedWeapon;
 
 public:

@@ -3,6 +3,7 @@
 #include "Weapon/Weapon.h"
 #include "Character/BlasterCharacter.h"
 #include "Components/SphereComponent.h"
+#include "Net/UnrealNetwork.h"
 UCombatComponent::UCombatComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
@@ -18,19 +19,25 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip)
+void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
+}
+
+void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) //Only called for server
 {
 	if (Character == nullptr || WeaponToEquip == nullptr)
 		return;
 
 	EquippedWeapon = WeaponToEquip;
-	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
+	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped); //since EquippedWeapon is replicated it will set for everyone
 
 	const USkeletalMeshSocket* HandSocket = Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
 	if(HandSocket)
 	{
 		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh()); //this is replicated because transform of weapon is replicated.
 	}
-	EquippedWeapon->SetOwner(Character); //this is replicated (Actors have virtual OnRep_Owner() method)
+	EquippedWeapon->SetOwner(Character); //this is replicated by default (Actors have virtual OnRep_Owner() method)
 
 }
