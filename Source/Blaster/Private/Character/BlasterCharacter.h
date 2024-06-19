@@ -27,6 +27,8 @@ protected:
 	void LookUp(float Value);
 	void EquipButtonPressed();
 	void CrouchButtonPressed();
+	void AimButtonPressed();
+	void AimButtonReleased();
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
@@ -43,15 +45,16 @@ private:
 
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(class AWeapon* LastWeapon); //OnRep_ + replicated objects name //It can have replicated object as parameter (optional)
-	//!!! OnRep_ is NOT called for server (since servers do not replicate)!!!
+	//!!! OnRep_ is NOT called for server (since servers do not replicate. Replication is only server to clients)!!!
 
 	UPROPERTY(VisibleAnywhere)
 	class UCombatComponent* Combat;
 
 	UFUNCTION(Server, Reliable) //this is RPC to Server from clients
-	void ServerEquipButtonPressed(); //definetion of this is .._Implementation()
+	void ServerEquipButtonPressed(); //definetion of this is .._Implementation() //RPCs can take parameters but not OnRep notifiers
 
 public:
 	void SetOverlappingWeapon(class AWeapon *Weapon);
 	bool IsWeaponEquipped();
+	bool IsAiming();
 };
