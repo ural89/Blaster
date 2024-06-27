@@ -1,11 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Character/BlasterAnimInstance.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "BlasterAnimInstance.h"
 #include "BlasterCharacter.h"
-
+#include "Kismet/KismetMathLibrary.h"
 void UBlasterAnimInstance::NativeInitializeAnimation()
 {
     Super::NativeInitializeAnimation();
@@ -21,7 +20,8 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
         BlasterCharacter = Cast<ABlasterCharacter>(TryGetPawnOwner());
     }
 
-    if (BlasterCharacter == nullptr) return;
+    if (BlasterCharacter == nullptr)
+        return;
 
     FVector Velocity = BlasterCharacter->GetVelocity();
     Velocity.Z = 0;
@@ -30,6 +30,11 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
     bIsInAir = BlasterCharacter->GetCharacterMovement()->IsFalling();
     bIsAccelerating = BlasterCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0;
     bWeaponEquipped = BlasterCharacter->IsWeaponEquipped();
-    bIsCrouched = BlasterCharacter->bIsCrouched;//this is in character class and replicated by Unreal engine already
+    bIsCrouched = BlasterCharacter->bIsCrouched; // this is in character class and replicated by Unreal engine already
     bAiming = BlasterCharacter->IsAiming();
+
+    FRotator AimRotation = BlasterCharacter->GetBaseAimRotation(); // global aim rotation
+    FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(BlasterCharacter->GetVelocity());
+    YawOffset = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation).Yaw;
+
 }
