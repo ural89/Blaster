@@ -44,4 +44,8 @@ private:
 
 	UPROPERTY(BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	float Lean;
+
+	FRotator CharacterRotationLastFrame; //these are to calculate lean
+	FRotator CharacterRotation; 
+	FRotator DeltaRotation;
 };

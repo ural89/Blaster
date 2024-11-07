@@ -33,8 +33,19 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
     bIsCrouched = BlasterCharacter->bIsCrouched; // this is in character class and replicated by Unreal engine already
     bAiming = BlasterCharacter->IsAiming();
 
+
+    //Offset yaw for strafing
     FRotator AimRotation = BlasterCharacter->GetBaseAimRotation(); // global aim rotation
     FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(BlasterCharacter->GetVelocity());
-    YawOffset = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation).Yaw;
+    FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
+    DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaTime, 5.f); //this is for jerky move from -180 to 180 RInterpTo fix this issue
+    YawOffset = DeltaRotation.Yaw;
+    
+    CharacterRotationLastFrame = CharacterRotation;
+    CharacterRotation = BlasterCharacter->GetActorRotation();
+    const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotation, CharacterRotationLastFrame);
+    const float Target = Delta.Yaw / DeltaTime;
+    const float Interp = FMath::FInterpTo(Lean, Target, DeltaTime, 6.f);
+    Lean = FMath::Clamp(Interp, -90.f, 90.f);
 
 }
