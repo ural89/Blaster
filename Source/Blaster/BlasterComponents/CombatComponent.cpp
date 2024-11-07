@@ -17,8 +17,8 @@ void UCombatComponent::BeginPlay()
 
 void UCombatComponent::SetAiming(bool bIsAiming)
 {
-	bAiming = bIsAiming; //since this is visual only, we can set localy for faster feedback
-	//if (!Character->HasAuthority()) //this is not needed. whoever calls this, it will run on server anyway
+	bAiming = bIsAiming; // since this is visual only, we can set localy for faster feedback
+	// if (!Character->HasAuthority()) //this is not needed. whoever calls this, it will run on server anyway
 	{
 		ServerSetAiming(bAiming);
 	}
@@ -39,6 +39,15 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Out
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
 	DOREPLIFETIME(UCombatComponent, bAiming);
+}
+
+void UCombatComponent::OnRep_EquippedWeapon()
+{
+	if (EquippedWeapon && Character)
+	{
+		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+		Character->bUseControllerRotationYaw = true;
+	}
 }
 
 void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for server
