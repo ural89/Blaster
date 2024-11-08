@@ -8,25 +8,35 @@
 UCombatComponent::UCombatComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
+	AimWalkSpeed = 450.f;
 }
 
 void UCombatComponent::BeginPlay()
 {
 	Super::BeginPlay();
+	if (Character)
+	{
+		BaseWalkSpeed = Character->GetCharacterMovement()->MaxWalkSpeed;
+	}
 }
 
 void UCombatComponent::SetAiming(bool bIsAiming)
 {
-	bAiming = bIsAiming; // since this is visual only, we can set localy for faster feedback
-	// if (!Character->HasAuthority()) //this is not needed. whoever calls this, it will run on server anyway
+	bAiming = bIsAiming;	  // since this is visual only, we can set localy for faster feedback
+	ServerSetAiming(bAiming); // RPC from this client to server
+	if (Character)
 	{
-		ServerSetAiming(bAiming);
+		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
 	}
 }
 
 void UCombatComponent::ServerSetAiming_Implementation(bool bIsAiming)
 {
 	bAiming = bIsAiming;
+	if (Character)
+	{
+		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+	}
 }
 
 void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)

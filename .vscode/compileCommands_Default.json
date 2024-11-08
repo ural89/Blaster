@@ -78,5 +78,101 @@
 			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
 		],
 		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/BlasterComponents/CombatComponent.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/BlasterComponents/CombatComponent.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterAnimInstance.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterAnimInstance.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterCharacter.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterCharacter.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/GameMode/LobbyGameMode.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/GameMode/LobbyGameMode.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/OverheadWidget.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/OverheadWidget.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Weapon.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Weapon.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
 	}
 ]
