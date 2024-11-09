@@ -29,6 +29,7 @@ protected:
 	void CrouchButtonPressed();
 	void AimButtonPressed();
 	void AimButtonReleased();
+	void UpdateAimOffset(float DeltaTime);
 
 private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
@@ -40,21 +41,28 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UWidgetComponent *OverheadWidget;
 
-	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon) //Replication happens only when we attach new value to OverlappingWeapon 
-	class AWeapon *OverlappingWeapon;						
+	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon) // Replication happens only when we attach new value to OverlappingWeapon
+	class AWeapon *OverlappingWeapon;
 
 	UFUNCTION()
-	void OnRep_OverlappingWeapon(class AWeapon* LastWeapon); //OnRep_ + replicated objects name //It can have replicated object as parameter (optional)
+	void OnRep_OverlappingWeapon(class AWeapon *LastWeapon); // OnRep_ + replicated objects name //It can have replicated object as parameter (optional)
 	//!!! OnRep_ is NOT called for server (since servers do not replicate. Replication is only server to clients)!!!
 
 	UPROPERTY(VisibleAnywhere)
-	class UCombatComponent* Combat;
+	class UCombatComponent *Combat;
 
-	UFUNCTION(Server, Reliable) //this is RPC to Server from clients
-	void ServerEquipButtonPressed(); //definetion of this is .._Implementation() //RPCs can take parameters but not OnRep notifiers
+	UFUNCTION(Server, Reliable)		 // this is RPC to Server from clients
+	void ServerEquipButtonPressed(); // definetion of this is .._Implementation() //RPCs can take parameters but not OnRep notifiers
+
+	float AO_Yaw;
+	float AO_Pitch;
+
+	FRotator LastRunningAimRotation;
 
 public:
 	void SetOverlappingWeapon(class AWeapon *Weapon);
 	bool IsWeaponEquipped();
 	bool IsAiming();
+	FORCEINLINE float GETAOYaw() const { return AO_Yaw; }
+	FORCEINLINE float GetAOPitch() const { return AO_Pitch; }
 };

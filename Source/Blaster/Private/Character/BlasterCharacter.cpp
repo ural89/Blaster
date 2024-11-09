@@ -8,6 +8,8 @@
 #include "Net/UnrealNetwork.h"
 #include "Weapon/Weapon.h"
 #include "Blaster/BlasterComponents/CombatComponent.h"
+#include "Kismet/KismetMathLibrary.h"
+
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -59,6 +61,7 @@ void ABlasterCharacter::BeginPlay()
 void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	UpdateAimOffset(DeltaTime);
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
@@ -152,6 +155,30 @@ void ABlasterCharacter::AimButtonReleased()
 	{
 		Combat->SetAiming(false);
 	}
+}
+
+void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
+{
+	FVector Velocity = GetVelocity();
+	Velocity.Z = 0;
+	bool bIsInAir = GetCharacterMovement()->IsFalling();
+
+	if (Velocity == FVector::ZeroVector && !bIsInAir) //standing still
+	{
+		FRotator CurrentAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
+		FRotator DeltaAimRotation  = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, LastRunningAimRotation);
+		AO_Yaw = DeltaAimRotation.Yaw;
+		bUseControllerRotationYaw = false;
+	}
+	else
+	{
+		LastRunningAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
+		AO_Yaw = 0;
+		bUseControllerRotationYaw = true;
+	}
+
+
+	AO_Pitch = GetBaseAimRotation().Pitch;
 }
 
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
