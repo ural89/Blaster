@@ -178,7 +178,7 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 	}
 
 
-	AO_Pitch = GetBaseAimRotation().Pitch;
+	AO_Pitch = GetBaseAimRotation().GetNormalized().Pitch; //we normilze this because characterMovementComponent sends pitch in 16bit unsigned int (between 0, 65535 map to 360 degrees)
 }
 
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
@@ -219,4 +219,10 @@ bool ABlasterCharacter::IsWeaponEquipped()
 bool ABlasterCharacter::IsAiming()
 {
 	return (Combat && Combat->bAiming);
+}
+
+AWeapon *ABlasterCharacter::GetEquippedWeapon()
+{
+    if(Combat == nullptr) return nullptr;
+	return Combat->EquippedWeapon;
 }

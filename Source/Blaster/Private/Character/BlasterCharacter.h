@@ -65,4 +65,5 @@ public:
 	bool IsAiming();
 	FORCEINLINE float GETAOYaw() const { return AO_Yaw; }
 	FORCEINLINE float GetAOPitch() const { return AO_Pitch; }
+	AWeapon* GetEquippedWeapon();
 };

@@ -4,6 +4,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "BlasterAnimInstance.h"
 #include "BlasterCharacter.h"
+#include "Weapon/Weapon.h"
 #include "Kismet/KismetMathLibrary.h"
 void UBlasterAnimInstance::NativeInitializeAnimation()
 {
@@ -30,17 +31,17 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
     bIsInAir = BlasterCharacter->GetCharacterMovement()->IsFalling();
     bIsAccelerating = BlasterCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0;
     bWeaponEquipped = BlasterCharacter->IsWeaponEquipped();
+    EquippedWeapon = BlasterCharacter->GetEquippedWeapon();
     bIsCrouched = BlasterCharacter->bIsCrouched; // this is in character class and replicated by Unreal engine already
     bAiming = BlasterCharacter->IsAiming();
 
-
-    //Offset yaw for strafing
+    // Offset yaw for strafing
     FRotator AimRotation = BlasterCharacter->GetBaseAimRotation(); // global aim rotation
     FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(BlasterCharacter->GetVelocity());
     FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
-    DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaTime, 5.f); //this is for jerky move from -180 to 180 RInterpTo fix this issue
+    DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaTime, 5.f); // this is for jerky move from -180 to 180 RInterpTo fix this issue
     YawOffset = DeltaRotation.Yaw;
-    
+
     CharacterRotationLastFrame = CharacterRotation;
     CharacterRotation = BlasterCharacter->GetActorRotation();
     const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotation, CharacterRotationLastFrame);
@@ -51,4 +52,14 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
     AO_Yaw = BlasterCharacter->GETAOYaw();
     AO_Pitch = BlasterCharacter->GetAOPitch();
 
+    if (bWeaponEquipped && EquippedWeapon && EquippedWeapon->GetWeaponMesh() && BlasterCharacter->GetMesh())
+    {
+        LeftHandTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("LeftHandSocket"), ERelativeTransformSpace::RTS_World);
+        FVector OutPosition;
+        FRotator OutRotation;
+        BlasterCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
+        LeftHandTransform.SetLocation(OutPosition);
+        LeftHandTransform.SetRotation(FQuat(OutRotation));
+
+    }
 }
