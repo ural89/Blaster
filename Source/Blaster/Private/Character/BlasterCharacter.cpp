@@ -35,6 +35,8 @@ ABlasterCharacter::ABlasterCharacter()
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+
+	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 }
 
 void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -157,6 +159,17 @@ void ABlasterCharacter::AimButtonReleased()
 	}
 }
 
+void ABlasterCharacter::UpdateTurnInPlace(float DeltaTime)
+{
+	if(AO_Yaw > 90.f)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_Right;
+	}
+	else if(AO_Yaw < -90.f)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_Left;
+	}
+}
 void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 {
 	FVector Velocity = GetVelocity();
@@ -169,12 +182,14 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 		FRotator DeltaAimRotation  = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, LastRunningAimRotation);
 		AO_Yaw = DeltaAimRotation.Yaw;
 		bUseControllerRotationYaw = false;
+		UpdateTurnInPlace(DeltaTime);
 	}
-	else
+	else //if moving
 	{
 		LastRunningAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
 		AO_Yaw = 0;
 		bUseControllerRotationYaw = true;
+		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 	}
 
 
@@ -209,6 +224,7 @@ void ABlasterCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 		}
 	}
 }
+
 
 bool ABlasterCharacter::IsWeaponEquipped()
 {
