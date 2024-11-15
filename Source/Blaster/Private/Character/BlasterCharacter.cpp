@@ -161,13 +161,23 @@ void ABlasterCharacter::AimButtonReleased()
 
 void ABlasterCharacter::UpdateTurnInPlace(float DeltaTime)
 {
-	if(AO_Yaw > 90.f)
+	if (AO_Yaw > 90.f)
 	{
 		TurningInPlace = ETurningInPlace::ETIP_Right;
 	}
-	else if(AO_Yaw < -90.f)
+	else if (AO_Yaw < -90.f)
 	{
 		TurningInPlace = ETurningInPlace::ETIP_Left;
+	}
+	if (TurningInPlace != ETurningInPlace::ETIP_NotTurning)
+	{
+		InterpAO_Yaw = FMath::FInterpTo(InterpAO_Yaw, 0.f, DeltaTime, 10.f);
+		AO_Yaw = InterpAO_Yaw;
+		if (FMath::Abs(AO_Yaw) < 15.f)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+		LastRunningAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
+		}
 	}
 }
 void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
@@ -176,15 +186,19 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 	Velocity.Z = 0;
 	bool bIsInAir = GetCharacterMovement()->IsFalling();
 
-	if (Velocity == FVector::ZeroVector && !bIsInAir) //standing still
+	if (Velocity == FVector::ZeroVector && !bIsInAir) // standing still
 	{
 		FRotator CurrentAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
-		FRotator DeltaAimRotation  = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, LastRunningAimRotation);
+		FRotator DeltaAimRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, LastRunningAimRotation);
 		AO_Yaw = DeltaAimRotation.Yaw;
-		bUseControllerRotationYaw = false;
+		if (TurningInPlace == ETurningInPlace::ETIP_NotTurning)
+		{
+			InterpAO_Yaw = AO_Yaw;
+		}
+		bUseControllerRotationYaw = true;
 		UpdateTurnInPlace(DeltaTime);
 	}
-	else //if moving
+	else // if moving
 	{
 		LastRunningAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
 		AO_Yaw = 0;
@@ -192,8 +206,7 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 	}
 
-
-	AO_Pitch = GetBaseAimRotation().GetNormalized().Pitch; //we normilze this because characterMovementComponent sends pitch in 16bit unsigned int (between 0, 65535 map to 360 degrees)
+	AO_Pitch = GetBaseAimRotation().GetNormalized().Pitch; // we normilze this because characterMovementComponent sends pitch in 16bit unsigned int (between 0, 65535 map to 360 degrees)
 }
 
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
@@ -225,7 +238,6 @@ void ABlasterCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 	}
 }
 
-
 bool ABlasterCharacter::IsWeaponEquipped()
 {
 
@@ -239,6 +251,7 @@ bool ABlasterCharacter::IsAiming()
 
 AWeapon *ABlasterCharacter::GetEquippedWeapon()
 {
-    if(Combat == nullptr) return nullptr;
+	if (Combat == nullptr)
+		return nullptr;
 	return Combat->EquippedWeapon;
 }
