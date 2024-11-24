@@ -37,6 +37,9 @@ ABlasterCharacter::ABlasterCharacter()
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 
 	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+
+	NetUpdateFrequency = 66.f;
+	MinNetUpdateFrequency = 33.f; // this is the update freq if nothing changes frequently
 }
 
 void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -176,7 +179,7 @@ void ABlasterCharacter::UpdateTurnInPlace(float DeltaTime)
 		if (FMath::Abs(AO_Yaw) < 15.f)
 		{
 			TurningInPlace = ETurningInPlace::ETIP_NotTurning;
-		LastRunningAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
+			LastRunningAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
 		}
 	}
 }
@@ -195,7 +198,7 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 		{
 			InterpAO_Yaw = AO_Yaw;
 		}
-		bUseControllerRotationYaw = true;
+		bUseControllerRotationYaw = false;
 		UpdateTurnInPlace(DeltaTime);
 	}
 	else // if moving
@@ -207,6 +210,19 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 	}
 
 	AO_Pitch = GetBaseAimRotation().GetNormalized().Pitch; // we normilze this because characterMovementComponent sends pitch in 16bit unsigned int (between 0, 65535 map to 360 degrees)
+}
+
+void ABlasterCharacter::Jump()
+{
+	if (bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
+	{
+
+		Super::Jump();
+	}
 }
 
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
