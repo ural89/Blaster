@@ -31,6 +31,9 @@ protected:
 	
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);
+
+	void FireButtonPressed(bool bPressed);
+
 private:
 	class ABlasterCharacter *Character;
 
@@ -44,6 +47,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimWalkSpeed;
+
+	bool bFireButtonPressed = false;
 
 public:
 };
