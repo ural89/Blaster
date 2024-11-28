@@ -201,7 +201,7 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 		{
 			InterpAO_Yaw = AO_Yaw;
 		}
-		bUseControllerRotationYaw = false;
+		bUseControllerRotationYaw = true;
 		UpdateTurnInPlace(DeltaTime);
 	}
 	else // if moving

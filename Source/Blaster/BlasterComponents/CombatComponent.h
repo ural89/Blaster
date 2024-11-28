@@ -34,6 +34,13 @@ protected:
 
 	void FireButtonPressed(bool bPressed);
 
+	UFUNCTION(Server, Reliable)
+	void ServerFire();
+
+	UFUNCTION(NetMulticast, Reliable) //multicast RPC's will work everybody when fired from server
+	void MulticastFire();
+
+
 private:
 	class ABlasterCharacter *Character;
 

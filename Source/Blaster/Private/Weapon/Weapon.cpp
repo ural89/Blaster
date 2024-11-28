@@ -70,6 +70,11 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent *OverlappedComponent, AActo
 	}
 }
 
+void AWeapon::Fire()
+{
+	//TODO: vfx and weapon animations here
+}
+
 void AWeapon::ShowPickupWidget(bool bShowWidget)
 {
 	if (PickupWidget)

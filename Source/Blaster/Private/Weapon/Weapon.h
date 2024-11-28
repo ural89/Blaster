@@ -44,6 +44,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 
+	void Fire();
 	void ShowPickupWidget(bool bShowWidget);
 
 private:

@@ -81,8 +81,22 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 void UCombatComponent::FireButtonPressed(bool bPressed)
 {
 	bFireButtonPressed = bPressed;
-	if (Character)
+	if (bFireButtonPressed)
+	{
+		ServerFire(); //this is calling from clients to server
+	}
+}
+void UCombatComponent::ServerFire_Implementation()
+{
+	MulticastFire(); //this is calling from server to all clients
+}
+void UCombatComponent::MulticastFire_Implementation()
+{
+	if (EquippedWeapon == nullptr)
+		return;
+	if (Character && bFireButtonPressed)
 	{
 		Character->PlayFireMontage(bAiming);
+		EquippedWeapon->Fire();
 	}
 }

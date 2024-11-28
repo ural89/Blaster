@@ -168,6 +168,38 @@
 		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
 	},
 	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Projectile.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Projectile.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/ProjectileWeapon.cpp",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
+		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/ProjectileWeapon.h",
+		"arguments": [
+			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+		],
+		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+	},
+	{
 		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Weapon.cpp",
 		"arguments": [
 			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
