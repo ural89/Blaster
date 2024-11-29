@@ -68,6 +68,11 @@ void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	UpdateAimOffset(DeltaTime);
+	if (Combat)
+	{
+		FHitResult HitResult;
+		Combat->TraceUnderCrosshairs(HitResult);
+	}
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
@@ -303,7 +308,7 @@ void ABlasterCharacter::PlayFireMontage(bool bAiming)
 
 		// FName SectionName;
 		// SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
-		// UE_LOG(LogTemp, Warning, TEXT("Riffle aiming %i"), bAiming);
+		UE_LOG(LogTemp, Warning, TEXT("Riffle aiming %i"), bAiming);
 		// AnimInstance->Montage_JumpToSection(SectionName);
 	}
 }
