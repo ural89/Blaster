@@ -68,11 +68,7 @@ void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	UpdateAimOffset(DeltaTime);
-	if (Combat)
-	{
-		FHitResult HitResult;
-		Combat->TraceUnderCrosshairs(HitResult);
-	}
+
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {

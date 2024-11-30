@@ -36,10 +36,10 @@ protected:
 	void FireButtonPressed(bool bPressed);
 
 	UFUNCTION(Server, Reliable)
-	void ServerFire();
+	void ServerFire(const FVector_NetQuantize& TraceHitTarget); //NetQuantize version is more effiecent over network
 
 	UFUNCTION(NetMulticast, Reliable) //multicast RPC's will work everybody when fired from server
-	void MulticastFire();
+	void MulticastFire(const FVector_NetQuantize& TraceHitTarget);
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
 
@@ -59,7 +59,6 @@ private:
 
 	bool bFireButtonPressed = false;
 
-	FVector HitTarget;
 
 public:
 };
