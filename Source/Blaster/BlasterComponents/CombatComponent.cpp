@@ -46,7 +46,7 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	FHitResult HitResult;
-	TraceUnderCrosshairs(HitResult);
+	// TraceUnderCrosshairs(HitResult);
 }
 
 void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -90,7 +90,6 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 	{
 		GEngine->GameViewport->GetViewportSize(ViewportSize);
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Ticking"));
 
 	FVector2D CrosshairLocation(ViewportSize.X / 2.f, ViewportSize.Y / 2.f);
 	FVector CrosshairWorldPosition;
@@ -102,22 +101,23 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 		CrosshairWorldDirection);
 	if (bScreenToWorld)
 	{
-		FCollisionQueryParams CollisionQueryParams;
-		CollisionQueryParams.AddIgnoredActor(GetOwner());
+		// FCollisionQueryParams CollisionQueryParams;
+		// CollisionQueryParams.AddIgnoredActor(GetOwner());
 		FVector Start = CrosshairWorldPosition;
 		FVector End = Start + CrosshairWorldDirection * TRACE_LENGTH;
 		GetWorld()->LineTraceSingleByChannel(
 			TraceHitResult,
 			Start,
 			End,
-			ECollisionChannel::ECC_Visibility,
-			CollisionQueryParams);
+			ECollisionChannel::ECC_Visibility
+			// CollisionQueryParams
+		);
 		if (!TraceHitResult.bBlockingHit)
 		{
 			TraceHitResult.ImpactPoint = End;
 			HitTarget = End;
 		}
-		else //if hit
+		else // if hit
 		{
 			HitTarget = TraceHitResult.ImpactPoint;
 			DrawDebugSphere(
@@ -125,8 +125,7 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 				TraceHitResult.ImpactPoint,
 				12.f,
 				12.f,
-				FColor::Red
-			);
+				FColor::Red);
 		}
 	}
 }
@@ -144,10 +143,15 @@ void UCombatComponent::ServerFire_Implementation()
 }
 void UCombatComponent::MulticastFire_Implementation()
 {
+	// UE_LOG(LogTemp, Warning, TEXT("Fire requested"));
 	if (EquippedWeapon == nullptr)
-		return;
-	if (Character && bFireButtonPressed)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("EquippedWeapon is null"));
+		return;
+	}
+	if (Character)
+	{
+		// UE_LOG(LogTemp, Warning, TEXT("Fired!!"));
 		Character->PlayFireMontage(bAiming);
 		EquippedWeapon->Fire(HitTarget);
 	}

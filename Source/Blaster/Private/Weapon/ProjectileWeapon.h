@@ -18,4 +18,7 @@ public:
 private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf <class AProjectile> ProjectileClass;
+
+
+	void SpawnTraceVFX(const FVector& HitTarget);
 };

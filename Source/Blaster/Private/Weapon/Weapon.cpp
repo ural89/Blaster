@@ -8,7 +8,7 @@ AWeapon::AWeapon()
 {
 
 	PrimaryActorTick.bCanEverTick = false;
-	bReplicates = true;
+	bReplicates = true; //this means this is only spawned in server and only 1 Instance of this exists actually.
 
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 	SetRootComponent(WeaponMesh);
