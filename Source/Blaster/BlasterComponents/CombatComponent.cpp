@@ -100,8 +100,6 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 		CrosshairWorldDirection);
 	if (bScreenToWorld)
 	{
-		// FCollisionQueryParams CollisionQueryParams;
-		// CollisionQueryParams.AddIgnoredActor(GetOwner());
 		FVector Start = CrosshairWorldPosition;
 		FVector End = Start + CrosshairWorldDirection * TRACE_LENGTH;
 		GetWorld()->LineTraceSingleByChannel(
@@ -109,7 +107,6 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 			Start,
 			End,
 			ECollisionChannel::ECC_Visibility
-			// CollisionQueryParams
 		);
 	}
 }
