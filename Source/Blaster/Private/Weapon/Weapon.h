@@ -63,6 +63,9 @@ private:
 	UPROPERTY(VisibleAnywhere, CATEGORY = "Weapon Properties")
 	class UWidgetComponent *PickupWidget;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<class ACasing> CasingClass;
+
 public:
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE USphereComponent *GetAreaSphere() const { return AreaSphere; }

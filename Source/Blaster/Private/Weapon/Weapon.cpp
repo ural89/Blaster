@@ -1,14 +1,16 @@
 #include "Weapon.h"
 #include "Weapon/Weapon.h"
+#include "Engine/SkeletalMeshSocket.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Character/BlasterCharacter.h"
+#include "Casing.h"
 #include "Net/UnrealNetwork.h"
 AWeapon::AWeapon()
 {
 
 	PrimaryActorTick.bCanEverTick = false;
-	bReplicates = true; //this means this is only spawned in server and only 1 Instance of this exists actually.
+	bReplicates = true; // this means this is only spawned in server and only 1 Instance of this exists actually.
 
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 	SetRootComponent(WeaponMesh);
@@ -30,7 +32,7 @@ void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
 	if (HasAuthority()) // --> same (GetLocalRole() == ENetRole::ROLE_Authority) //if this is server
-	{						//OverlapSphere only works in SERVER!
+	{					// OverlapSphere only works in SERVER!
 		AreaSphere->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 		AreaSphere->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Overlap);
 		AreaSphere->OnComponentBeginOverlap.AddDynamic(this, &AWeapon::OnSphereOverlap);
@@ -70,9 +72,20 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent *OverlappedComponent, AActo
 	}
 }
 
-void AWeapon::Fire(const FVector& HitTarget)
+void AWeapon::Fire(const FVector &HitTarget)
 {
-	//TODO: vfx and weapon animations here
+	if (CasingClass)
+	{
+
+		const USkeletalMeshSocket *CasingSocket = GetWeaponMesh()->GetSocketByName(FName("AmmoEject"));
+		if (CasingSocket)
+		{
+			FTransform CasingSocketTransform(CasingSocket->GetSocketTransform(GetWeaponMesh()));
+
+			GetWorld()->SpawnActor<ACasing>(CasingClass, CasingSocketTransform);
+		}
+	}
+	// TODO: vfx and weapon animations here
 }
 
 void AWeapon::ShowPickupWidget(bool bShowWidget)
