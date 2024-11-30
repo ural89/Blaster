@@ -59,5 +59,7 @@ private:
 
 	bool bFireButtonPressed = false;
 
+	FVector HitTarget;
+
 public:
 };
