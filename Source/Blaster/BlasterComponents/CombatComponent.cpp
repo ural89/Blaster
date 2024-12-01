@@ -7,6 +7,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
+#include "PlayerController/BlasterPlayerController.h"
+#include "HUD/BlasterHUD.h"
 
 UCombatComponent::UCombatComponent()
 {
@@ -20,6 +22,47 @@ void UCombatComponent::BeginPlay()
 	if (Character)
 	{
 		BaseWalkSpeed = Character->GetCharacterMovement()->MaxWalkSpeed;
+	}
+}
+
+void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	UpdateHUDCrosshairs(DeltaTime);
+}
+
+void UCombatComponent::UpdateHUDCrosshairs(float DeltaTime)
+{
+	if (Character == nullptr || Character->Controller == nullptr)
+		return;
+
+	Controller = Controller == nullptr ? Cast<ABlasterPlayerController>(Character->Controller) : Controller;//TODO: this is BS carry this to Begin play
+
+	if (Controller)
+	{
+		HUD = HUD == nullptr ? Cast<ABlasterHUD>(Controller->GetHUD()) : HUD;
+		if (HUD)
+		{
+			FHUDPackage HUDPackage;
+			if (EquippedWeapon)
+			{
+				HUDPackage.CrosshairsCenter = EquippedWeapon->CrosshairsCenter;
+				HUDPackage.CrosshairsLeft = EquippedWeapon->CrosshairsLeft;
+				HUDPackage.CrosshairsRight = EquippedWeapon->CrosshairsRight;
+				HUDPackage.CrosshairsTop = EquippedWeapon->CrosshairsTop;
+				HUDPackage.CrosshairsBottom = EquippedWeapon->CrosshairsBottom;
+			}
+			else
+			{
+
+				HUDPackage.CrosshairsCenter = nullptr;
+				HUDPackage.CrosshairsLeft = nullptr;
+				HUDPackage.CrosshairsRight = nullptr;
+				HUDPackage.CrosshairsTop = nullptr;
+				HUDPackage.CrosshairsBottom = nullptr;
+			}
+			HUD->SetHUDPackage(HUDPackage);
+		}
 	}
 }
 
@@ -40,12 +83,6 @@ void UCombatComponent::ServerSetAiming_Implementation(bool bIsAiming)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
 	}
-}
-
-void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
 }
 
 void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -106,8 +143,7 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 			TraceHitResult,
 			Start,
 			End,
-			ECollisionChannel::ECC_Visibility
-		);
+			ECollisionChannel::ECC_Visibility);
 	}
 }
 void UCombatComponent::FireButtonPressed(bool bPressed)
@@ -121,11 +157,11 @@ void UCombatComponent::FireButtonPressed(bool bPressed)
 		ServerFire(HitResult.ImpactPoint); // this is calling from clients to server
 	}
 }
-void UCombatComponent::ServerFire_Implementation(const FVector_NetQuantize& TraceHitTarget)
+void UCombatComponent::ServerFire_Implementation(const FVector_NetQuantize &TraceHitTarget)
 {
 	MulticastFire(TraceHitTarget); // this is calling from server to all clients
 }
-void UCombatComponent::MulticastFire_Implementation(const FVector_NetQuantize& TraceHitTarget)
+void UCombatComponent::MulticastFire_Implementation(const FVector_NetQuantize &TraceHitTarget)
 {
 	// UE_LOG(LogTemp, Warning, TEXT("Fire requested"));
 	if (EquippedWeapon == nullptr)

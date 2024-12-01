@@ -44,9 +44,27 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 
-	virtual void Fire(const FVector& HitTarget);
+	virtual void Fire(const FVector &HitTarget);
 	void ShowPickupWidget(bool bShowWidget);
 
+public:
+	/// Textures for weapon crosshairs
+
+	UPROPERTY(EditAnywhere, Category = Crosshairs)
+	class UTexture2D *CrosshairsCenter;
+
+	UPROPERTY(EditAnywhere, Category = Crosshairs)
+	UTexture2D *CrosshairsLeft;
+
+	UPROPERTY(EditAnywhere, Category = Crosshairs)
+	UTexture2D *CrosshairsRight;
+
+	UPROPERTY(EditAnywhere, Category = Crosshairs)
+	UTexture2D *CrosshairsTop;
+
+	UPROPERTY(EditAnywhere, Category = Crosshairs)
+	UTexture2D *CrosshairsBottom;
+	////
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
 	USkeletalMeshComponent *WeaponMesh;
@@ -69,5 +87,5 @@ private:
 public:
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE USphereComponent *GetAreaSphere() const { return AreaSphere; }
-	FORCEINLINE USkeletalMeshComponent* GetWeaponMesh() const {return WeaponMesh;}
+	FORCEINLINE USkeletalMeshComponent *GetWeaponMesh() const { return WeaponMesh; }
 };
