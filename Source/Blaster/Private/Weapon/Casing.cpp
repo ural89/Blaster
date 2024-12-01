@@ -27,12 +27,16 @@ void ACasing::BeginPlay()
 	CasingMesh->OnComponentHit.AddDynamic(this, &ACasing::OnHit); //CasingMesh->SetNotifyRigidBodyCollision(true); neeede to run!!
 	
 }
-
+void ACasing::LateDestroy()
+{
+	Destroy();
+}
 void ACasing::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult &Hit)
 {
+	FTimerHandle DestroyTimerHandle; //you can simply use SetLifeSpawn(3.f) in begin play
+	GetWorld()->GetTimerManager().SetTimer(DestroyTimerHandle, this, &ACasing::LateDestroy, 1.f);
 	if (ShellSound)
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, ShellSound, GetActorLocation());
 	}
-	Destroy();
 }

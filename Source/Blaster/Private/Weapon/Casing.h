@@ -22,6 +22,8 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	class USoundCue* ShellSound;
+
+	void LateDestroy();
 	
 protected:
 	virtual void BeginPlay() override;

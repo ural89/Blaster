@@ -9,6 +9,11 @@ void AProjectileWeapon::Fire(const FVector &HitTarget)
     if (HasAuthority())
     {
         SpawnTraceVFX(HitTarget);
+    }
+}
+
+void AProjectileWeapon::SpawnTraceVFX(const FVector &HitTarget)
+{
         APawn *InstigatorPawn = Cast<APawn>(GetOwner());
 
         const USkeletalMeshSocket *MuzzleFlashSocket = GetWeaponMesh()->GetSocketByName(FName("MuzzleFlash"));
@@ -34,9 +39,4 @@ void AProjectileWeapon::Fire(const FVector &HitTarget)
                 }
             }
         }
-    }
-}
-
-void AProjectileWeapon::SpawnTraceVFX(const FVector &HitTarget)
-{
 }
