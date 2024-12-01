@@ -81,6 +81,9 @@ void AWeapon::Fire(const FVector &HitTarget)
 		if (CasingSocket)
 		{
 			FTransform CasingSocketTransform(CasingSocket->GetSocketTransform(GetWeaponMesh()));
+			FRotator RandomRotation = CasingSocketTransform.GetRotation().Rotator();
+			RandomRotation.Pitch = FMath::RandRange(-30.f, 30.f);
+			CasingSocketTransform.SetRotation(RandomRotation.Quaternion());
 
 			GetWorld()->SpawnActor<ACasing>(CasingClass, CasingSocketTransform);
 		}
