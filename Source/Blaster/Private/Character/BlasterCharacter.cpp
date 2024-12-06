@@ -68,7 +68,6 @@ void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	UpdateAimOffset(DeltaTime);
-
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
@@ -274,6 +273,13 @@ AWeapon *ABlasterCharacter::GetEquippedWeapon()
 	if (Combat == nullptr)
 		return nullptr;
 	return Combat->EquippedWeapon;
+}
+
+FVector ABlasterCharacter::GetHitTarget() const
+{
+	if (Combat == nullptr)
+		return FVector();
+	return Combat->HitTarget;
 }
 
 void ABlasterCharacter::FireButtonPressed()
