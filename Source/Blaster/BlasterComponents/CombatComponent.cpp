@@ -9,7 +9,6 @@
 #include "DrawDebugHelpers.h"
 #include "PlayerController/BlasterPlayerController.h"
 #include "Camera/CameraComponent.h"
-#include "HUD/BlasterHUD.h"
 
 UCombatComponent::UCombatComponent()
 {
@@ -42,7 +41,7 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 		FHitResult HitResult;
 		TraceUnderCrosshairs(HitResult);
 		HitTarget = HitResult.ImpactPoint;
-		
+
 		UpdateHUDCrosshairs(DeltaTime);
 		InterpFOV(DeltaTime);
 	}
@@ -60,7 +59,6 @@ void UCombatComponent::UpdateHUDCrosshairs(float DeltaTime)
 		HUD = HUD == nullptr ? Cast<ABlasterHUD>(Controller->GetHUD()) : HUD;
 		if (HUD)
 		{
-			FHUDPackage HUDPackage;
 			if (EquippedWeapon)
 			{
 				HUDPackage.CrosshairsCenter = EquippedWeapon->CrosshairsCenter;
@@ -94,7 +92,7 @@ void UCombatComponent::UpdateHUDCrosshairs(float DeltaTime)
 				CrosshairInAirFactor = FMath::FInterpTo(CrosshairInAirFactor, 0.f, DeltaTime, 30.f);
 			}
 
-			if(bAiming)
+			if (bAiming)
 			{
 				CrosshairAimFactor = FMath::FInterpTo(CrosshairAimFactor, -0.58f, DeltaTime, 30.f);
 			}
@@ -205,6 +203,14 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 			Start,
 			End,
 			ECollisionChannel::ECC_Visibility);
+	}
+	if (TraceHitResult.GetActor() && TraceHitResult.GetActor()->Implements < UInteractWithCrosshairsInterface>())
+	{
+		HUDPackage.CrosshairsColor = FLinearColor::Red;
+	}
+	else
+	{
+		HUDPackage.CrosshairsColor = FLinearColor::White;
 	}
 }
 void UCombatComponent::FireButtonPressed(bool bPressed)

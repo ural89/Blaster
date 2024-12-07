@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "HUD/BlasterHUD.h"
 #include "CombatComponent.generated.h"
 
-#define TRACE_LENGTH  80000.f;
+#define TRACE_LENGTH 80000.f;
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class BLASTER_API UCombatComponent : public UActorComponent
 {
@@ -18,37 +19,36 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 
-
 	friend class ABlasterCharacter;
 
-	void EquipWeapon(class AWeapon* WeaponToEquip);
+	void EquipWeapon(class AWeapon *WeaponToEquip);
 
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bIsAiming);
-	
- 	UFUNCTION()
+
+	UFUNCTION()
 	void OnRep_EquippedWeapon();
-	
+
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);
 
 	void FireButtonPressed(bool bPressed);
 
 	UFUNCTION(Server, Reliable)
-	void ServerFire(const FVector_NetQuantize& TraceHitTarget); //NetQuantize version is more effiecent over network
+	void ServerFire(const FVector_NetQuantize &TraceHitTarget); // NetQuantize version is more effiecent over network
 
-	UFUNCTION(NetMulticast, Reliable) //multicast RPC's will work everybody when fired from server
-	void MulticastFire(const FVector_NetQuantize& TraceHitTarget);
+	UFUNCTION(NetMulticast, Reliable) // multicast RPC's will work everybody when fired from server
+	void MulticastFire(const FVector_NetQuantize &TraceHitTarget);
 
-	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
+	void TraceUnderCrosshairs(FHitResult &TraceHitResult);
 
 	void UpdateHUDCrosshairs(float DeltaTime);
 
 private:
 	class ABlasterCharacter *Character;
-	class ABlasterPlayerController* Controller;
-	class ABlasterHUD* HUD;
+	class ABlasterPlayerController *Controller;
+	class ABlasterHUD *HUD;
 
 	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
 	AWeapon *EquippedWeapon;
@@ -63,8 +63,9 @@ private:
 
 	bool bFireButtonPressed = false;
 
-	//HUD and crosshairs
+	// HUD and crosshairs
 
+	FHUDPackage HUDPackage;
 	float CrosshairVelocityFactor;
 	float CrosshairInAirFactor;
 	float CrosshairAimFactor;
@@ -72,7 +73,7 @@ private:
 
 	FVector HitTarget;
 
-	//Aiming and FOV
+	// Aiming and FOV
 	float DefaultFOV;
 
 	UPROPERTY(Editanywhere, Category = Combat)
@@ -84,5 +85,4 @@ private:
 	float ZoomInterpSpeed = 20.f;
 
 	void InterpFOV(float DeltaTime);
-
 };

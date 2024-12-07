@@ -36,6 +36,7 @@ ABlasterCharacter::ABlasterCharacter()
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
+	// GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block); //this is trace response (visiblity)
 
 	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 
@@ -116,14 +117,17 @@ void ABlasterCharacter::LookUp(float Value)
 }
 void ABlasterCharacter::EquipButtonPressed()
 {
+		UE_LOG(LogTemp, Warning, TEXT("Pressed equip"));
 	if (Combat)
 	{
 		if (HasAuthority())
 		{
+			UE_LOG(LogTemp, Warning, TEXT("Has Auth equip"));
 			Combat->EquipWeapon(OverlappingWeapon);
 		}
 		else // this is called from client
 		{
+		UE_LOG(LogTemp, Warning, TEXT("NoAuth equip"));
 			ServerEquipButtonPressed(); // RPC call
 		}
 	}
