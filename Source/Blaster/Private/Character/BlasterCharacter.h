@@ -22,6 +22,8 @@ public:
 
 	void PlayFireMontage(bool bAiming);
 
+	UFUNCTION(NetMulticast, Unreliable)
+	void MulticastHit();
 protected:
 	virtual void BeginPlay() override;
 
@@ -36,6 +38,7 @@ protected:
 	void AimButtonPressed();
 	void AimButtonReleased();
 	void UpdateAimOffset(float DeltaTime);
+	void PlayHitReactMontage();
 	void Jump() override;
 
 private:
@@ -72,7 +75,11 @@ private:
 	void UpdateTurnInPlace(float DeltaTime);
 
 	UPROPERTY(EditAnywhere, Category = Combat)
-	class UAnimMontage* FireWeaponMontage;
+	class UAnimMontage *FireWeaponMontage;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	UAnimMontage *HitReactMontage;
+
 
 	void HideCameraIfCharacterClose();
 
@@ -88,5 +95,5 @@ public:
 	AWeapon *GetEquippedWeapon();
 	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace; }
 	FVector GetHitTarget() const;
-	FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera;}
+	FORCEINLINE UCameraComponent *GetFollowCamera() const { return FollowCamera; }
 };
