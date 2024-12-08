@@ -197,6 +197,11 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 	if (bScreenToWorld)
 	{
 		FVector Start = CrosshairWorldPosition;
+		if (Character)
+		{
+			float DistanceToCharacter = (Character->GetActorLocation() - Start).Size();
+			Start += CrosshairWorldDirection * (DistanceToCharacter + 150.f);
+		}
 		FVector End = Start + CrosshairWorldDirection * TRACE_LENGTH;
 		GetWorld()->LineTraceSingleByChannel(
 			TraceHitResult,
@@ -204,7 +209,7 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 			End,
 			ECollisionChannel::ECC_Visibility);
 	}
-	if (TraceHitResult.GetActor() && TraceHitResult.GetActor()->Implements < UInteractWithCrosshairsInterface>())
+	if (TraceHitResult.GetActor() && TraceHitResult.GetActor()->Implements<UInteractWithCrosshairsInterface>())
 	{
 		HUDPackage.CrosshairsColor = FLinearColor::Red;
 	}

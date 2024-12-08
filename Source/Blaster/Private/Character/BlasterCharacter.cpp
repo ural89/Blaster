@@ -69,6 +69,7 @@ void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	UpdateAimOffset(DeltaTime);
+	HideCameraIfCharacterClose();
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
@@ -117,7 +118,7 @@ void ABlasterCharacter::LookUp(float Value)
 }
 void ABlasterCharacter::EquipButtonPressed()
 {
-		UE_LOG(LogTemp, Warning, TEXT("Pressed equip"));
+	UE_LOG(LogTemp, Warning, TEXT("Pressed equip"));
 	if (Combat)
 	{
 		if (HasAuthority())
@@ -127,7 +128,7 @@ void ABlasterCharacter::EquipButtonPressed()
 		}
 		else // this is called from client
 		{
-		UE_LOG(LogTemp, Warning, TEXT("NoAuth equip"));
+			UE_LOG(LogTemp, Warning, TEXT("NoAuth equip"));
 			ServerEquipButtonPressed(); // RPC call
 		}
 	}
@@ -241,6 +242,28 @@ void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here las
 	if (LastWeapon)
 	{
 		LastWeapon->ShowPickupWidget(false);
+	}
+}
+
+void ABlasterCharacter::HideCameraIfCharacterClose()
+{
+	if (!IsLocallyControlled())
+		return;
+	if ((FollowCamera->GetComponentLocation() - GetActorLocation()).Size() < CameraThreshold)
+	{
+		GetMesh()->SetVisibility(false);
+		if (Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		{
+			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = true;
+		}
+	}
+	else
+	{
+		GetMesh()->SetVisibility(true);
+		if (Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		{
+			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
+		}
 	}
 }
 
