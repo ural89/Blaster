@@ -8,6 +8,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "PlayerController/BlasterPlayerController.h"
+#include "TimerManager.h"
 #include "Camera/CameraComponent.h"
 
 UCombatComponent::UCombatComponent()
@@ -125,6 +126,25 @@ void UCombatComponent::InterpFOV(float DeltaTime)
 	}
 }
 
+void UCombatComponent::StartFireTimer()
+{
+	if (EquippedWeapon == nullptr || Character == nullptr)
+		return;
+	Character->GetWorldTimerManager().SetTimer(FireTimer,
+											   this,
+											   &UCombatComponent::FireTimeFinished,
+											   FireDelay);
+}
+
+void UCombatComponent::FireTimeFinished()
+{
+	bCanFire = true;
+	if (bFireButtonPressed && bAutomatic)
+	{
+		Fire();
+	}
+}
+
 void UCombatComponent::SetAiming(bool bIsAiming)
 {
 	bAiming = bIsAiming;	  // since this is visual only, we can set localy for faster feedback
@@ -221,17 +241,23 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 void UCombatComponent::FireButtonPressed(bool bPressed)
 {
 	bFireButtonPressed = bPressed;
-	if (bFireButtonPressed)
+	if (bFireButtonPressed && EquippedWeapon)
 	{
-		FHitResult HitResult;
-		TraceUnderCrosshairs(HitResult);
-
-		ServerFire(HitResult.ImpactPoint); // this is calling from clients to server
+		Fire();
+	}
+}
+void UCombatComponent::Fire()
+{
+	if (bCanFire)
+	{
+		bCanFire = false;
+		ServerFire(HitTarget); // this is calling from clients to server
 
 		if (EquippedWeapon)
 		{
 			CrosshairShootFactor = 0.75f;
 		}
+		StartFireTimer();
 	}
 }
 void UCombatComponent::ServerFire_Implementation(const FVector_NetQuantize &TraceHitTarget)

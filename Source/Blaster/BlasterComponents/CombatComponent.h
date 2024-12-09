@@ -32,10 +32,10 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);
+    void FireButtonPressed(bool bPressed);
+    void Fire();
 
-	void FireButtonPressed(bool bPressed);
-
-	UFUNCTION(Server, Reliable)
+    UFUNCTION(Server, Reliable)
 	void ServerFire(const FVector_NetQuantize &TraceHitTarget); // NetQuantize version is more effiecent over network
 
 	UFUNCTION(NetMulticast, Reliable) // multicast RPC's will work everybody when fired from server
@@ -85,4 +85,18 @@ private:
 	float ZoomInterpSpeed = 20.f;
 
 	void InterpFOV(float DeltaTime);
+
+
+	//Automatic fire
+	FTimerHandle FireTimer;
+	
+	UPROPERTY(EditAnywhere, Category = Combat)
+	float FireDelay = .15f;
+
+	UPROPERTY(EditAnywhere, Category = Combat)
+	bool bAutomatic = true;
+	bool bCanFire = true;
+
+	void StartFireTimer();
+	void FireTimeFinished();
 };
