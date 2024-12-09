@@ -37,7 +37,7 @@ ABlasterCharacter::ABlasterCharacter()
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	GetMesh()->SetCollisionObjectType(ECC_SkeletalMesh);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
-	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block); //this is trace response (visiblity)
+	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block); // this is trace response (visiblity)
 
 	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 
@@ -61,6 +61,13 @@ void ABlasterCharacter::PostInitializeComponents()
 	}
 }
 
+void ABlasterCharacter::OnRep_ReplicatedMovement() // this is overridden in actor. It is called on replication (not as frequent as tick)
+{
+	Super::OnRep_ReplicatedMovement();
+	SimProxiesTurn();
+	TimeSinceLastMovementReplication = 0;
+}
+
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
@@ -69,7 +76,21 @@ void ABlasterCharacter::BeginPlay()
 void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UpdateAimOffset(DeltaTime);
+	if (GetLocalRole() > ENetRole::ROLE_SimulatedProxy && IsLocallyControlled()) // local role gives None,SimulatedProxy, AutonomousProxy, Authority, Max. This is hierarchyle.
+																				 // Bigger than simulated means actively local controlled or server
+																				 // This is like HasInputAuthority() like in photon?
+	{
+		UpdateAimOffset(DeltaTime);
+	}
+	else
+	{
+		TimeSinceLastMovementReplication += DeltaTime; // since OnRep_ReplicatedMovement only called when moving, we call manually when we are also not moving
+		if (TimeSinceLastMovementReplication > 0.25f)
+		{
+			OnRep_ReplicatedMovement();
+		}
+		CalculateAO_Pitch();
+	}
 	HideCameraIfCharacterClose();
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
@@ -200,6 +221,7 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 
 	if (Velocity == FVector::ZeroVector && !bIsInAir) // standing still
 	{
+		bRotateRootBone = true;
 		FRotator CurrentAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
 		FRotator DeltaAimRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, LastRunningAimRotation);
 		AO_Yaw = DeltaAimRotation.Yaw;
@@ -212,13 +234,66 @@ void ABlasterCharacter::UpdateAimOffset(float DeltaTime)
 	}
 	else // if moving
 	{
+		bRotateRootBone = false;
 		LastRunningAimRotation = FRotator(0, GetBaseAimRotation().Yaw, 0);
 		AO_Yaw = 0;
 		bUseControllerRotationYaw = true;
 		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 	}
 
-	AO_Pitch = GetBaseAimRotation().GetNormalized().Pitch; // we normilze this because characterMovementComponent sends pitch in 16bit unsigned int (between 0, 65535 map to 360 degrees)
+	CalculateAO_Pitch();
+}
+
+float ABlasterCharacter::CalculateSpeed()
+{
+	FVector Velocity = GetVelocity();
+	Velocity.Z = 0.f;
+	return Velocity.Size();
+}
+void ABlasterCharacter::CalculateAO_Pitch()
+{
+	AO_Pitch = GetBaseAimRotation().Pitch;
+	if (AO_Pitch > 90.f && !IsLocallyControlled())
+	{
+		FVector2D InRange(270.f, 360.f);
+		FVector2D OutRange(-90.f, 0.f);
+		AO_Pitch = FMath::GetMappedRangeValueClamped(InRange, OutRange, AO_Pitch);
+	}
+}
+void ABlasterCharacter::SimProxiesTurn()
+{
+	if (Combat == nullptr)
+		return;
+	if (Combat->EquippedWeapon == nullptr)
+		return;
+	bRotateRootBone = false;
+	float Speed = CalculateSpeed();
+	if (Speed > 0)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+		return;
+	}
+	ProxyRotationLastFrame = ProxyRotation;
+	ProxyRotation = GetActorRotation();
+	ProxyYaw = UKismetMathLibrary::NormalizedDeltaRotator(ProxyRotation, ProxyRotationLastFrame).Yaw;
+
+	if (FMath::Abs(ProxyYaw) > TurnThreshold)
+	{
+		if (ProxyYaw > TurnThreshold)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_Right;
+		}
+		else if (ProxyYaw < -TurnThreshold)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_Left;
+		}
+		else
+		{
+			TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+		}
+		return;
+	}
+	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 }
 
 void ABlasterCharacter::Jump()

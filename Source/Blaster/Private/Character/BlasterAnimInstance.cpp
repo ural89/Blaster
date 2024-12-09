@@ -35,6 +35,7 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
     bIsCrouched = BlasterCharacter->bIsCrouched; // this is in character class and replicated by Unreal engine already
     bAiming = BlasterCharacter->IsAiming();
     TurningInPlace = BlasterCharacter->GetTurningInPlace();
+    bRotateRootBone = BlasterCharacter->ShouldRotateRootBone();
 
     // Offset yaw for strafing
     FRotator AimRotation = BlasterCharacter->GetBaseAimRotation(); // global aim rotation
