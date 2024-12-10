@@ -28,6 +28,10 @@ class ABlasterHUD : public AHUD
 	GENERATED_BODY()
 public:
 	void DrawHUD() override;
+	
+	UPROPERTY(EditAnywhere, Category ="Player Stats");
+	TSubclassOf<class UUserWidget> CharacterOverlaytClass;
+	class UCharacterOverlay* CharacterOverlay;
 
 private:
 	FHUDPackage HUDPackage;
