@@ -89,12 +89,6 @@ private:
 
 	//Automatic fire
 	FTimerHandle FireTimer;
-	
-	UPROPERTY(EditAnywhere, Category = Combat)
-	float FireDelay = .15f;
-
-	UPROPERTY(EditAnywhere, Category = Combat)
-	bool bAutomatic = true;
 	bool bCanFire = true;
 
 	void StartFireTimer();

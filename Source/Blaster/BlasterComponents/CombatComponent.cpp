@@ -133,13 +133,14 @@ void UCombatComponent::StartFireTimer()
 	Character->GetWorldTimerManager().SetTimer(FireTimer,
 											   this,
 											   &UCombatComponent::FireTimeFinished,
-											   FireDelay);
+											   EquippedWeapon->FireDelay);
 }
 
 void UCombatComponent::FireTimeFinished()
 {
+	if (EquippedWeapon == nullptr) return;
 	bCanFire = true;
-	if (bFireButtonPressed && bAutomatic)
+	if (bFireButtonPressed && EquippedWeapon->bAutomatic)
 	{
 		Fire();
 	}
