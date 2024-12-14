@@ -11,6 +11,7 @@
 #include "Kismet/KismetMathLibrary.h"
 #include "BlasterAnimInstance.h"
 #include "Blaster/Blaster.h"
+#include "PlayerController/BlasterPlayerController.h"
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -72,6 +73,11 @@ void ABlasterCharacter::OnRep_ReplicatedMovement() // this is overridden in acto
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	BlasterPlayerController = Cast<ABlasterPlayerController>(Controller);
+	if(BlasterPlayerController)
+	{
+		BlasterPlayerController->SetHUDHealth(Health, MaxHealth);
+	}
 }
 
 void ABlasterCharacter::Tick(float DeltaTime)

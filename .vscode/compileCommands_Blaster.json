@@ -1,298 +1,298 @@
 [
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Plugins/MultiplayerSessions/Source/MultiplayerSessions/MultiplayerSessions.Build.cs",
+		"file": "E:\\GitHub\\Blaster\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\MultiplayerSessions.Build.cs",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/MultiplayerSessions.31.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\MultiplayerSessions.33.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/Menu.cpp",
+		"file": "E:\\GitHub\\Blaster\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\Private\\Menu.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/MultiplayerSessions.31.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\MultiplayerSessions.33.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/MultiplayerSessions.cpp",
+		"file": "E:\\GitHub\\Blaster\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\Private\\MultiplayerSessions.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/MultiplayerSessions.31.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\MultiplayerSessions.33.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Private/MultiplayerSessionsSubsystem.cpp",
+		"file": "E:\\GitHub\\Blaster\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\Private\\MultiplayerSessionsSubsystem.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/MultiplayerSessions.31.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\MultiplayerSessions.33.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Public/Menu.h",
+		"file": "E:\\GitHub\\Blaster\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\Public\\Menu.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/MultiplayerSessions.31.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\MultiplayerSessions.33.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Public/MultiplayerSessions.h",
+		"file": "E:\\GitHub\\Blaster\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\Public\\MultiplayerSessions.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/MultiplayerSessions.31.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\MultiplayerSessions.33.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Plugins/MultiplayerSessions/Source/MultiplayerSessions/Public/MultiplayerSessionsSubsystem.h",
+		"file": "E:\\GitHub\\Blaster\\Plugins\\MultiplayerSessions\\Source\\MultiplayerSessions\\Public\\MultiplayerSessionsSubsystem.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/MultiplayerSessions.31.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\MultiplayerSessions.33.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Blaster.Build.cs",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Blaster.Build.cs",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Blaster.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Blaster.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Blaster.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Blaster.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/BlasterComponents/CombatComponent.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\BlasterComponents\\CombatComponent.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/BlasterComponents/CombatComponent.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\BlasterComponents\\CombatComponent.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/BlasterTypes/TurningInPlace.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\BlasterTypes\\TurningInPlace.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterAnimInstance.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Character\\BlasterAnimInstance.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterAnimInstance.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Character\\BlasterAnimInstance.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterCharacter.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Character\\BlasterCharacter.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Character/BlasterCharacter.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Character\\BlasterCharacter.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/GameMode/LobbyGameMode.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\GameMode\\LobbyGameMode.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/GameMode/LobbyGameMode.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\GameMode\\LobbyGameMode.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/BlasterHUD.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\HUD\\BlasterHUD.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/BlasterHUD.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\HUD\\BlasterHUD.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/CharacterOverlay.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\HUD\\CharacterOverlay.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/CharacterOverlay.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\HUD\\CharacterOverlay.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/OverheadWidget.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\HUD\\OverheadWidget.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/HUD/OverheadWidget.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\HUD\\OverheadWidget.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Interfaces/InteractWithCrosshairsInterface.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Interfaces\\InteractWithCrosshairsInterface.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Interfaces/InteractWithCrosshairsInterface.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Interfaces\\InteractWithCrosshairsInterface.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/PlayerController/BlasterPlayerController.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\PlayerController\\BlasterPlayerController.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/PlayerController/BlasterPlayerController.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\PlayerController\\BlasterPlayerController.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Casing.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\Casing.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Casing.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\Casing.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Projectile.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\Projectile.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Projectile.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\Projectile.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/ProjectileWeapon.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\ProjectileWeapon.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/ProjectileWeapon.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\ProjectileWeapon.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Weapon.cpp",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\Weapon.cpp",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
-		"file": "/home/ural/Documents/GitHub/Blaster/Source/Blaster/Private/Weapon/Weapon.h",
+		"file": "E:\\GitHub\\Blaster\\Source\\Blaster\\Private\\Weapon\\Weapon.h",
 		"arguments": [
-			"/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
-			"@/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster/Blaster.1.rsp"
+			"C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster\\Blaster.1.rsp"
 		],
-		"directory": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Source"
+		"directory": "E:\\Epic Games\\UE_5.3\\Engine\\Source"
 	}
 ]
