@@ -67,10 +67,5 @@ void AProjectile::Tick(float DeltaTime)
 }
 void AProjectile::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult &Hit) // calls in server only
 {
-	if (ABlasterCharacter *BlasterCharacter = Cast<ABlasterCharacter>(OtherActor))
-	{
-		BlasterCharacter->MulticastHit();
-	}
-
 	Destroy(); // Since destroy is already replicated, all hit vfx can be called locally from this method
 }

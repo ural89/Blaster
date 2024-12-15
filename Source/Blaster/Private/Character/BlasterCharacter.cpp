@@ -73,11 +73,21 @@ void ABlasterCharacter::OnRep_ReplicatedMovement() // this is overridden in acto
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	BlasterPlayerController = Cast<ABlasterPlayerController>(Controller);
-	if(BlasterPlayerController)
+
+    UpdateHUDHealth();
+    if (HasAuthority())
 	{
-		BlasterPlayerController->SetHUDHealth(Health, MaxHealth);
+		OnTakeAnyDamage.AddDynamic(this, &ABlasterCharacter::RecieveDamage);
 	}
+}
+
+void ABlasterCharacter::UpdateHUDHealth()
+{
+    BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
+    if (BlasterPlayerController)
+    {
+        BlasterPlayerController->SetHUDHealth(Health, MaxHealth);
+    }
 }
 
 void ABlasterCharacter::Tick(float DeltaTime)
@@ -305,7 +315,8 @@ void ABlasterCharacter::SimProxiesTurn()
 
 void ABlasterCharacter::OnRep_Health()
 {
-
+	UpdateHUDHealth();
+	PlayHitReactMontage();
 }
 void ABlasterCharacter::Jump()
 {
@@ -315,9 +326,15 @@ void ABlasterCharacter::Jump()
 	}
 	else
 	{
-
 		Super::Jump();
 	}
+}
+
+void ABlasterCharacter::RecieveDamage(AActor *DamagedActor, float Damage, const UDamageType *DamageType, AController *InstigatorController, AActor *DamageCauser)
+{
+	Health = FMath::Clamp(Health - Damage, 0.f, MaxHealth);
+	UpdateHUDHealth();
+	PlayHitReactMontage();
 }
 
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
@@ -330,11 +347,6 @@ void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here las
 	{
 		LastWeapon->ShowPickupWidget(false);
 	}
-}
-
-void ABlasterCharacter::MulticastHit_Implementation()
-{
-	PlayHitReactMontage();
 }
 
 void ABlasterCharacter::HideCameraIfCharacterClose()
