@@ -12,6 +12,7 @@
 #include "BlasterAnimInstance.h"
 #include "Blaster/Blaster.h"
 #include "PlayerController/BlasterPlayerController.h"
+#include "Blaster/Private/GameMode/BlasterGameMode.h"
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -70,12 +71,18 @@ void ABlasterCharacter::OnRep_ReplicatedMovement() // this is overridden in acto
 	TimeSinceLastMovementReplication = 0;
 }
 
+void ABlasterCharacter::Elim_Implementation()
+{
+	bElimmed = true;
+	PlayElimMontage();
+}
+
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-    UpdateHUDHealth();
-    if (HasAuthority())
+	UpdateHUDHealth();
+	if (HasAuthority())
 	{
 		OnTakeAnyDamage.AddDynamic(this, &ABlasterCharacter::RecieveDamage);
 	}
@@ -83,11 +90,11 @@ void ABlasterCharacter::BeginPlay()
 
 void ABlasterCharacter::UpdateHUDHealth()
 {
-    BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
-    if (BlasterPlayerController)
-    {
-        BlasterPlayerController->SetHUDHealth(Health, MaxHealth);
-    }
+	BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
+	if (BlasterPlayerController)
+	{
+		BlasterPlayerController->SetHUDHealth(Health, MaxHealth);
+	}
 }
 
 void ABlasterCharacter::Tick(float DeltaTime)
@@ -335,6 +342,18 @@ void ABlasterCharacter::RecieveDamage(AActor *DamagedActor, float Damage, const 
 	Health = FMath::Clamp(Health - Damage, 0.f, MaxHealth);
 	UpdateHUDHealth();
 	PlayHitReactMontage();
+	if (Health <= 0.f)
+	{
+		ABlasterGameMode *BlasterGameMode = GetWorld()->GetAuthGameMode<ABlasterGameMode>();
+		if (BlasterGameMode)
+		{
+			BlasterPlayerController =
+				BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
+			ABlasterPlayerController *AttackerController =
+				Cast<ABlasterPlayerController>(InstigatorController);
+					BlasterGameMode->PlayerEliminated(this, BlasterPlayerController, AttackerController);
+		}
+	}
 }
 
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
@@ -443,6 +462,15 @@ void ABlasterCharacter::PlayFireMontage(bool bAiming)
 		// SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
 		UE_LOG(LogTemp, Warning, TEXT("Riffle aiming %i"), bAiming);
 		// AnimInstance->Montage_JumpToSection(SectionName);
+	}
+}
+
+void ABlasterCharacter::PlayElimMontage()
+{
+	UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && ElimMontage)
+	{
+		AnimInstance->Montage_Play(ElimMontage);
 	}
 }
 

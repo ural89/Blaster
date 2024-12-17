@@ -1,20 +1,28 @@
 {
     "configurations": [
         {
-            "name": "BlasterEditor Editor Win64 Development (Blaster)",
-            "compilerPath": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+            "name": "BlasterEditor Editor Linux Development (Blaster)",
+            "compilerPath": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+            "compilerArgs": [
+                "-isysroot",
+                "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu"
+            ],
             "cStandard": "c17",
             "cppStandard": "c++20",
-            "intelliSenseMode": "msvc-x64",
-            "compileCommands": "E:\\GitHub\\Blaster\\.vscode\\compileCommands_Blaster.json"
+            "intelliSenseMode": "clang-x64",
+            "compileCommands": "/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Blaster.json"
         },
         {
-            "name": "Win32",
-            "compilerPath": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+            "name": "Linux",
+            "compilerPath": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+            "compilerArgs": [
+                "-isysroot",
+                "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v22_clang-16.0.6-centos7/x86_64-unknown-linux-gnu"
+            ],
             "cStandard": "c17",
             "cppStandard": "c++20",
-            "intelliSenseMode": "msvc-x64",
-            "compileCommands": "E:\\GitHub\\Blaster\\.vscode\\compileCommands_Default.json"
+            "intelliSenseMode": "clang-x64",
+            "compileCommands": "/home/ural/Documents/GitHub/Blaster/.vscode/compileCommands_Default.json"
         }
     ],
     "version": 4

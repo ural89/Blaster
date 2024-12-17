@@ -6,7 +6,7 @@
 		},
 		{
 			"name": "UE5",
-			"path": "E:\\Epic Games\\UE_5.3"
+			"path": "/home/ural/Linux_Unreal_Engine_5.3.2"
 		}
 	],
 	"settings": {
@@ -16,442 +16,728 @@
 	"extensions": {
 		"recommendations": [
 			"ms-vscode.cpptools",
-			"ms-dotnettools.csharp"
+			"ms-dotnettools.csharp",
+			"vadimcn.vscode-lldb",
+			"ms-vscode.mono-debug",
+			"dfarley1.file-picker"
 		]
 	},
 	"tasks": {
 		"version": "2.0.0",
 		"tasks": [
 			{
-				"label": "Blaster Win64 Debug Build",
+				"label": "Blaster Linux Debug Build",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Debug",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Debug Rebuild",
+				"label": "Blaster Linux Debug Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Debug",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"Blaster Win64 Debug Clean"
+					"Blaster Linux Debug Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Debug Clean",
+				"label": "Blaster Linux Debug Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Debug",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster Linux DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"Linux",
+					"DebugGame",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 DebugGame Build",
+				"label": "Blaster Linux DebugGame Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"DebugGame",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
-					"-waitmutex"
-				],
-				"problemMatcher": "$msCompile",
-				"type": "shell",
-				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
-				}
-			},
-			{
-				"label": "Blaster Win64 DebugGame Rebuild",
-				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
-				"args": [
-					"Blaster",
-					"Win64",
-					"DebugGame",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"Blaster Win64 DebugGame Clean"
+					"Blaster Linux DebugGame Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 DebugGame Clean",
+				"label": "Blaster Linux DebugGame Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"DebugGame",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster Linux Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"Linux",
+					"Development",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Development Build",
+				"label": "Blaster Linux Development Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Development",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
-					"-waitmutex"
-				],
-				"problemMatcher": "$msCompile",
-				"type": "shell",
-				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
-				}
-			},
-			{
-				"label": "Blaster Win64 Development Rebuild",
-				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
-				"args": [
-					"Blaster",
-					"Win64",
-					"Development",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"Blaster Win64 Development Clean"
+					"Blaster Linux Development Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Development Clean",
+				"label": "Blaster Linux Development Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Development",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
-					"-waitmutex"
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Test Build",
+				"label": "Blaster Linux Test Build",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Test",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Test Rebuild",
+				"label": "Blaster Linux Test Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Test",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"Blaster Win64 Test Clean"
+					"Blaster Linux Test Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Test Clean",
+				"label": "Blaster Linux Test Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Test",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
-					"-waitmutex"
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Shipping Build",
+				"label": "Blaster Linux Shipping Build",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Shipping",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Shipping Rebuild",
+				"label": "Blaster Linux Shipping Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Shipping",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"Blaster Win64 Shipping Clean"
+					"Blaster Linux Shipping Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "Blaster Win64 Shipping Clean",
+				"label": "Blaster Linux Shipping Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
 					"Blaster",
-					"Win64",
+					"Linux",
 					"Shipping",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Debug",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "BlasterEditor Win64 Debug Build",
+				"label": "Blaster LinuxArm64 Debug Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
-					"BlasterEditor",
-					"Win64",
+					"Blaster",
+					"LinuxArm64",
 					"Debug",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
-					"-waitmutex"
-				],
-				"problemMatcher": "$msCompile",
-				"type": "shell",
-				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
-				}
-			},
-			{
-				"label": "BlasterEditor Win64 Debug Rebuild",
-				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
-				"args": [
-					"BlasterEditor",
-					"Win64",
-					"Debug",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"BlasterEditor Win64 Debug Clean"
+					"Blaster LinuxArm64 Debug Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "BlasterEditor Win64 Debug Clean",
+				"label": "Blaster LinuxArm64 Debug Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
-					"BlasterEditor",
-					"Win64",
+					"Blaster",
+					"LinuxArm64",
 					"Debug",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"DebugGame",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "BlasterEditor Win64 DebugGame Build",
+				"label": "Blaster LinuxArm64 DebugGame Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
-					"BlasterEditor",
-					"Win64",
+					"Blaster",
+					"LinuxArm64",
 					"DebugGame",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
-					"-waitmutex"
-				],
-				"problemMatcher": "$msCompile",
-				"type": "shell",
-				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
-				}
-			},
-			{
-				"label": "BlasterEditor Win64 DebugGame Rebuild",
-				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
-				"args": [
-					"BlasterEditor",
-					"Win64",
-					"DebugGame",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"BlasterEditor Win64 DebugGame Clean"
+					"Blaster LinuxArm64 DebugGame Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "BlasterEditor Win64 DebugGame Clean",
+				"label": "Blaster LinuxArm64 DebugGame Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
-					"BlasterEditor",
-					"Win64",
+					"Blaster",
+					"LinuxArm64",
 					"DebugGame",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Development",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "BlasterEditor Win64 Development Build",
+				"label": "Blaster LinuxArm64 Development Rebuild",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
-					"BlasterEditor",
-					"Win64",
+					"Blaster",
+					"LinuxArm64",
 					"Development",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
-					"-waitmutex"
-				],
-				"problemMatcher": "$msCompile",
-				"type": "shell",
-				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
-				}
-			},
-			{
-				"label": "BlasterEditor Win64 Development Rebuild",
-				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Build.bat",
-				"args": [
-					"BlasterEditor",
-					"Win64",
-					"Development",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"dependsOn": [
-					"BlasterEditor Win64 Development Clean"
+					"Blaster LinuxArm64 Development Clean"
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			},
 			{
-				"label": "BlasterEditor Win64 Development Clean",
+				"label": "Blaster LinuxArm64 Development Clean",
 				"group": "build",
-				"command": "Engine\\Build\\BatchFiles\\Clean.bat",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
 				"args": [
-					"BlasterEditor",
-					"Win64",
+					"Blaster",
+					"LinuxArm64",
 					"Development",
-					"E:\\GitHub\\Blaster\\Blaster.uproject",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Test Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Test",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "E:\\Epic Games\\UE_5.3"
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Test Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Test",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Blaster LinuxArm64 Test Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Test Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Test",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Shipping Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Shipping",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Shipping Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Shipping",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"Blaster LinuxArm64 Shipping Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "Blaster LinuxArm64 Shipping Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"Blaster",
+					"LinuxArm64",
+					"Shipping",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux Debug Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"Debug",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux Debug Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"Debug",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"BlasterEditor Linux Debug Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux Debug Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"Debug",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux DebugGame Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"DebugGame",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux DebugGame Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"DebugGame",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"BlasterEditor Linux DebugGame Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux DebugGame Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"DebugGame",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux Development Build",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"Development",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux Development Rebuild",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"Development",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex"
+				],
+				"problemMatcher": "$msCompile",
+				"dependsOn": [
+					"BlasterEditor Linux Development Clean"
+				],
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				}
+			},
+			{
+				"label": "BlasterEditor Linux Development Clean",
+				"group": "build",
+				"command": "Engine/Build/BatchFiles/Linux/Build.sh",
+				"args": [
+					"BlasterEditor",
+					"Linux",
+					"Development",
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-waitmutex",
+					"-clean"
+				],
+				"problemMatcher": "$msCompile",
+				"type": "shell",
+				"options": {
+					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 				}
 			}
 		]
@@ -462,151 +748,120 @@
 			{
 				"name": "Launch Blaster (Debug)",
 				"request": "launch",
-				"program": "E:\\GitHub\\Blaster\\Binaries\\Win64\\UnrealGame-Win64-Debug.exe",
-				"preLaunchTask": "Blaster Win64 Debug Build",
+				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-Debug",
+				"preLaunchTask": "Blaster Linux Debug Build",
 				"args": [
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (DebugGame)",
 				"request": "launch",
-				"program": "E:\\GitHub\\Blaster\\Binaries\\Win64\\UnrealGame-Win64-DebugGame.exe",
-				"preLaunchTask": "Blaster Win64 DebugGame Build",
+				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-DebugGame",
+				"preLaunchTask": "Blaster Linux DebugGame Build",
 				"args": [
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (Development)",
 				"request": "launch",
-				"program": "E:\\GitHub\\Blaster\\Binaries\\Win64\\UnrealGame.exe",
-				"preLaunchTask": "Blaster Win64 Development Build",
+				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame",
+				"preLaunchTask": "Blaster Linux Development Build",
 				"args": [
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (Test)",
 				"request": "launch",
-				"program": "E:\\GitHub\\Blaster\\Binaries\\Win64\\UnrealGame-Win64-Test.exe",
-				"preLaunchTask": "Blaster Win64 Test Build",
+				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-Test",
+				"preLaunchTask": "Blaster Linux Test Build",
 				"args": [
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (Shipping)",
 				"request": "launch",
-				"program": "E:\\GitHub\\Blaster\\Binaries\\Win64\\UnrealGame-Win64-Shipping.exe",
-				"preLaunchTask": "Blaster Win64 Shipping Build",
+				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-Shipping",
+				"preLaunchTask": "Blaster Linux Shipping Build",
 				"args": [
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch BlasterEditor (Debug)",
 				"request": "launch",
-				"program": "E:\\Epic Games\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-Debug.exe",
-				"preLaunchTask": "BlasterEditor Win64 Debug Build",
+				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor-Linux-Debug",
+				"preLaunchTask": "BlasterEditor Linux Debug Build",
 				"args": [
-					"E:\\GitHub\\Blaster\\Blaster.uproject"
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject"
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch BlasterEditor (DebugGame)",
 				"request": "launch",
-				"program": "E:\\Epic Games\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor-Win64-DebugGame.exe",
-				"preLaunchTask": "BlasterEditor Win64 DebugGame Build",
+				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor-Linux-DebugGame",
+				"preLaunchTask": "BlasterEditor Linux DebugGame Build",
 				"args": [
-					"E:\\GitHub\\Blaster\\Blaster.uproject"
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject"
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Launch BlasterEditor (Development)",
 				"request": "launch",
-				"program": "E:\\Epic Games\\UE_5.3\\Engine\\Binaries\\Win64\\UnrealEditor.exe",
-				"preLaunchTask": "BlasterEditor Win64 Development Build",
+				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor",
+				"preLaunchTask": "BlasterEditor Linux Development Build",
 				"args": [
-					"E:\\GitHub\\Blaster\\Blaster.uproject"
+					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject"
 				],
-				"cwd": "E:\\Epic Games\\UE_5.3",
-				"stopAtEntry": false,
-				"console": "externalTerminal",
-				"type": "cppvsdbg",
-				"visualizerFile": "E:\\Epic Games\\UE_5.3\\Engine\\Extras\\VisualStudioDebugging\\Unreal.natvis",
-				"sourceFileMap": {
-					"D:\\build\\++UE5\\Sync": "E:\\Epic Games\\UE_5.3"
-				}
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"type": "cppdbg",
+				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"showDisplayString": true
 			},
 			{
 				"name": "Generate Project Files",
 				"type": "coreclr",
 				"request": "launch",
-				"preLaunchTask": "UnrealBuildTool Win64 Development Build",
-				"program": "E:\\Epic Games\\UE_5.3\\Engine\\Build\\BatchFiles\\RunUBT.bat",
+				"preLaunchTask": "UnrealBuildTool Linux Development Build",
+				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Build/BatchFiles/RunUBT.bat",
 				"args": [
 					"-projectfiles",
 					"-vscode",
-					"-project=E:\\GitHub\\Blaster\\Blaster.uproject",
+					"-project=/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
 					"-game",
 					"-engine",
 					"-dotnet"
 				],
-				"console": "externalTerminal",
+				"console": "internalConsole",
+				"internalConsoleOptions": "openOnSessionStart",
 				"stopAtEntry": false,
-				"cwd": "E:\\Epic Games\\UE_5.3"
+				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
 			}
 		]
 	}
