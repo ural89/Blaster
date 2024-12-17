@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Blaster/BlasterTypes/TurningInPlace.h"
 #include "Interfaces/InteractWithCrosshairsInterface.h"
+#include "Components/TimelineComponent.h"
 #include "BlasterCharacter.generated.h"
 
 UCLASS()
@@ -122,11 +123,29 @@ private:
 
 	FTimerHandle ElimTimer;
 
-	void ElimTimerFInished();
-
 	UPROPERTY(EditDefaultsOnly)
 	float ElimDelay = 3.f;
+	void ElimTimerFInished();
 
+
+	//Dissolve VFX
+	UPROPERTY(VisibleAnywhere)
+	UTimelineComponent* DissolveTimeline;
+	FOnTimelineFloat DissolveTrack;
+
+	UPROPERTY(EditAnywhere)
+	UCurveFloat* DissolveCurve;
+	
+	UFUNCTION()
+	void UpdateDissolveMaterial(float DissolveValue);
+	void StartDissolve();
+
+	UPROPERTY(VisibleAnywhere, Category = Elim)
+	UMaterialInstanceDynamic* DynamicDissolveMaterialInstance; //Dynamic instance that we
+																//we change on runtime
+
+	UPROPERTY(EditAnywhere, Category = Elim) 
+	UMaterialInstance* DissolveMaterialInstance; //instance set on the blueprint
 
 public:
 	void SetOverlappingWeapon(class AWeapon *Weapon);
