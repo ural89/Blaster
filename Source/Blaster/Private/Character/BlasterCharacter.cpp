@@ -13,9 +13,12 @@
 #include "Blaster/Blaster.h"
 #include "PlayerController/BlasterPlayerController.h"
 #include "Blaster/Private/GameMode/BlasterGameMode.h"
+#include "TimerManager.h"
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	SpawnCollisionHandlingMethod =
+		ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(GetMesh());
@@ -70,8 +73,26 @@ void ABlasterCharacter::OnRep_ReplicatedMovement() // this is overridden in acto
 	SimProxiesTurn();
 	TimeSinceLastMovementReplication = 0;
 }
+void ABlasterCharacter::ElimTimerFInished() // only server
+{
+	ABlasterGameMode *BlasterGameMode = GetWorld()->GetAuthGameMode<ABlasterGameMode>();
+	if (BlasterGameMode)
+	{
+		BlasterGameMode->RequestRespawn(this, Controller);
+	}
+}
+void ABlasterCharacter::Elim() // since this is called from game mode, this is only called
+							   // in server (game mode only lives in server)
+{
+	MulticastElim();
+	GetWorldTimerManager().SetTimer(
+		ElimTimer,
+		this,
+		&ABlasterCharacter::ElimTimerFInished,
+		ElimDelay);
+}
 
-void ABlasterCharacter::Elim_Implementation()
+void ABlasterCharacter::MulticastElim_Implementation()
 {
 	bElimmed = true;
 	PlayElimMontage();
@@ -351,7 +372,7 @@ void ABlasterCharacter::RecieveDamage(AActor *DamagedActor, float Damage, const 
 				BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
 			ABlasterPlayerController *AttackerController =
 				Cast<ABlasterPlayerController>(InstigatorController);
-					BlasterGameMode->PlayerEliminated(this, BlasterPlayerController, AttackerController);
+			BlasterGameMode->PlayerEliminated(this, BlasterPlayerController, AttackerController);
 		}
 	}
 }
