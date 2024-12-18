@@ -20,6 +20,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
+	virtual void Destroyed() override;
 
 	void PlayFireMontage(bool bAiming);
 	void PlayElimMontage();
@@ -146,6 +147,13 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = Elim) 
 	UMaterialInstance* DissolveMaterialInstance; //instance set on the blueprint
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* ElimBotEffect;
+
+	UPROPERTY(VisibleAnywhere)
+	UParticleSystemComponent* ElimBotComponent;
+
 
 public:
 	void SetOverlappingWeapon(class AWeapon *Weapon);

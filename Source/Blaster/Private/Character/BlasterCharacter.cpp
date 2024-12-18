@@ -14,6 +14,8 @@
 #include "PlayerController/BlasterPlayerController.h"
 #include "Blaster/Private/GameMode/BlasterGameMode.h"
 #include "TimerManager.h"
+#include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystemComponent.h"
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -43,14 +45,13 @@ ABlasterCharacter::ABlasterCharacter()
 	GetMesh()->SetCollisionObjectType(ECC_SkeletalMesh);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
 	GetMesh()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Visibility, ECollisionResponse::ECR_Block); // this is trace response (visiblity)
-	
+
 	DissolveTimeline = CreateDefaultSubobject<UTimelineComponent>(TEXT("DissolveTimelineComponent"));
 
 	TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 
 	NetUpdateFrequency = 66.f;
 	MinNetUpdateFrequency = 33.f; // this is the update freq if nothing changes frequently
-
 }
 
 void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -67,6 +68,16 @@ void ABlasterCharacter::PostInitializeComponents()
 	if (Combat)
 	{
 		Combat->Character = this;
+	}
+}
+
+void ABlasterCharacter::Destroyed()
+{
+	Super::Destroyed();
+	if (ElimBotComponent)
+	{
+		//Destroy component is not replicated!!
+		ElimBotComponent->DestroyComponent();
 	}
 }
 
@@ -115,7 +126,7 @@ void ABlasterCharacter::MulticastElim_Implementation()
 	StartDissolve();
 
 	GetCharacterMovement()->DisableMovement();
-	GetCharacterMovement()->StopMovementImmediately(); //also freezes look around
+	GetCharacterMovement()->StopMovementImmediately(); // also freezes look around
 	if (BlasterPlayerController)
 	{
 		DisableInput(BlasterPlayerController);
@@ -124,6 +135,19 @@ void ABlasterCharacter::MulticastElim_Implementation()
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
+	// Spawn elimbot
+	if (ElimBotEffect)
+	{
+		FVector ElimBotSpawnPoint(GetActorLocation().X,
+								  GetActorLocation().Y,
+								  GetActorLocation().Z + 200.f);
+		ElimBotComponent = UGameplayStatics::SpawnEmitterAtLocation(
+			GetWorld(),
+			ElimBotEffect,
+			ElimBotSpawnPoint,
+			GetActorRotation()
+		);
+	}
 }
 
 void ABlasterCharacter::BeginPlay()
