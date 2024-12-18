@@ -138,7 +138,8 @@ void UCombatComponent::StartFireTimer()
 
 void UCombatComponent::FireTimeFinished()
 {
-	if (EquippedWeapon == nullptr) return;
+	if (EquippedWeapon == nullptr)
+		return;
 	bCanFire = true;
 	if (bFireButtonPressed && EquippedWeapon->bAutomatic)
 	{
@@ -176,6 +177,19 @@ void UCombatComponent::OnRep_EquippedWeapon()
 {
 	if (EquippedWeapon && Character)
 	{
+		/////We set weapon state again here because:
+		//in equip weapon both setweaponstate and attach actor is replicated. 
+		//But it is no guarantee which one is recieved first. so we copy them in here to
+		//clients. Because first we need to set weapon state and disable collisions first
+		//then attach to actor
+		EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped); 
+
+		const USkeletalMeshSocket *HandSocket =
+			Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
+		if (HandSocket)
+		{
+			HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
+		}
 		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 		Character->bUseControllerRotationYaw = true;
 	}
