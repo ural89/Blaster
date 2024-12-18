@@ -16,6 +16,7 @@ class ABlasterPlayerController : public APlayerController
 	
 public:
 	void SetHUDHealth(float Health, float MaxHealth);
+	void OnPossess(APawn* InPawn) override;
 protected:
 	void BeginPlay() override;
 private:
