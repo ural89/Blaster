@@ -16,6 +16,8 @@
 #include "TimerManager.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "PlayerState/BlasterPlayerState.h"
+
 ABlasterCharacter::ABlasterCharacter()
 {
 	PrimaryActorTick.bCanEverTick = true;
@@ -76,7 +78,7 @@ void ABlasterCharacter::Destroyed()
 	Super::Destroyed();
 	if (ElimBotComponent)
 	{
-		//Destroy component is not replicated!!
+		// Destroy component is not replicated!!
 		ElimBotComponent->DestroyComponent();
 	}
 }
@@ -145,8 +147,7 @@ void ABlasterCharacter::MulticastElim_Implementation()
 			GetWorld(),
 			ElimBotEffect,
 			ElimBotSpawnPoint,
-			GetActorRotation()
-		);
+			GetActorRotation());
 	}
 }
 
@@ -189,6 +190,7 @@ void ABlasterCharacter::Tick(float DeltaTime)
 		CalculateAO_Pitch();
 	}
 	HideCameraIfCharacterClose();
+	PollInit();
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
@@ -429,6 +431,18 @@ void ABlasterCharacter::RecieveDamage(AActor *DamagedActor, float Damage, const 
 	}
 }
 
+void ABlasterCharacter::PollInit()
+{
+	if (BlasterPlayerState == nullptr)
+	{
+		BlasterPlayerState = GetPlayerState<ABlasterPlayerState>();
+		if (BlasterPlayerState)
+		{
+			BlasterPlayerState->AddToScore(0.f);
+		}
+	}
+}
+
 void ABlasterCharacter::OnRep_OverlappingWeapon(AWeapon *LastWeapon) // Here lastWeapon will be the last value BEFORE change with replication
 {
 	if (OverlappingWeapon)
@@ -553,7 +567,6 @@ void ABlasterCharacter::PlayFireMontage(bool bAiming)
 
 		// FName SectionName;
 		// SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
-		UE_LOG(LogTemp, Warning, TEXT("Riffle aiming %i"), bAiming);
 		// AnimInstance->Montage_JumpToSection(SectionName);
 	}
 }

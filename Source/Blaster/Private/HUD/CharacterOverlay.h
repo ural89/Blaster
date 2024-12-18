@@ -22,4 +22,6 @@ public:
 	class UTextBlock* HealthText;
 
 	
+	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	class UTextBlock* ScoreAmount;
 };
