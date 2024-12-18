@@ -17,6 +17,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PlayerState/BlasterPlayerState.h"
+#include "Weapon/WeaponTypes.h"
 
 ABlasterCharacter::ABlasterCharacter()
 {
@@ -210,6 +211,7 @@ void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("Aim"), EInputEvent::IE_Released, this, &ABlasterCharacter::AimButtonReleased);
 	PlayerInputComponent->BindAction(TEXT("Fire"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::FireButtonPressed);
 	PlayerInputComponent->BindAction(TEXT("Fire"), EInputEvent::IE_Released, this, &ABlasterCharacter::FireButtonReleased);
+	PlayerInputComponent->BindAction(TEXT("Reload"), EInputEvent::IE_Pressed, this, &ABlasterCharacter::ReloadButtonPressed);
 }
 
 void ABlasterCharacter::MoveForward(float Value)
@@ -276,6 +278,14 @@ void ABlasterCharacter::CrouchButtonPressed()
 	{
 		Crouch(); // this uses bIsCrouched in unreal. And this bool is replicated. and has OnRep_IsCrouched() callback in character class.
 				  // REMEMBER TO ENABLE CAN CROUCH IN CHAR BLUEPRINT
+	}
+}
+
+void ABlasterCharacter::ReloadButtonPressed()
+{
+	if (Combat)
+	{
+		Combat->Reload();
 	}
 }
 
@@ -570,9 +580,31 @@ void ABlasterCharacter::PlayFireMontage(bool bAiming)
 	{
 		AnimInstance->Montage_Play(FireWeaponMontage);
 
-		// FName SectionName;
-		// SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
-		// AnimInstance->Montage_JumpToSection(SectionName);
+		FName SectionName;
+		SectionName = bAiming ? FName("RifleAim") : FName("RifleHip");
+		AnimInstance->Montage_JumpToSection(SectionName);
+	}
+}
+
+void ABlasterCharacter::PlayReloadMontage()
+{
+
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
+		return;
+
+	UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && ReloadMontage)
+	{
+		AnimInstance->Montage_Play(ReloadMontage);
+
+		FName SectionName;
+		switch (Combat->EquippedWeapon->GetWeaponType())
+		{
+			case EWeaponType::EWT_AssaultRiffle:
+				SectionName = FName("Riffle");
+				break;
+		}
+		AnimInstance->Montage_JumpToSection(SectionName);
 	}
 }
 

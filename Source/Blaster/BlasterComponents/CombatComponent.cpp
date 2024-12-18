@@ -112,6 +112,7 @@ void UCombatComponent::UpdateHUDCrosshairs(float DeltaTime)
 	}
 }
 
+
 void UCombatComponent::InterpFOV(float DeltaTime)
 {
 	if (EquippedWeapon == nullptr)
@@ -235,6 +236,24 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 	}
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
+}
+
+void UCombatComponent::Reload()
+{
+	if (CurrentWeaponCariedAmmo > 0)
+	{
+		ServerReload();
+	}
+}
+void UCombatComponent::ServerReload_Implementation()
+{
+	if (Character == nullptr)
+	{
+		return;
+	}
+	UE_LOG(LogTemp, Warning, TEXT("Playin montage"));
+	Character->PlayReloadMontage();
+
 }
 
 void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)

@@ -23,7 +23,7 @@ public:
 	friend class ABlasterCharacter;
 
 	void EquipWeapon(class AWeapon *WeaponToEquip);
-
+	void Reload();
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bIsAiming);
@@ -45,6 +45,9 @@ protected:
 	void TraceUnderCrosshairs(FHitResult &TraceHitResult);
 
 	void UpdateHUDCrosshairs(float DeltaTime);
+
+	UFUNCTION(Server, Reliable)
+	void ServerReload();
 
 private:
 	class ABlasterCharacter *Character;
