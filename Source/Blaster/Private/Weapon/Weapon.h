@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "WeaponTypes.h"
 #include "Weapon.generated.h"
 
 UENUM(BlueprintType)
@@ -48,7 +49,7 @@ public:
 	virtual void Fire(const FVector &HitTarget);
 	void ShowPickupWidget(bool bShowWidget);
 	void Dropped();
-    void UpdateHUDAmmo();
+	void UpdateHUDAmmo();
 
 public:
 	/// Textures for weapon crosshairs
@@ -77,13 +78,14 @@ public:
 	UPROPERTY(EditAnywhere)
 	float ZoomInterpSpeed = 20.f;
 
-	///Automatic fire
-	
+	/// Automatic fire
+
 	UPROPERTY(EditAnywhere, Category = Combat)
 	float FireDelay = .15f;
 
 	UPROPERTY(EditAnywhere, Category = Combat)
 	bool bAutomatic = true;
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Weapon Properties")
 	USkeletalMeshComponent *WeaponMesh;
@@ -107,19 +109,21 @@ private:
 	int32 Ammo;
 
 	UFUNCTION()
-    void OnRep_Ammo();
+	void OnRep_Ammo();
 
-
-    void SpendRound();
+	void SpendRound();
 
 	UPROPERTY(EditAnywhere)
 	int32 MagCapacity;
 
 	UPROPERTY()
-	class ABlasterCharacter* BlasterOwnerCharacter;
+	class ABlasterCharacter *BlasterOwnerCharacter;
 
 	UPROPERTY()
-	class ABlasterPlayerController* BlasterOwnerController;
+	class ABlasterPlayerController *BlasterOwnerController;
+
+	UPROPERTY(EditAnywhere)
+	EWeaponType WeaponType;
 
 public:
 	void SetWeaponState(EWeaponState State);
@@ -128,4 +132,5 @@ public:
 	FORCEINLINE float GetZoomedFOV() const { return ZoomedFOV; }
 	FORCEINLINE float GetZoomInterpSpeed() const { return ZoomInterpSpeed; }
 	bool IsEmpty();
+	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
 };

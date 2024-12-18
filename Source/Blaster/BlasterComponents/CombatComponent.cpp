@@ -31,6 +31,10 @@ void UCombatComponent::BeginPlay()
 			DefaultFOV = Character->GetFollowCamera()->FieldOfView;
 			CurrentFOV = DefaultFOV;
 		}
+		if (Character->HasAuthority())
+		{
+			InitializeCarriedAmmo();
+		}
 	}
 }
 
@@ -147,7 +151,6 @@ void UCombatComponent::FireTimeFinished()
 	}
 }
 
-
 void UCombatComponent::SetAiming(bool bIsAiming)
 {
 	bAiming = bIsAiming;	  // since this is visual only, we can set localy for faster feedback
@@ -172,6 +175,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Out
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
 	DOREPLIFETIME(UCombatComponent, bAiming);
+	DOREPLIFETIME_CONDITION(UCombatComponent, CurrentWeaponCariedAmmo, COND_OwnerOnly);
 }
 
 void UCombatComponent::OnRep_EquippedWeapon()
@@ -216,6 +220,19 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 	}
 	EquippedWeapon->SetOwner(Character); // this is replicated by default (Actors have virtual OnRep_Owner() method)
 	EquippedWeapon->UpdateHUDAmmo();
+	if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+	{
+		CurrentWeaponCariedAmmo = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+	}
+	Controller =
+		Controller == nullptr
+			? Cast<ABlasterPlayerController>(Character->Controller)
+			: Controller;
+
+	if (Controller) // we can update for client in on repammo (ammo updated 5 lines up)
+	{
+		Controller->SetHUDCarriedAmmo(CurrentWeaponCariedAmmo);
+	}
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
 }
@@ -309,4 +326,17 @@ bool UCombatComponent::CanFire()
 		return false;
 	}
 	return !EquippedWeapon->IsEmpty() && bCanFire;
+}
+
+void UCombatComponent::InitializeCarriedAmmo()
+{
+	CarriedAmmoMap.Emplace(EWeaponType::EWT_AssaultRiffle, StartingARAmmo);
+}
+
+void UCombatComponent::OnRep_CarriedAmmo()
+{
+	if (Controller)
+	{
+		Controller->SetHUDCarriedAmmo(CurrentWeaponCariedAmmo);
+	}
 }

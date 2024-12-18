@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "HUD/BlasterHUD.h"
+#include "Weapon/WeaponTypes.h"
 #include "CombatComponent.generated.h"
 
 #define TRACE_LENGTH 80000.f;
@@ -95,4 +96,18 @@ private:
 	void FireTimeFinished();
 
 	bool CanFire();
+
+	UPROPERTY(ReplicatedUsing = OnRep_CarriedAmmo)
+	int32 CurrentWeaponCariedAmmo;
+
+	TMap<EWeaponType, int32> CarriedAmmoMap; //TMaps cant be replicated and 
+							//this is in server! CurrentWeaponCarriedAmmo is replicated though
+
+	UPROPERTY()
+	int32 StartingARAmmo = 30;
+
+	void InitializeCarriedAmmo();
+
+	UFUNCTION()
+	void OnRep_CarriedAmmo();
 };

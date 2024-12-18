@@ -30,4 +30,7 @@ public:
 
 	UPROPERTY(meta=(BindWidget))//this is required to bind widget
 	class UTextBlock* WeaponAmmoAmount;
+
+	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	class UTextBlock* CarriedAmmoAmount;
 };
