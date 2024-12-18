@@ -147,6 +147,7 @@ void UCombatComponent::FireTimeFinished()
 	}
 }
 
+
 void UCombatComponent::SetAiming(bool bIsAiming)
 {
 	bAiming = bIsAiming;	  // since this is visual only, we can set localy for faster feedback
@@ -178,11 +179,11 @@ void UCombatComponent::OnRep_EquippedWeapon()
 	if (EquippedWeapon && Character)
 	{
 		/////We set weapon state again here because:
-		//in equip weapon both setweaponstate and attach actor is replicated. 
-		//But it is no guarantee which one is recieved first. so we copy them in here to
-		//clients. Because first we need to set weapon state and disable collisions first
-		//then attach to actor
-		EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped); 
+		// in equip weapon both setweaponstate and attach actor is replicated.
+		// But it is no guarantee which one is recieved first. so we copy them in here to
+		// clients. Because first we need to set weapon state and disable collisions first
+		// then attach to actor
+		EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
 
 		const USkeletalMeshSocket *HandSocket =
 			Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
@@ -199,7 +200,7 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 {
 	if (Character == nullptr || WeaponToEquip == nullptr)
 		return;
-	
+
 	if (EquippedWeapon)
 	{
 		EquippedWeapon->Dropped();
@@ -269,7 +270,7 @@ void UCombatComponent::FireButtonPressed(bool bPressed)
 }
 void UCombatComponent::Fire()
 {
-	if (bCanFire)
+	if (CanFire())
 	{
 		bCanFire = false;
 		ServerFire(HitTarget); // this is calling from clients to server
@@ -299,4 +300,13 @@ void UCombatComponent::MulticastFire_Implementation(const FVector_NetQuantize &T
 		Character->PlayFireMontage(bAiming);
 		EquippedWeapon->Fire(TraceHitTarget);
 	}
+}
+
+bool UCombatComponent::CanFire()
+{
+	if (EquippedWeapon == nullptr)
+	{
+		return false;
+	}
+	return !EquippedWeapon->IsEmpty() && bCanFire;
 }

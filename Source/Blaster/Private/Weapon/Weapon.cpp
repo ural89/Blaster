@@ -115,7 +115,7 @@ void AWeapon::Dropped()
 
 void AWeapon::SpendRound()
 {
-	Ammo--;
+	Ammo = FMath::Clamp(Ammo - 1, 0, MagCapacity);
 	UpdateHUDAmmo();
 }
 
@@ -182,6 +182,11 @@ void AWeapon::SetWeaponState(EWeaponState State)
 	default:
 		break;
 	}
+}
+
+bool AWeapon::IsEmpty()
+{
+    return Ammo <= 0;
 }
 
 void AWeapon::OnRep_WeaponState()
