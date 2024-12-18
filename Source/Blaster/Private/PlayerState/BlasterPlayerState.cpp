@@ -4,10 +4,17 @@
 #include "BlasterPlayerState.h"
 #include "Character/BlasterCharacter.h"
 #include "PlayerController/BlasterPlayerController.h"
+#include "Net/UnrealNetwork.h"
 
+void ABlasterPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+    DOREPLIFETIME(ABlasterPlayerState, Defeats);
+
+}
 void ABlasterPlayerState::AddToScore(float ScoreAmount) // this is for server
 {
-    Score += ScoreAmount;
+    SetScore(GetScore() + ScoreAmount);
     Character = Character == nullptr ? Cast<ABlasterCharacter>(GetPawn()) : Character;
     if (Character)
     {
@@ -18,7 +25,7 @@ void ABlasterPlayerState::AddToScore(float ScoreAmount) // this is for server
 
         if (Controller)
         {
-            Controller->SetHUDScore(Score);
+            Controller->SetHUDScore(GetScore());
         }
     }
 }
@@ -36,7 +43,42 @@ void ABlasterPlayerState::OnRep_Score() // reps only in clients not in server!!
 
         if (Controller)
         {
-            Controller->SetHUDScore(Score);
+            Controller->SetHUDScore(GetScore());
         }
     }
 }
+void ABlasterPlayerState::AddToDefeats(int DefeatsAmount)
+{
+    Defeats += DefeatsAmount;
+    Character = Character == nullptr ? Cast<ABlasterCharacter>(GetPawn()) : Character;
+    if (Character)
+    {
+        Controller = Controller ==
+                             nullptr
+                         ? Cast<ABlasterPlayerController>(Character->Controller)
+                         : Controller;
+
+        if (Controller)
+        {
+            Controller->SetHUDDefeats(Defeats);
+        }
+    }
+}
+
+void ABlasterPlayerState::OnRep_Defeats()
+{
+    Character = Character == nullptr ? Cast<ABlasterCharacter>(GetPawn()) : Character;
+    if (Character)
+    {
+        Controller = Controller ==
+                             nullptr
+                         ? Cast<ABlasterPlayerController>(Character->Controller)
+                         : Controller;
+
+        if (Controller)
+        {
+            Controller->SetHUDDefeats(Defeats);
+        }
+    }
+}
+

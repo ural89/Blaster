@@ -24,4 +24,7 @@ public:
 	
 	UPROPERTY(meta=(BindWidget))//this is required to bind widget
 	class UTextBlock* ScoreAmount;
+
+	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	class UTextBlock* DefeatsAmount;
 };
