@@ -43,10 +43,12 @@ protected:
 public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
+	virtual void OnRep_Owner() override;
 
 	virtual void Fire(const FVector &HitTarget);
 	void ShowPickupWidget(bool bShowWidget);
 	void Dropped();
+    void UpdateHUDAmmo();
 
 public:
 	/// Textures for weapon crosshairs
@@ -100,6 +102,24 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class ACasing> CasingClass;
+
+	UPROPERTY(EditAnywhere, ReplicatedUsing = OnRep_Ammo)
+	int32 Ammo;
+
+	UFUNCTION()
+    void OnRep_Ammo();
+
+
+    void SpendRound();
+
+	UPROPERTY(EditAnywhere)
+	int32 MagCapacity;
+
+	UPROPERTY()
+	class ABlasterCharacter* BlasterOwnerCharacter;
+
+	UPROPERTY()
+	class ABlasterPlayerController* BlasterOwnerController;
 
 public:
 	void SetWeaponState(EWeaponState State);

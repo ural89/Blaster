@@ -114,6 +114,10 @@ void ABlasterCharacter::Elim() // since this is called from game mode, this is o
 
 void ABlasterCharacter::MulticastElim_Implementation()
 {
+	if (BlasterPlayerController)
+	{
+		BlasterPlayerController->SetHUDWeaponAmmo(0);
+	}
 	bElimmed = true;
 	PlayElimMontage();
 	if (DissolveMaterialInstance)

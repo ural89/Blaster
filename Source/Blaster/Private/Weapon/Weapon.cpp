@@ -4,8 +4,10 @@
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Character/BlasterCharacter.h"
+#include "PlayerController/BlasterPlayerController.h"
 #include "Casing.h"
 #include "Net/UnrealNetwork.h"
+
 AWeapon::AWeapon()
 {
 
@@ -53,6 +55,7 @@ void AWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeP
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME(AWeapon, WeaponState); // registers replicated object
+	DOREPLIFETIME(AWeapon, Ammo);
 }
 void AWeapon::OnSphereOverlap(UPrimitiveComponent *OverlappedComponent, AActor *OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult &SweepResult)
 {
@@ -88,6 +91,7 @@ void AWeapon::Fire(const FVector &HitTarget)
 			GetWorld()->SpawnActor<ACasing>(CasingClass, CasingSocketTransform);
 		}
 	}
+	SpendRound();
 	// TODO: vfx and weapon animations here
 }
 
@@ -105,6 +109,52 @@ void AWeapon::Dropped()
 	FDetachmentTransformRules DetachRules(EDetachmentRule::KeepWorld, true);
 	WeaponMesh->DetachFromComponent(DetachRules);
 	SetOwner(nullptr);
+	BlasterOwnerCharacter = nullptr;
+	BlasterOwnerController = nullptr;
+}
+
+void AWeapon::SpendRound()
+{
+	Ammo--;
+	UpdateHUDAmmo();
+}
+
+void AWeapon::OnRep_Ammo()
+{
+	UpdateHUDAmmo();
+}
+void AWeapon::UpdateHUDAmmo()
+{
+	BlasterOwnerCharacter =
+		BlasterOwnerCharacter ==
+				nullptr
+			? Cast<ABlasterCharacter>(GetOwner())
+			: BlasterOwnerCharacter;
+	if (BlasterOwnerCharacter)
+	{
+		BlasterOwnerController =
+			BlasterOwnerController ==
+					nullptr
+				? Cast<ABlasterPlayerController>(BlasterOwnerCharacter->Controller)
+				: BlasterOwnerController;
+		if (BlasterOwnerController)
+		{
+			BlasterOwnerController->SetHUDWeaponAmmo(Ammo);
+		}
+	}
+}
+void AWeapon::OnRep_Owner()
+{
+	Super::OnRep_Owner();
+	if (Owner == nullptr)
+	{
+		BlasterOwnerCharacter = nullptr;
+		BlasterOwnerController = nullptr;
+	}
+	else
+	{
+		UpdateHUDAmmo();
+	}
 }
 
 void AWeapon::SetWeaponState(EWeaponState State)

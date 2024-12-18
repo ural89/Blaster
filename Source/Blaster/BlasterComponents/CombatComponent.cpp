@@ -199,6 +199,11 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 {
 	if (Character == nullptr || WeaponToEquip == nullptr)
 		return;
+	
+	if (EquippedWeapon)
+	{
+		EquippedWeapon->Dropped();
+	}
 
 	EquippedWeapon = WeaponToEquip;
 	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped); // since EquippedWeapon is replicated it will set for everyone
@@ -209,6 +214,7 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh()); // this is replicated because transform of weapon is replicated.
 	}
 	EquippedWeapon->SetOwner(Character); // this is replicated by default (Actors have virtual OnRep_Owner() method)
+	EquippedWeapon->UpdateHUDAmmo();
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
 }
