@@ -7,6 +7,29 @@
 #include "GameFramework/PlayerStart.h"
 #include "PlayerState/BlasterPlayerState.h"
 
+ABlasterGameMode::ABlasterGameMode()
+{
+    bDelayedStart = true; //this spawns ghosts instead of pawn at start
+}
+
+void ABlasterGameMode::BeginPlay()
+{
+    Super::BeginPlay();
+    LevelStartingTime = GetWorld()->GetTimeSeconds();
+}
+void ABlasterGameMode::Tick(float DeltaTime)
+{
+    Super::Tick(DeltaTime);
+    if (MatchState == MatchState::WaitingToStart)
+    {
+        CountdownTime = WarmupTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
+        if (CountdownTime <= 0.f)
+        {
+            StartMatch();
+        }
+    }
+}
+
 void ABlasterGameMode::PlayerEliminated(ABlasterCharacter *ElimmedCharacter, ABlasterPlayerController *VictimController, ABlasterPlayerController *AttackerController)
 {
     ABlasterPlayerState *AttackerPlayerState =
