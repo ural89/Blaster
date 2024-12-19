@@ -117,7 +117,7 @@ private:
 	TMap<EWeaponType, int32> CarriedAmmoMap; //TMaps cant be replicated and 
 							//this is in server! CurrentWeaponCarriedAmmo is replicated though
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	int32 StartingARAmmo = 30;
 
 	void InitializeCarriedAmmo();

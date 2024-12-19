@@ -149,6 +149,10 @@ void UCombatComponent::FireTimeFinished()
 	{
 		Fire();
 	}
+	if (EquippedWeapon->IsEmpty())
+	{
+		Reload();
+	}
 }
 
 void UCombatComponent::SetAiming(bool bIsAiming)
@@ -221,7 +225,8 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 	EquippedWeapon = WeaponToEquip;
 	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped); // since EquippedWeapon is replicated it will set for everyone
 
-	const USkeletalMeshSocket *HandSocket = Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
+	const USkeletalMeshSocket *HandSocket =
+		Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
 	if (HandSocket)
 	{
 		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh()); // this is replicated because transform of weapon is replicated.
@@ -247,6 +252,10 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 			this,
 			EquippedWeapon->EquipSound,
 			Character->GetActorLocation());
+	}
+	if (EquippedWeapon->IsEmpty())
+	{
+		Reload();
 	}
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
