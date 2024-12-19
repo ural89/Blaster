@@ -9,13 +9,29 @@
 
 ABlasterGameMode::ABlasterGameMode()
 {
-    bDelayedStart = true; //this spawns ghosts instead of pawn at start
+    bDelayedStart = true; // this spawns ghosts instead of pawn at start
 }
 
 void ABlasterGameMode::BeginPlay()
 {
     Super::BeginPlay();
     LevelStartingTime = GetWorld()->GetTimeSeconds();
+}
+void ABlasterGameMode::OnMatchStateSet()
+{
+    Super::OnMatchStateSet();
+
+    // tell all player controllers the gamestate
+    for (FConstPlayerControllerIterator It =
+             GetWorld()->GetPlayerControllerIterator();
+         It; It++)
+    {
+        ABlasterPlayerController* BlasterPlayer = Cast<ABlasterPlayerController>(*It);
+        if (BlasterPlayer)
+        {
+            BlasterPlayer->OnMatchStateSet(MatchState);
+        }
+    }
 }
 void ABlasterGameMode::Tick(float DeltaTime)
 {

@@ -10,7 +10,7 @@
  *
  */
 UCLASS()
-class ABlasterGameMode : public AGameMode //Gamemode has MatchStates on top of gamemodebase 
+class ABlasterGameMode : public AGameMode // Gamemode has MatchStates on top of gamemodebase
 {
 	GENERATED_BODY()
 public:
@@ -20,15 +20,18 @@ public:
 								  class ABlasterPlayerController *VictimController,
 								  ABlasterPlayerController *AttackerController);
 
-	virtual void RequestRespawn(class ACharacter* ElimmedCharacter,
-	 								AController* ElimmedController);
+	virtual void RequestRespawn(class ACharacter *ElimmedCharacter,
+								AController *ElimmedController);
 
 	UPROPERTY(EditDefaultsOnly)
 	float WarmupTime = 10.f;
 	float LevelStartingTime = 0.f;
 
 protected:
-virtual void BeginPlay() override;
- private:
+	virtual void BeginPlay() override;
+	virtual void OnMatchStateSet() override;
+
+private:
 	float CountdownTime = 0;
+	
 };
