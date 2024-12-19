@@ -8,15 +8,13 @@
 #include "Net/UnrealNetwork.h"
 #include "GameMode/BlasterGameMode.h"
 #include "HUD/Announcement.h"
+#include "Kismet/GameplayStatics.h"
 
 void ABlasterPlayerController::BeginPlay()
 {
     Super::BeginPlay();
+    ServerCheckMatchState();
     BlasterHUD = Cast<ABlasterHUD>(GetHUD());
-    if (BlasterHUD)
-    {
-        BlasterHUD->AddAnnouncement();
-    }
 }
 
 void ABlasterPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -227,13 +225,40 @@ void ABlasterPlayerController::OnRep_MatchState()
 void ABlasterPlayerController::HandleMatchHasStarted()
 {
 
-        BlasterHUD = BlasterHUD == nullptr ? Cast<ABlasterHUD>(GetHUD()) : BlasterHUD;
-        if (BlasterHUD)
+    BlasterHUD = BlasterHUD == nullptr ? Cast<ABlasterHUD>(GetHUD()) : BlasterHUD;
+    if (BlasterHUD)
+    {
+        BlasterHUD->AddCharacterOverlay();
+        if (BlasterHUD->Announcement)
         {
-            BlasterHUD->AddCharacterOverlay();
-            if (BlasterHUD->Announcement)
-            {
-                BlasterHUD->Announcement->SetVisibility(ESlateVisibility::Hidden);
-            }
+            BlasterHUD->Announcement->SetVisibility(ESlateVisibility::Hidden);
         }
+    }
+}
+
+void ABlasterPlayerController::ClientJoinMidgame_Implementation(FName StateOfMatch,
+                                                                float Warmup, float Match, float StartingTime)
+{
+    WarmupTime = Warmup;
+    MatchTime = Match;
+    LevelStartingTime = StartingTime;
+    MatchState = StateOfMatch;
+    OnMatchStateSet(MatchState);
+}
+
+void ABlasterPlayerController::ServerCheckMatchState_Implementation()
+{
+    ABlasterGameMode *GameMode = Cast<ABlasterGameMode>(UGameplayStatics::GetGameMode(this));
+    if (GameMode)
+    {
+        WarmupTime = GameMode->WarmupTime;
+        MatchTime = GameMode->MatchTime;
+        LevelStartingTime = GameMode->LevelStartingTime;
+        MatchState = GameMode->GetMatchState();
+        ClientJoinMidgame(MatchState, WarmupTime, MatchTime, LevelStartingTime);
+        if (BlasterHUD && MatchState == MatchState::WaitingToStart)
+        {
+            BlasterHUD->AddAnnouncement();
+        }
+    }
 }
