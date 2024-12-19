@@ -247,12 +247,34 @@ void UCombatComponent::Reload()
 }
 void UCombatComponent::ServerReload_Implementation()
 {
-	if (Character == nullptr)
+	if (Character == nullptr || EquippedWeapon == nullptr)
 	{
 		return;
 	}
-	CombatState = ECombatState::ECS_Reloading;
+    CombatState = ECombatState::ECS_Reloading;
 	HandleReload(); // this is on server reload
+}
+
+void UCombatComponent::UpdateAmmoValues()
+{
+	if (Character == nullptr || EquippedWeapon == nullptr) return;
+    int ReloadAmount = AmountToReload();
+
+    if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+    {
+        CarriedAmmoMap[EquippedWeapon->GetWeaponType()] -= ReloadAmount;
+        CurrentWeaponCariedAmmo = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+    }
+
+    Controller =
+        Controller == nullptr
+            ? Cast<ABlasterPlayerController>(Character->Controller)
+            : Controller;
+    if (Controller) // we can update for client in on repammo (ammo updated 5 lines up)
+    {
+        Controller->SetHUDCarriedAmmo(CurrentWeaponCariedAmmo);
+    }
+    EquippedWeapon->AddAmmo(-ReloadAmount);
 }
 
 void UCombatComponent::OnFinishReloadingAnim()
@@ -262,6 +284,7 @@ void UCombatComponent::OnFinishReloadingAnim()
 	if (Character->HasAuthority())
 	{
 		CombatState = ECombatState::ECS_Unoccupied;
+		UpdateAmmoValues();
 	}
 	if (bFireButtonPressed)
 	{
@@ -288,6 +311,23 @@ void UCombatComponent::OnRep_CombatState()
 void UCombatComponent::HandleReload()
 {
 	Character->PlayReloadMontage();
+}
+
+int32 UCombatComponent::AmountToReload()
+{
+	if (EquippedWeapon == nullptr)
+	{
+		return 0;
+	}
+	int32 RoomInMag = EquippedWeapon->GetMagCapacity() - EquippedWeapon->GetAmmo();
+
+	if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+	{
+		int32 AmountCarried = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+		int32 Least = FMath::Min(RoomInMag, AmountCarried);
+		return FMath::Clamp(RoomInMag, 0, Least);
+	}
+	return 0;
 }
 
 void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)

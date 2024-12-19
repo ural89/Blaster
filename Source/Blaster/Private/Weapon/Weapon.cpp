@@ -143,6 +143,11 @@ void AWeapon::UpdateHUDAmmo()
 		}
 	}
 }
+void AWeapon::AddAmmo(int32 AmmoToAdd)
+{
+	Ammo = FMath::Clamp(Ammo - AmmoToAdd, 0, MagCapacity);
+	UpdateHUDAmmo();
+}
 void AWeapon::OnRep_Owner()
 {
 	Super::OnRep_Owner();

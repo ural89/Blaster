@@ -50,6 +50,7 @@ public:
 	void ShowPickupWidget(bool bShowWidget);
 	void Dropped();
 	void UpdateHUDAmmo();
+	void AddAmmo(int32 AmmoToAdd);
 
 public:
 	/// Textures for weapon crosshairs
@@ -133,4 +134,7 @@ public:
 	FORCEINLINE float GetZoomInterpSpeed() const { return ZoomInterpSpeed; }
 	bool IsEmpty();
 	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
+	FORCEINLINE int32 GetAmmo() const { return Ammo; }
+	FORCEINLINE int32 GetMagCapacity() const {return MagCapacity;}
+	
 };
