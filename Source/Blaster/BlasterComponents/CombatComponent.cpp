@@ -10,7 +10,7 @@
 #include "PlayerController/BlasterPlayerController.h"
 #include "TimerManager.h"
 #include "Camera/CameraComponent.h"
-
+#include "Sound/SoundCue.h"
 UCombatComponent::UCombatComponent()
 {
 	AimWalkSpeed = 450.f;
@@ -198,6 +198,13 @@ void UCombatComponent::OnRep_EquippedWeapon()
 		}
 		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 		Character->bUseControllerRotationYaw = true;
+		if (EquippedWeapon->EquipSound)
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				EquippedWeapon->EquipSound,
+				Character->GetActorLocation());
+		}
 	}
 }
 
@@ -234,6 +241,13 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 	{
 		Controller->SetHUDCarriedAmmo(CurrentWeaponCariedAmmo);
 	}
+	if (EquippedWeapon->EquipSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(
+			this,
+			EquippedWeapon->EquipSound,
+			Character->GetActorLocation());
+	}
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->bUseControllerRotationYaw = true;
 }
@@ -251,30 +265,31 @@ void UCombatComponent::ServerReload_Implementation()
 	{
 		return;
 	}
-    CombatState = ECombatState::ECS_Reloading;
+	CombatState = ECombatState::ECS_Reloading;
 	HandleReload(); // this is on server reload
 }
 
 void UCombatComponent::UpdateAmmoValues()
 {
-	if (Character == nullptr || EquippedWeapon == nullptr) return;
-    int ReloadAmount = AmountToReload();
+	if (Character == nullptr || EquippedWeapon == nullptr)
+		return;
+	int ReloadAmount = AmountToReload();
 
-    if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
-    {
-        CarriedAmmoMap[EquippedWeapon->GetWeaponType()] -= ReloadAmount;
-        CurrentWeaponCariedAmmo = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
-    }
+	if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
+	{
+		CarriedAmmoMap[EquippedWeapon->GetWeaponType()] -= ReloadAmount;
+		CurrentWeaponCariedAmmo = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
+	}
 
-    Controller =
-        Controller == nullptr
-            ? Cast<ABlasterPlayerController>(Character->Controller)
-            : Controller;
-    if (Controller) // we can update for client in on repammo (ammo updated 5 lines up)
-    {
-        Controller->SetHUDCarriedAmmo(CurrentWeaponCariedAmmo);
-    }
-    EquippedWeapon->AddAmmo(-ReloadAmount);
+	Controller =
+		Controller == nullptr
+			? Cast<ABlasterPlayerController>(Character->Controller)
+			: Controller;
+	if (Controller) // we can update for client in on repammo (ammo updated 5 lines up)
+	{
+		Controller->SetHUDCarriedAmmo(CurrentWeaponCariedAmmo);
+	}
+	EquippedWeapon->AddAmmo(-ReloadAmount);
 }
 
 void UCombatComponent::OnFinishReloadingAnim()
