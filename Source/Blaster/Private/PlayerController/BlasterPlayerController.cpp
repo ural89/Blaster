@@ -15,18 +15,51 @@ void ABlasterPlayerController::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
     UpdateHUDTime();
+    CheckTimeSync(DeltaTime);
+
 }
 
+void ABlasterPlayerController::CheckTimeSync(float DeltaTime)
+{
+    TimeSyncRunningTime += DeltaTime;
+    if (IsLocalController() && TimeSyncRunningTime > TimeSyncFrequency)
+    {
+        ServerRequestServerTime(GetWorld()->GetTimeSeconds());
+        TimeSyncRunningTime = 0;
+    }
+}
 void ABlasterPlayerController::UpdateHUDTime()
 {
-    uint32 SecondsLeft = FMath::CeilToInt(MatchTime - GetWorld()->GetTimeSeconds());
+    uint32 SecondsLeft = FMath::CeilToInt(MatchTime - GetServerTime());
     if (CountdownInt != SecondsLeft)
     {
-        SetHUDMatchCountdown(MatchTime - GetWorld()->GetTimeSeconds());
+        SetHUDMatchCountdown(MatchTime - GetServerTime());
     }
 
     CountdownInt = SecondsLeft;
 }
+void ABlasterPlayerController::ServerRequestServerTime_Implementation(
+    float TimeOfClientRequest)
+{
+    float ServerTimeOfReceived = GetWorld()->GetTimeSeconds(); // since this is server,
+                                                               // this is server time
+    ClientReportServerTime(TimeOfClientRequest, ServerTimeOfReceived);
+}
+void ABlasterPlayerController::ClientReportServerTime_Implementation(float TimeOfClientRequest, float TimeServerRecievedClientRequest)
+{
+    float RoundTripTime = GetWorld()->GetTimeSeconds() - TimeOfClientRequest;
+    float CurrentServerTime = TimeServerRecievedClientRequest + (0.5f * RoundTripTime);
+    ClientServerDelta = CurrentServerTime - GetWorld()->GetTimeSeconds();
+}
+
+float ABlasterPlayerController::GetServerTime()
+{
+    if (HasAuthority())
+        return GetWorld()->GetTimeSeconds();
+    else
+        return GetWorld()->GetTimeSeconds() + ClientServerDelta;
+}
+
 void ABlasterPlayerController::SetHUDHealth(float Health, float MaxHealth)
 {
     BlasterHUD = BlasterHUD == nullptr ? Cast<ABlasterHUD>(GetHUD()) : BlasterHUD;
@@ -119,5 +152,13 @@ void ABlasterPlayerController::SetHUDMatchCountdown(float CountdownTime)
         FString CountdownText = FString::Printf(TEXT("%02d:%02d"), Minutes, Seconds);
         BlasterHUD->CharacterOverlay->MatchCountdownText->SetText(
             FText::FromString(CountdownText));
+    }
+}
+void ABlasterPlayerController::ReceivedPlayer()
+{
+    Super::ReceivedPlayer();
+    if (IsLocalController())
+    {
+        ServerRequestServerTime(GetWorld()->GetTimeSeconds());
     }
 }
