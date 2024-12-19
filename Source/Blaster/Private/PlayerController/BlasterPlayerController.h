@@ -51,7 +51,7 @@ protected:
 	float TimeSyncRunningTime = 0.f;
 
 	void CheckTimeSync(float DeltaTime);
-
+	void HandleMatchHasStarted();
 private:
 	UPROPERTY()
 	class ABlasterHUD *BlasterHUD;

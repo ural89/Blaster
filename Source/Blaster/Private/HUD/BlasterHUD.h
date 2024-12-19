@@ -28,23 +28,33 @@ class ABlasterHUD : public AHUD
 	GENERATED_BODY()
 public:
 	void DrawHUD() override;
-	
-	UPROPERTY(EditAnywhere, Category ="Player Stats");
+
+	UPROPERTY(EditAnywhere, Category = "Player Stats");
 	TSubclassOf<class UUserWidget> CharacterOverlaytClass;
 
-    void AddCharacterOverlay();
+	UPROPERTY(EditAnywhere, Category = "Player Stats");
+	TSubclassOf<UUserWidget> AnnouncementClass;
+
+	void AddCharacterOverlay();
+	void AddAnnouncement();
 
 	UPROPERTY()
-	class UCharacterOverlay* CharacterOverlay;
+	class UCharacterOverlay *CharacterOverlay;
+
+	UPROPERTY()
+	class UAnnouncement *Announcement;
+
 protected:
-	 void BeginPlay() override;
+	void BeginPlay() override;
+
 private:
 	FHUDPackage HUDPackage;
-	
-	void DrawCrosshair(UTexture2D* Texture, FVector2D ViewportCenter, FVector2D Spread, FLinearColor CrosshairColor);
+
+	void DrawCrosshair(UTexture2D *Texture, FVector2D ViewportCenter, FVector2D Spread, FLinearColor CrosshairColor);
 
 	UPROPERTY(EditAnywhere)
 	float CrosshairSpreadMax = 16.f;
+
 public:
 	FORCEINLINE void SetHUDPackage(const FHUDPackage &Package) { HUDPackage = Package; }
 };
