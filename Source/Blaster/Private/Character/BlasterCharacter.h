@@ -75,7 +75,7 @@ private:
 	//!!! OnRep_ is NOT called for server (since servers do not replicate. Replication is only server to clients)!!!
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
-	class UCombatComponent *Combat;
+	class UCombatComponent *CombatComp;
 
 	UFUNCTION(Server, Reliable)		 // this is RPC to Server from clients
 	void ServerEquipButtonPressed(); // definetion of this is .._Implementation() //RPCs can take parameters but not OnRep notifiers
@@ -91,16 +91,16 @@ private:
 	ETurningInPlace TurningInPlace;
 	void UpdateTurnInPlace(float DeltaTime);
 
-	UPROPERTY(EditAnywhere, Category = Combat)
+	UPROPERTY(EditAnywhere, Category = CombatComp)
 	class UAnimMontage *FireWeaponMontage;
 
-	UPROPERTY(EditAnywhere, Category = Combat)
+	UPROPERTY(EditAnywhere, Category = CombatComp)
 	UAnimMontage *ReloadMontage;
 
-	UPROPERTY(EditAnywhere, Category = Combat)
+	UPROPERTY(EditAnywhere, Category = CombatComp)
 	UAnimMontage *HitReactMontage;
 
-	UPROPERTY(EditAnywhere, Category = Combat)
+	UPROPERTY(EditAnywhere, Category = CombatComp)
 	UAnimMontage *ElimMontage;
 
 

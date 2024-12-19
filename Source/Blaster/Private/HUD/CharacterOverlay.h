@@ -16,21 +16,24 @@ class UCharacterOverlay : public UUserWidget
 
 public:
 	UPROPERTY(meta=(BindWidget))//this is required to bind widget
-	class UProgressBar* HealthBar;
+	class UProgressBar* HealthBar; //this needs to be same name with UI object
 
-	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	UPROPERTY(meta=(BindWidget))
 	class UTextBlock* HealthText;
 
 	
-	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	UPROPERTY(meta=(BindWidget))
 	class UTextBlock* ScoreAmount;
 
-	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	UPROPERTY(meta=(BindWidget))
 	class UTextBlock* DefeatsAmount;
 
-	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	UPROPERTY(meta=(BindWidget))
 	class UTextBlock* WeaponAmmoAmount;
 
-	UPROPERTY(meta=(BindWidget))//this is required to bind widget
+	UPROPERTY(meta=(BindWidget))
 	class UTextBlock* CarriedAmmoAmount;
+
+	UPROPERTY(meta=(BindWidget))
+	class UTextBlock* MatchCountdownText;
 };

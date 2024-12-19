@@ -40,8 +40,8 @@ ABlasterCharacter::ABlasterCharacter()
 	OverheadWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("OverheadWidget"));
 	OverheadWidget->SetupAttachment(RootComponent);
 
-	Combat = CreateDefaultSubobject<UCombatComponent>(TEXT("CombatComponent"));
-	Combat->SetIsReplicated(true); // components do not need to be registered to replicated. this is enough
+	CombatComp = CreateDefaultSubobject<UCombatComponent>(TEXT("Combat"));
+	CombatComp->SetIsReplicated(true); // components do not need to be registered to replicated. this is enough
 
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECollisionChannel::ECC_Camera, ECollisionResponse::ECR_Ignore);
@@ -68,9 +68,9 @@ void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Ou
 void ABlasterCharacter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	if (Combat)
+	if (CombatComp)
 	{
-		Combat->Character = this;
+		CombatComp->Character = this;
 	}
 }
 
@@ -101,9 +101,9 @@ void ABlasterCharacter::ElimTimerFInished() // only server
 void ABlasterCharacter::Elim() // since this is called from game mode, this is only called
 							   // in server (game mode only lives in server)
 {
-	if (Combat && Combat->EquippedWeapon)
+	if (CombatComp && CombatComp->EquippedWeapon)
 	{
-		Combat->EquippedWeapon->Dropped();
+		CombatComp->EquippedWeapon->Dropped();
 	}
 	MulticastElim();
 	GetWorldTimerManager().SetTimer(
@@ -246,12 +246,12 @@ void ABlasterCharacter::LookUp(float Value)
 void ABlasterCharacter::EquipButtonPressed()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Pressed equip"));
-	if (Combat)
+	if (CombatComp)
 	{
 		if (HasAuthority())
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Has Auth equip"));
-			Combat->EquipWeapon(OverlappingWeapon);
+			CombatComp->EquipWeapon(OverlappingWeapon);
 		}
 		else // this is called from client
 		{
@@ -262,9 +262,9 @@ void ABlasterCharacter::EquipButtonPressed()
 }
 void ABlasterCharacter::ServerEquipButtonPressed_Implementation()
 {
-	if (Combat) // we dont need to check Authority since this is RPC to server from client
+	if (CombatComp) // we dont need to check Authority since this is RPC to server from client
 	{
-		Combat->EquipWeapon(OverlappingWeapon);
+		CombatComp->EquipWeapon(OverlappingWeapon);
 	}
 }
 
@@ -283,25 +283,25 @@ void ABlasterCharacter::CrouchButtonPressed()
 
 void ABlasterCharacter::ReloadButtonPressed()
 {
-	if (Combat)
+	if (CombatComp)
 	{
-		Combat->Reload();
+		CombatComp->Reload();
 	}
 }
 
 void ABlasterCharacter::AimButtonPressed()
 {
-	if (Combat)
+	if (CombatComp)
 	{
-		Combat->SetAiming(true);
+		CombatComp->SetAiming(true);
 	}
 }
 
 void ABlasterCharacter::AimButtonReleased()
 {
-	if (Combat)
+	if (CombatComp)
 	{
-		Combat->SetAiming(false);
+		CombatComp->SetAiming(false);
 	}
 }
 
@@ -375,9 +375,9 @@ void ABlasterCharacter::CalculateAO_Pitch()
 }
 void ABlasterCharacter::SimProxiesTurn()
 {
-	if (Combat == nullptr)
+	if (CombatComp == nullptr)
 		return;
-	if (Combat->EquippedWeapon == nullptr)
+	if (CombatComp->EquippedWeapon == nullptr)
 		return;
 	bRotateRootBone = false;
 	float Speed = CalculateSpeed();
@@ -477,17 +477,17 @@ void ABlasterCharacter::HideCameraIfCharacterClose()
 	if ((FollowCamera->GetComponentLocation() - GetActorLocation()).Size() < CameraThreshold)
 	{
 		GetMesh()->SetVisibility(false);
-		if (Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		if (CombatComp && CombatComp->EquippedWeapon && CombatComp->EquippedWeapon->GetWeaponMesh())
 		{
-			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = true;
+			CombatComp->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = true;
 		}
 	}
 	else
 	{
 		GetMesh()->SetVisibility(true);
-		if (Combat && Combat->EquippedWeapon && Combat->EquippedWeapon->GetWeaponMesh())
+		if (CombatComp && CombatComp->EquippedWeapon && CombatComp->EquippedWeapon->GetWeaponMesh())
 		{
-			Combat->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
+			CombatComp->EquippedWeapon->GetWeaponMesh()->bOwnerNoSee = false;
 		}
 	}
 }
@@ -532,54 +532,54 @@ void ABlasterCharacter::SetOverlappingWeapon(AWeapon *Weapon)
 bool ABlasterCharacter::IsWeaponEquipped()
 {
 
-	return (Combat && Combat->EquippedWeapon);
+	return (CombatComp && CombatComp->EquippedWeapon);
 }
 
 bool ABlasterCharacter::IsAiming()
 {
-	return (Combat && Combat->bAiming);
+	return (CombatComp && CombatComp->bAiming);
 }
 
 AWeapon *ABlasterCharacter::GetEquippedWeapon()
 {
-	if (Combat == nullptr)
+	if (CombatComp == nullptr)
 		return nullptr;
-	return Combat->EquippedWeapon;
+	return CombatComp->EquippedWeapon;
 }
 
 FVector ABlasterCharacter::GetHitTarget() const
 {
-	if (Combat == nullptr)
+	if (CombatComp == nullptr)
 		return FVector();
-	return Combat->HitTarget;
+	return CombatComp->HitTarget;
 }
 
 ECombatState ABlasterCharacter::GetCombatState() const
 {
-	if (Combat == nullptr)
+	if (CombatComp == nullptr)
 		return ECombatState::ECS_MAX;
-	return Combat->CombatState;
+	return CombatComp->CombatState;
 }
 
 void ABlasterCharacter::FireButtonPressed()
 {
-	if (Combat)
+	if (CombatComp)
 	{
-		Combat->FireButtonPressed(true);
+		CombatComp->FireButtonPressed(true);
 	}
 }
 
 void ABlasterCharacter::FireButtonReleased()
 {
-	if (Combat)
+	if (CombatComp)
 	{
-		Combat->FireButtonPressed(false);
+		CombatComp->FireButtonPressed(false);
 	}
 }
 
 void ABlasterCharacter::PlayFireMontage(bool bAiming)
 {
-	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
+	if (CombatComp == nullptr || CombatComp->EquippedWeapon == nullptr)
 		return;
 
 	UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
@@ -596,7 +596,7 @@ void ABlasterCharacter::PlayFireMontage(bool bAiming)
 void ABlasterCharacter::PlayReloadMontage()
 {
 
-	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
+	if (CombatComp == nullptr || CombatComp->EquippedWeapon == nullptr)
 		return;
 
 	UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
@@ -605,7 +605,7 @@ void ABlasterCharacter::PlayReloadMontage()
 		AnimInstance->Montage_Play(ReloadMontage);
 
 		FName SectionName;
-		switch (Combat->EquippedWeapon->GetWeaponType())
+		switch (CombatComp->EquippedWeapon->GetWeaponType())
 		{
 			case EWeaponType::EWT_AssaultRiffle:
 				SectionName = FName("Riffle");
@@ -626,7 +626,7 @@ void ABlasterCharacter::PlayElimMontage()
 
 void ABlasterCharacter::PlayHitReactMontage()
 {
-	if (Combat == nullptr || Combat->EquippedWeapon == nullptr)
+	if (CombatComp == nullptr || CombatComp->EquippedWeapon == nullptr)
 		return;
 
 	UAnimInstance *AnimInstance = GetMesh()->GetAnimInstance();
