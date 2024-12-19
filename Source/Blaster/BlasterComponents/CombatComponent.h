@@ -6,6 +6,8 @@
 #include "Components/ActorComponent.h"
 #include "HUD/BlasterHUD.h"
 #include "Weapon/WeaponTypes.h"
+#include "Blaster/BlasterTypes/CombatState.h"
+
 #include "CombatComponent.generated.h"
 
 #define TRACE_LENGTH 80000.f;
@@ -24,6 +26,9 @@ public:
 
 	void EquipWeapon(class AWeapon *WeaponToEquip);
 	void Reload();
+	
+	UFUNCTION(BlueprintCallable)
+	void OnFinishReloadingAnim();
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bIsAiming);
@@ -48,6 +53,8 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void ServerReload();
+
+	void HandleReload();
 
 private:
 	class ABlasterCharacter *Character;
@@ -103,6 +110,9 @@ private:
 	UPROPERTY(ReplicatedUsing = OnRep_CarriedAmmo)
 	int32 CurrentWeaponCariedAmmo;
 
+	UFUNCTION()
+	void OnRep_CarriedAmmo();
+
 	TMap<EWeaponType, int32> CarriedAmmoMap; //TMaps cant be replicated and 
 							//this is in server! CurrentWeaponCarriedAmmo is replicated though
 
@@ -111,6 +121,10 @@ private:
 
 	void InitializeCarriedAmmo();
 
+	UPROPERTY(ReplicatedUsing = OnRep_CombatState)
+	ECombatState CombatState = ECombatState::ECS_Unoccupied;
+
 	UFUNCTION()
-	void OnRep_CarriedAmmo();
+	void OnRep_CombatState();
+
 };

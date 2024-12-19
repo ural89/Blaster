@@ -112,7 +112,6 @@ void UCombatComponent::UpdateHUDCrosshairs(float DeltaTime)
 	}
 }
 
-
 void UCombatComponent::InterpFOV(float DeltaTime)
 {
 	if (EquippedWeapon == nullptr)
@@ -177,6 +176,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Out
 	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
 	DOREPLIFETIME(UCombatComponent, bAiming);
 	DOREPLIFETIME_CONDITION(UCombatComponent, CurrentWeaponCariedAmmo, COND_OwnerOnly);
+	DOREPLIFETIME(UCombatComponent, CombatState);
 }
 
 void UCombatComponent::OnRep_EquippedWeapon()
@@ -240,7 +240,7 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 
 void UCombatComponent::Reload()
 {
-	if (CurrentWeaponCariedAmmo > 0)
+	if (CurrentWeaponCariedAmmo > 0 && CombatState != ECombatState::ECS_Reloading)
 	{
 		ServerReload();
 	}
@@ -251,9 +251,33 @@ void UCombatComponent::ServerReload_Implementation()
 	{
 		return;
 	}
-	UE_LOG(LogTemp, Warning, TEXT("Playin montage"));
-	Character->PlayReloadMontage();
+	CombatState = ECombatState::ECS_Reloading;
+	HandleReload(); // this is on server reload
+}
 
+void UCombatComponent::OnFinishReloadingAnim()
+{
+	if (Character == nullptr)
+		return;
+	if (Character->HasAuthority())
+	{
+		CombatState = ECombatState::ECS_Unoccupied;
+	}
+}
+
+void UCombatComponent::OnRep_CombatState()
+{
+	switch (CombatState)
+	{
+	case ECombatState::ECS_Reloading:
+		HandleReload(); // this is on client reload
+		break;
+	}
+}
+
+void UCombatComponent::HandleReload()
+{
+	Character->PlayReloadMontage();
 }
 
 void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)

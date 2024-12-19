@@ -7,6 +7,7 @@
 #include "Blaster/BlasterTypes/TurningInPlace.h"
 #include "Interfaces/InteractWithCrosshairsInterface.h"
 #include "Components/TimelineComponent.h"
+#include "Blaster/BlasterTypes/CombatState.h"
 #include "BlasterCharacter.generated.h"
 
 UCLASS()
@@ -73,7 +74,7 @@ private:
 	void OnRep_OverlappingWeapon(class AWeapon *LastWeapon); // OnRep_ + replicated objects name //It can have replicated object as parameter (optional)
 	//!!! OnRep_ is NOT called for server (since servers do not replicate. Replication is only server to clients)!!!
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UCombatComponent *Combat;
 
 	UFUNCTION(Server, Reliable)		 // this is RPC to Server from clients
@@ -180,4 +181,5 @@ public:
 	FORCEINLINE bool IsElimmed() const {return bElimmed; }
 	FORCEINLINE float GetHealth() const { return Health; }
 	FORCEINLINE float GetMaxHealth() const { return Health; }
+	ECombatState GetCombatState() const;
 };

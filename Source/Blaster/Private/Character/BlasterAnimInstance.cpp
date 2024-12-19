@@ -6,6 +6,8 @@
 #include "BlasterCharacter.h"
 #include "Weapon/Weapon.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Blaster/BlasterTypes/CombatState.h"
+
 void UBlasterAnimInstance::NativeInitializeAnimation()
 {
     Super::NativeInitializeAnimation();
@@ -72,4 +74,5 @@ void UBlasterAnimInstance::NativeUpdateAnimation(float DeltaTime)
             RightHandRotation = FMath::RInterpTo(RightHandRotation, RightHandNewRotation, DeltaTime, 30.f);
         }
     }
+    bUseFABRIK = BlasterCharacter->GetCombatState() != ECombatState::ECS_Reloading;
 }
