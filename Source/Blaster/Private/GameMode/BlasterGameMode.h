@@ -5,9 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameMode.h"
 #include "BlasterGameMode.generated.h"
-namespace MatchState //adding a custom matchstate
+namespace MatchState // adding a custom matchstate
 {
-	extern BLASTER_API const FName Cooldown; //match duration has been reached. Display winner
+	extern BLASTER_API const FName Cooldown; // match duration has been reached. Display winner
 }
 /**
  *
@@ -43,5 +43,7 @@ protected:
 
 private:
 	float CountdownTime = 0;
-	
+
+public:
+	FORCEINLINE float GetCountdownTime() const { return CountdownTime; }
 };

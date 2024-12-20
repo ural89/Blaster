@@ -30,7 +30,7 @@ void ABlasterGameMode::OnMatchStateSet()
              GetWorld()->GetPlayerControllerIterator();
          It; It++)
     {
-        ABlasterPlayerController* BlasterPlayer = Cast<ABlasterPlayerController>(*It);
+        ABlasterPlayerController *BlasterPlayer = Cast<ABlasterPlayerController>(*It);
         if (BlasterPlayer)
         {
             BlasterPlayer->OnMatchStateSet(MatchState);
@@ -42,7 +42,7 @@ void ABlasterGameMode::Tick(float DeltaTime)
     Super::Tick(DeltaTime);
     if (MatchState == MatchState::WaitingToStart)
     {
-        //since game mode runs in server only server holds time
+        // since game mode runs in server only server holds time
         CountdownTime = WarmupTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
         if (CountdownTime <= 0.f)
         {
@@ -53,10 +53,14 @@ void ABlasterGameMode::Tick(float DeltaTime)
     {
         CountdownTime = WarmupTime + MatchTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
         if (CountdownTime)
-        if (CountdownTime <= 0.f)
-        {
-            SetMatchState(MatchState::Cooldown);
-        }
+            if (CountdownTime <= 0.f)
+            {
+                SetMatchState(MatchState::Cooldown);
+            }
+    }
+    else if (MatchState == MatchState::Cooldown)
+    {
+        CountdownTime = CooldownTime + WarmupTime + MatchTime - GetWorld()->GetTimeSeconds() + LevelStartingTime;
     }
 }
 

@@ -27,11 +27,12 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 	virtual float GetServerTime();
-	virtual void ReceivedPlayer() override; //Sync with server clock as soon as possible
-	
+	virtual void ReceivedPlayer() override; // Sync with server clock as soon as possible
+
 	void HandleMatchHasStarted();
 	void HandleCooldown();
 	void OnMatchStateSet(FName State);
+
 protected:
 	void BeginPlay() override;
 	void UpdateHUDTime();
@@ -47,7 +48,7 @@ protected:
 								float TimeServerRecievedClientRequest);
 
 	float ClientServerDelta = 0.f;
-	
+
 	UPROPERTY(EditAnywhere, Category = Time)
 	float TimeSyncFrequency = 5.f;
 
@@ -59,14 +60,19 @@ protected:
 	void ServerCheckMatchState();
 
 	UFUNCTION(Client, Reliable)
-	void ClientJoinMidgame(FName StateOfMatch, float Warmup, float Match, float StartingTime);
+	void ClientJoinMidgame(FName StateOfMatch, float Warmup, float Match, float Cooldown, float StartingTime);
+
 private:
 	UPROPERTY()
 	class ABlasterHUD *BlasterHUD;
 
+	UPROPERTY()
+	class ABlasterGameMode* BlasterGameMode;
+
 	float LevelStartingTime = 0.f;
 	float MatchTime = 0.f;
 	float WarmupTime = 0.f;
+	float CooldownTime = 0.f;
 	uint32 CountdownInt = 0;
 
 	UPROPERTY(ReplicatedUsing = OnRep_MatchState)
@@ -76,7 +82,7 @@ private:
 	void OnRep_MatchState();
 
 	UPROPERTY()
-	class UCharacterOverlay* CharacterOverlay;
+	class UCharacterOverlay *CharacterOverlay;
 
 	bool bInitializeCharacterOverlay = false;
 
@@ -84,5 +90,4 @@ private:
 	float HUDMaxHealth;
 	float HUDScore;
 	int32 HUDDefeats;
-
 };
