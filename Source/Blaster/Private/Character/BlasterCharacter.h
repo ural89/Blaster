@@ -29,13 +29,18 @@ public:
 
 	void OnRep_ReplicatedMovement() override;
 	void Elim();
-	UFUNCTION(NetMulticast,Reliable)
+	UFUNCTION(NetMulticast, Reliable)
 	void MulticastElim();
-protected:
-    virtual void BeginPlay() override;
 
-    void UpdateHUDHealth();
-    void MoveForward(float Value);
+	UPROPERTY(Replicated)
+	bool bDisableGameplay = false;
+
+protected:
+	virtual void BeginPlay() override;
+
+	void RotateInPlace(float DeltaTime);
+	void UpdateHUDHealth();
+	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void Turn(float Value);
 	void LookUp(float Value);
@@ -57,6 +62,7 @@ protected:
 	void RecieveDamage(AActor *DamagedActor, float Damage, const UDamageType *DamageType,
 					   class AController *InstigatorController, AActor *DamageCauser);
 	void PollInit();
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = Camera)
 	class USpringArmComponent *CameraBoom;
@@ -103,7 +109,6 @@ private:
 	UPROPERTY(EditAnywhere, Category = CombatComp)
 	UAnimMontage *ElimMontage;
 
-
 	void HideCameraIfCharacterClose();
 
 	UPROPERTY(EditAnywhere)
@@ -137,35 +142,33 @@ private:
 	float ElimDelay = 3.f;
 	void ElimTimerFInished();
 
-
-	//Dissolve VFX
+	// Dissolve VFX
 	UPROPERTY(VisibleAnywhere)
-	UTimelineComponent* DissolveTimeline;
+	UTimelineComponent *DissolveTimeline;
 	FOnTimelineFloat DissolveTrack;
 
 	UPROPERTY(EditAnywhere)
-	UCurveFloat* DissolveCurve;
-	
+	UCurveFloat *DissolveCurve;
+
 	UFUNCTION()
 	void UpdateDissolveMaterial(float DissolveValue);
 	void StartDissolve();
 
 	UPROPERTY(VisibleAnywhere, Category = Elim)
-	UMaterialInstanceDynamic* DynamicDissolveMaterialInstance; //Dynamic instance that we
-																//we change on runtime
+	UMaterialInstanceDynamic *DynamicDissolveMaterialInstance; // Dynamic instance that we
+															   // we change on runtime
 
-	UPROPERTY(EditAnywhere, Category = Elim) 
-	UMaterialInstance* DissolveMaterialInstance; //instance set on the blueprint
+	UPROPERTY(EditAnywhere, Category = Elim)
+	UMaterialInstance *DissolveMaterialInstance; // instance set on the blueprint
 
 	UPROPERTY(EditAnywhere)
-	UParticleSystem* ElimBotEffect;
+	UParticleSystem *ElimBotEffect;
 
 	UPROPERTY(VisibleAnywhere)
-	UParticleSystemComponent* ElimBotComponent;
+	UParticleSystemComponent *ElimBotComponent;
 
 	UPROPERTY()
-	class ABlasterPlayerState* BlasterPlayerState;
-
+	class ABlasterPlayerState *BlasterPlayerState;
 
 public:
 	void SetOverlappingWeapon(class AWeapon *Weapon);
@@ -178,8 +181,10 @@ public:
 	FVector GetHitTarget() const;
 	FORCEINLINE UCameraComponent *GetFollowCamera() const { return FollowCamera; }
 	FORCEINLINE bool ShouldRotateRootBone() const { return bRotateRootBone; }
-	FORCEINLINE bool IsElimmed() const {return bElimmed; }
+	FORCEINLINE bool IsElimmed() const { return bElimmed; }
 	FORCEINLINE float GetHealth() const { return Health; }
 	FORCEINLINE float GetMaxHealth() const { return Health; }
+	FORCEINLINE UCombatComponent *GetCombat() const { return CombatComp; }
+	FORCEINLINE bool GetDisableGameplay() const { return bDisableGameplay; }
 	ECombatState GetCombatState() const;
 };

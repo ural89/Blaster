@@ -63,6 +63,7 @@ void ABlasterCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &Ou
 
 	DOREPLIFETIME_CONDITION(ABlasterCharacter, OverlappingWeapon, COND_OwnerOnly); // registers replicated object
 	DOREPLIFETIME(ABlasterCharacter, Health);
+	DOREPLIFETIME(ABlasterCharacter, bDisableGameplay);
 }
 
 void ABlasterCharacter::PostInitializeComponents()
@@ -81,6 +82,10 @@ void ABlasterCharacter::Destroyed()
 	{
 		// Destroy component is not replicated!!
 		ElimBotComponent->DestroyComponent();
+	}
+	if (CombatComp && CombatComp->EquippedWeapon)
+	{
+		CombatComp->EquippedWeapon->Destroy();
 	}
 }
 
@@ -134,10 +139,7 @@ void ABlasterCharacter::MulticastElim_Implementation()
 
 	GetCharacterMovement()->DisableMovement();
 	GetCharacterMovement()->StopMovementImmediately(); // also freezes look around
-	if (BlasterPlayerController)
-	{
-		DisableInput(BlasterPlayerController);
-	}
+	bDisableGameplay = true;
 
 	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
@@ -179,9 +181,22 @@ void ABlasterCharacter::UpdateHUDHealth()
 void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (GetLocalRole() > ENetRole::ROLE_SimulatedProxy && IsLocallyControlled()) // local role gives None,SimulatedProxy, AutonomousProxy, Authority, Max. This is hierarchyle.
-																				 // Bigger than simulated means actively local controlled or server
-																				 // This is like HasInputAuthority() like in photon?
+	RotateInPlace(DeltaTime);
+	HideCameraIfCharacterClose();
+	PollInit();
+}
+void ABlasterCharacter::RotateInPlace(float DeltaTime)
+{
+	if (bDisableGameplay)
+	{
+		bUseControllerRotationYaw = false;
+		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+		return;
+	}
+	if (GetLocalRole() > ENetRole::ROLE_SimulatedProxy &&
+		IsLocallyControlled()) // local role gives None,SimulatedProxy, AutonomousProxy, Authority, Max. This is hierarchyle.
+							   // Bigger than simulated means actively local controlled or server
+							   // This is like HasInputAuthority() like in photon?
 	{
 		UpdateAimOffset(DeltaTime);
 	}
@@ -194,8 +209,6 @@ void ABlasterCharacter::Tick(float DeltaTime)
 		}
 		CalculateAO_Pitch();
 	}
-	HideCameraIfCharacterClose();
-	PollInit();
 }
 void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
@@ -216,6 +229,8 @@ void ABlasterCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCo
 
 void ABlasterCharacter::MoveForward(float Value)
 {
+	if (bDisableGameplay)
+		return;
 	if (Controller != nullptr && Value != 0.f)
 	{
 		const FRotator YawRotation(0, Controller->GetControlRotation().Yaw, 0);
@@ -226,6 +241,8 @@ void ABlasterCharacter::MoveForward(float Value)
 
 void ABlasterCharacter::MoveRight(float Value)
 {
+	if (bDisableGameplay)
+		return;
 	if (Controller != nullptr && Value != 0.f)
 	{
 		const FRotator YawRotation(0, Controller->GetControlRotation().Yaw, 0);
@@ -245,7 +262,8 @@ void ABlasterCharacter::LookUp(float Value)
 }
 void ABlasterCharacter::EquipButtonPressed()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Pressed equip"));
+	if (bDisableGameplay)
+		return;
 	if (CombatComp)
 	{
 		if (HasAuthority())
@@ -270,6 +288,8 @@ void ABlasterCharacter::ServerEquipButtonPressed_Implementation()
 
 void ABlasterCharacter::CrouchButtonPressed()
 {
+	if (bDisableGameplay)
+		return;
 	if (bIsCrouched)
 	{
 		UnCrouch();
@@ -283,6 +303,8 @@ void ABlasterCharacter::CrouchButtonPressed()
 
 void ABlasterCharacter::ReloadButtonPressed()
 {
+	if (bDisableGameplay)
+		return;
 	if (CombatComp)
 	{
 		CombatComp->Reload();
@@ -291,6 +313,8 @@ void ABlasterCharacter::ReloadButtonPressed()
 
 void ABlasterCharacter::AimButtonPressed()
 {
+	if (bDisableGameplay)
+		return;
 	if (CombatComp)
 	{
 		CombatComp->SetAiming(true);
@@ -299,6 +323,8 @@ void ABlasterCharacter::AimButtonPressed()
 
 void ABlasterCharacter::AimButtonReleased()
 {
+	if (bDisableGameplay)
+		return;
 	if (CombatComp)
 	{
 		CombatComp->SetAiming(false);
@@ -416,6 +442,7 @@ void ABlasterCharacter::OnRep_Health()
 }
 void ABlasterCharacter::Jump()
 {
+	if (bDisableGameplay) return;
 	if (bIsCrouched)
 	{
 		UnCrouch();
@@ -563,6 +590,8 @@ ECombatState ABlasterCharacter::GetCombatState() const
 
 void ABlasterCharacter::FireButtonPressed()
 {
+	if (bDisableGameplay)
+		return;
 	if (CombatComp)
 	{
 		CombatComp->FireButtonPressed(true);
@@ -571,6 +600,8 @@ void ABlasterCharacter::FireButtonPressed()
 
 void ABlasterCharacter::FireButtonReleased()
 {
+	if (bDisableGameplay)
+		return;
 	if (CombatComp)
 	{
 		CombatComp->FireButtonPressed(false);
@@ -607,9 +638,9 @@ void ABlasterCharacter::PlayReloadMontage()
 		FName SectionName;
 		switch (CombatComp->EquippedWeapon->GetWeaponType())
 		{
-			case EWeaponType::EWT_AssaultRiffle:
-				SectionName = FName("Riffle");
-				break;
+		case EWeaponType::EWT_AssaultRiffle:
+			SectionName = FName("Riffle");
+			break;
 		}
 		AnimInstance->Montage_JumpToSection(SectionName);
 	}
