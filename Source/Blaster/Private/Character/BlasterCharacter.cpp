@@ -83,7 +83,10 @@ void ABlasterCharacter::Destroyed()
 		// Destroy component is not replicated!!
 		ElimBotComponent->DestroyComponent();
 	}
-	if (CombatComp && CombatComp->EquippedWeapon)
+	ABlasterGameMode *BlasterGameMode = Cast<ABlasterGameMode>(UGameplayStatics::GetGameMode(this));
+	bool bMatchNotInProgress = BlasterGameMode && BlasterGameMode->GetMatchState() !=
+													  MatchState::InProgress;
+	if (CombatComp && CombatComp->EquippedWeapon && bMatchNotInProgress)
 	{
 		CombatComp->EquippedWeapon->Destroy();
 	}
@@ -136,7 +139,11 @@ void ABlasterCharacter::MulticastElim_Implementation()
 		DynamicDissolveMaterialInstance->SetScalarParameterValue(TEXT("Glow"), 200.f);
 	}
 	StartDissolve();
-
+	bDisableGameplay = true;
+	if (CombatComp)
+	{
+		CombatComp->FireButtonPressed(false);
+	}
 	GetCharacterMovement()->DisableMovement();
 	GetCharacterMovement()->StopMovementImmediately(); // also freezes look around
 	bDisableGameplay = true;
@@ -442,7 +449,8 @@ void ABlasterCharacter::OnRep_Health()
 }
 void ABlasterCharacter::Jump()
 {
-	if (bDisableGameplay) return;
+	if (bDisableGameplay)
+		return;
 	if (bIsCrouched)
 	{
 		UnCrouch();
