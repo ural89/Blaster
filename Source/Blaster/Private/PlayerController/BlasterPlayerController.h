@@ -21,6 +21,7 @@ public:
 	void SetHUDWeaponAmmo(int32 Ammo);
 	void SetHUDCarriedAmmo(int32 Ammo);
 	void SetHUDMatchCountdown(float CountDownTime);
+	void SetHUDAnnouncementCountdown(float Countdown);
 	virtual void OnPossess(APawn *InPawn) override;
 	virtual void Tick(float DeltaTime) override;
 

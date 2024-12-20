@@ -13,8 +13,8 @@
 void ABlasterPlayerController::BeginPlay()
 {
     Super::BeginPlay();
-    ServerCheckMatchState();
     BlasterHUD = Cast<ABlasterHUD>(GetHUD());
+    ServerCheckMatchState();
 }
 
 void ABlasterPlayerController::GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const
@@ -41,10 +41,21 @@ void ABlasterPlayerController::CheckTimeSync(float DeltaTime)
 }
 void ABlasterPlayerController::UpdateHUDTime()
 {
-    uint32 SecondsLeft = FMath::CeilToInt(MatchTime - GetServerTime());
+    float TimeLeft = 0.f;
+    if (MatchState == MatchState::WaitingToStart) TimeLeft = WarmupTime - GetServerTime() + LevelStartingTime;
+    else if (MatchState == MatchState::InProgress) TimeLeft = WarmupTime + MatchTime - WarmupTime - GetServerTime() + LevelStartingTime;
+
+    uint32 SecondsLeft = FMath::CeilToInt(TimeLeft);
     if (CountdownInt != SecondsLeft)
     {
-        SetHUDMatchCountdown(MatchTime - GetServerTime());
+        if (MatchState == MatchState::WaitingToStart)
+        {
+            SetHUDAnnouncementCountdown(TimeLeft);
+        }
+        if (MatchState == MatchState::InProgress)
+        {
+            SetHUDMatchCountdown(TimeLeft);
+        }
     }
 
     CountdownInt = SecondsLeft;
@@ -180,6 +191,24 @@ void ABlasterPlayerController::OnPossess(APawn *InPawn)
     }
 }
 
+void ABlasterPlayerController::SetHUDAnnouncementCountdown(float Countdown)
+{
+    BlasterHUD = BlasterHUD == nullptr ? Cast<ABlasterHUD>(GetHUD()) : BlasterHUD;
+    bool bHUDValid = BlasterHUD &&
+                     BlasterHUD->Announcement &&
+                     BlasterHUD->Announcement->WarmupTime;
+
+    if (bHUDValid)
+    {
+        int32 Minutes = FMath::FloorToInt(Countdown / 60.f);
+        int32 Seconds = Countdown - Minutes * 60;
+        // 02d means 2 digits (for example 01)
+        FString CountdownText = FString::Printf(TEXT("%02d:%02d"), Minutes, Seconds);
+        BlasterHUD->Announcement->WarmupTime->SetText(
+            FText::FromString(CountdownText));
+    }
+}
+
 void ABlasterPlayerController::SetHUDMatchCountdown(float CountdownTime)
 {
     BlasterHUD = BlasterHUD == nullptr ? Cast<ABlasterHUD>(GetHUD()) : BlasterHUD;
@@ -244,6 +273,10 @@ void ABlasterPlayerController::ClientJoinMidgame_Implementation(FName StateOfMat
     LevelStartingTime = StartingTime;
     MatchState = StateOfMatch;
     OnMatchStateSet(MatchState);
+    if (BlasterHUD && MatchState == MatchState::WaitingToStart)
+    {
+        BlasterHUD->AddAnnouncement();
+    }
 }
 
 void ABlasterPlayerController::ServerCheckMatchState_Implementation()
