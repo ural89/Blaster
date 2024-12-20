@@ -29,6 +29,8 @@ public:
 	virtual float GetServerTime();
 	virtual void ReceivedPlayer() override; //Sync with server clock as soon as possible
 	
+	void HandleMatchHasStarted();
+	void HandleCooldown();
 	void OnMatchStateSet(FName State);
 protected:
 	void BeginPlay() override;
@@ -52,7 +54,6 @@ protected:
 	float TimeSyncRunningTime = 0.f;
 
 	void CheckTimeSync(float DeltaTime);
-	void HandleMatchHasStarted();
 
 	UFUNCTION(Server, Reliable)
 	void ServerCheckMatchState();

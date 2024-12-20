@@ -63,7 +63,7 @@ void ABlasterHUD::AddCharacterOverlay()
 void ABlasterHUD::AddAnnouncement()
 {
     APlayerController *PlayerController = GetOwningPlayerController();
-    if (PlayerController && AnnouncementClass)
+    if (PlayerController && AnnouncementClass && Announcement == nullptr)
     {
         Announcement = CreateWidget<UAnnouncement>(PlayerController,
                                                            AnnouncementClass);
