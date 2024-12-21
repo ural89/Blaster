@@ -7,7 +7,7 @@
 #include "ProjectileRocket.generated.h"
 
 /**
- * 
+ *
  */
 UCLASS()
 class BLASTER_API AProjectileRocket : public AProjectile
@@ -16,29 +16,33 @@ class BLASTER_API AProjectileRocket : public AProjectile
 public:
 	AProjectileRocket();
 	virtual void Destroyed() override;
+
 protected:
-	virtual void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) override;
+	virtual void OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult &Hit) override;
 	virtual void BeginPlay() override;
 	void DestroyTimerFinished();
 
 	UPROPERTY(EditAnywhere)
-	class UNiagaraSystem* TrailSystem;
+	class UNiagaraSystem *TrailSystem;
 
 	UPROPERTY()
-	class UNiagaraComponent* TrailSystemComponent;
+	class UNiagaraComponent *TrailSystemComponent;
 
 	UPROPERTY(EditAnywhere)
-	USoundCue* ProjectileLoop;
+	USoundCue *ProjectileLoop;
 
 	UPROPERTY()
-	UAudioComponent* ProjectileLoopComponent;
+	UAudioComponent *ProjectileLoopComponent;
 
 	UPROPERTY(EditAnywhere)
-	USoundAttenuation* LoopingSoundAttenuation;
+	USoundAttenuation *LoopingSoundAttenuation;
+	
+	UPROPERTY(VisibleAnywhere)
+	class URocketMovementComponent *RocketMovementComponent;
 
 private:
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* RocketMesh;
+	UStaticMeshComponent *RocketMesh;
 
 	FTimerHandle DestroyTimer;
 

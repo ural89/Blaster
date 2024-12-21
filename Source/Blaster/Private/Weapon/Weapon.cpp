@@ -13,7 +13,7 @@ AWeapon::AWeapon()
 
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true; // this means this is only spawned in server and only 1 Instance of this exists actually.
-
+	SetReplicateMovement(true);
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 	SetRootComponent(WeaponMesh);
 
@@ -191,7 +191,7 @@ void AWeapon::SetWeaponState(EWeaponState State)
 
 bool AWeapon::IsEmpty()
 {
-    return Ammo <= 0;
+	return Ammo <= 0;
 }
 
 void AWeapon::OnRep_WeaponState()

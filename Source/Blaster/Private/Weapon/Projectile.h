@@ -7,13 +7,14 @@
 #include "Projectile.generated.h"
 
 UCLASS()
-class AProjectile : public AActor
+class BLASTER_API AProjectile : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	AProjectile();
-	void Destroyed() override;
+	virtual void Tick(float DeltaTime) override;
+	virtual void Destroyed() override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -23,24 +24,25 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	float Damage = 20.f;
-public:	
-	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditAnywhere)
+	class UParticleSystem* ImpactParticles;
+
+	UPROPERTY(EditAnywhere)
+	class USoundCue* ImpactSound;
 
 	UPROPERTY(EditAnywhere)
 	class UBoxComponent* CollisionBox;
 
- 	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	class UProjectileMovementComponent* ProjectileMovementComponent;
-
+private:
 	UPROPERTY(EditAnywhere)
-	class UParticleSystem* Tracer;
+	UParticleSystem* Tracer;
 
+	UPROPERTY()
 	class UParticleSystemComponent* TracerComponent;
 
-	UPROPERTY(EditAnywhere)
-	UParticleSystem* ImpactParticles;
-
-	UPROPERTY(EditAnywhere)
-	class USoundCue* ImpactSound;
+public:		
 
 };
