@@ -26,10 +26,11 @@ public:
 
 	void EquipWeapon(class AWeapon *WeaponToEquip);
 	void Reload();
-	
+
 	UFUNCTION(BlueprintCallable)
 	void OnFinishReloadingAnim();
-    void FireButtonPressed(bool bPressed);
+	void FireButtonPressed(bool bPressed);
+
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bIsAiming);
@@ -39,9 +40,9 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);
-    void Fire();
+	void Fire();
 
-    UFUNCTION(Server, Reliable)
+	UFUNCTION(Server, Reliable)
 	void ServerFire(const FVector_NetQuantize &TraceHitTarget); // NetQuantize version is more effiecent over network
 
 	UFUNCTION(NetMulticast, Reliable) // multicast RPC's will work everybody when fired from server
@@ -98,8 +99,7 @@ private:
 
 	void InterpFOV(float DeltaTime);
 
-
-	//Automatic fire
+	// Automatic fire
 	FTimerHandle FireTimer;
 	bool bCanFire = true;
 
@@ -114,8 +114,8 @@ private:
 	UFUNCTION()
 	void OnRep_CarriedAmmo();
 
-	TMap<EWeaponType, int32> CarriedAmmoMap; //TMaps cant be replicated and 
-							//this is in server! CurrentWeaponCarriedAmmo is replicated though
+	TMap<EWeaponType, int32> CarriedAmmoMap; // TMaps cant be replicated and
+											 // this is in server! CurrentWeaponCarriedAmmo is replicated though
 
 	UPROPERTY(EditAnywhere)
 	int32 StartingARAmmo = 30;
@@ -125,11 +125,14 @@ private:
 
 	void InitializeCarriedAmmo();
 
+	UPROPERTY(EditAnywhere)
+	int32 StartingPistolAmmo = 0;
+	
 	UPROPERTY(ReplicatedUsing = OnRep_CombatState)
 	ECombatState CombatState = ECombatState::ECS_Unoccupied;
 
 	UFUNCTION()
 	void OnRep_CombatState();
 
-    void UpdateAmmoValues();
+	void UpdateAmmoValues();
 };
