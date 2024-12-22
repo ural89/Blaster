@@ -1,14 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "ProjectileRocket.h"
 #include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
- #include "NiagaraSystemInstanceController.h"
+#include "NiagaraSystemInstanceController.h"
 #include "Sound/SoundCue.h"
 #include "Components/BoxComponent.h"
 #include "Sound/SoundCue.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "Components/AudioComponent.h"
 #include "RocketMovementComponent.h"
 
@@ -17,7 +17,7 @@ AProjectileRocket::AProjectileRocket()
 	RocketMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Rocket Mesh"));
 	RocketMesh->SetupAttachment(RootComponent);
 	RocketMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-    RocketMovementComponent = CreateDefaultSubobject<URocketMovementComponent>(TEXT("RocketMovementComponent"));
+	RocketMovementComponent = CreateDefaultSubobject<URocketMovementComponent>(TEXT("RocketMovementComponent"));
 	RocketMovementComponent->bRotationFollowsVelocity = true;
 	RocketMovementComponent->SetIsReplicated(true);
 }
@@ -26,7 +26,7 @@ void AProjectileRocket::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (!HasAuthority()) //already bound in authority
+	if (!HasAuthority()) // already bound in authority
 	{
 		CollisionBox->OnComponentHit.AddDynamic(this, &AProjectileRocket::OnHit);
 	}
@@ -40,8 +40,7 @@ void AProjectileRocket::BeginPlay()
 			GetActorLocation(),
 			GetActorRotation(),
 			EAttachLocation::KeepWorldPosition,
-			false
-		);
+			false);
 	}
 	if (ProjectileLoop && LoopingSoundAttenuation)
 	{
@@ -56,9 +55,8 @@ void AProjectileRocket::BeginPlay()
 			1.f,
 			0.f,
 			LoopingSoundAttenuation,
-			(USoundConcurrency*)nullptr,
-			false
-		);
+			(USoundConcurrency *)nullptr,
+			false);
 	}
 }
 
@@ -67,26 +65,26 @@ void AProjectileRocket::DestroyTimerFinished()
 	Destroy();
 }
 
-void AProjectileRocket::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void AProjectileRocket::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult &Hit)
 {
-	APawn* FiringPawn = GetInstigator();
+	APawn *FiringPawn = GetInstigator();
 	if (FiringPawn && HasAuthority())
 	{
-		AController* FiringController = FiringPawn->GetController();
+		AController *FiringController = FiringPawn->GetController();
 		if (FiringController)
 		{
 			UGameplayStatics::ApplyRadialDamageWithFalloff(
-				this, // World context object
-				Damage, // BaseDamage
-				Damage / 2.f, // MinimumDamage
-				GetActorLocation(), // Origin
-				200.f, // DamageInnerRadius
-				500.f, // DamageOuterRadius
-				1.f, // DamageFalloff
+				this,						// World context object
+				Damage,						// BaseDamage
+				Damage / 2.f,				// MinimumDamage
+				GetActorLocation(),			// Origin
+				200.f,						// DamageInnerRadius
+				500.f,						// DamageOuterRadius
+				1.f,						// DamageFalloff
 				UDamageType::StaticClass(), // DamageTypeClass
-				TArray<AActor*>(), // IgnoreActors
-				this, // DamageCauser
-				FiringController // InstigatorController
+				TArray<AActor *>(),			// IgnoreActors
+				this,						// DamageCauser
+				FiringController			// InstigatorController
 			);
 		}
 	}
@@ -95,8 +93,7 @@ void AProjectileRocket::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 		DestroyTimer,
 		this,
 		&AProjectileRocket::DestroyTimerFinished,
-		DestroyTime
-	);
+		DestroyTime);
 
 	if (ImpactParticles)
 	{
@@ -126,5 +123,4 @@ void AProjectileRocket::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, 
 
 void AProjectileRocket::Destroyed()
 {
-
 }
