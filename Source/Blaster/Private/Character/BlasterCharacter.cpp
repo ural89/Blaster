@@ -163,11 +163,11 @@ void ABlasterCharacter::MulticastElim_Implementation()
 			ElimBotSpawnPoint,
 			GetActorRotation());
 	}
-	bool bHideSniperScope = IsLocallyControlled() && 
-		CombatComp && 
-		CombatComp->bAiming && 
-		CombatComp->EquippedWeapon && 
-		CombatComp->EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle;
+	bool bHideSniperScope = IsLocallyControlled() &&
+							CombatComp &&
+							CombatComp->bAiming &&
+							CombatComp->EquippedWeapon &&
+							CombatComp->EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle;
 	UE_LOG(LogTemp, Warning, TEXT("Show sniper scope %i"), bHideSniperScope);
 	if (bHideSniperScope)
 	{
@@ -672,6 +672,9 @@ void ABlasterCharacter::PlayReloadMontage()
 			SectionName = FName("Riffle");
 			break;
 		case EWeaponType::EWT_SniperRifle:
+			SectionName = FName("Riffle");
+			break;
+		case EWeaponType::EWT_GrenadeLauncher:
 			SectionName = FName("Riffle");
 			break;
 		}
