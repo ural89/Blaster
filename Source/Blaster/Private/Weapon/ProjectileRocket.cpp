@@ -1,22 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
 #include "ProjectileRocket.h"
 #include "Kismet/GameplayStatics.h"
-#include "NiagaraFunctionLibrary.h"
 #include "NiagaraComponent.h"
-#include "NiagaraSystemInstanceController.h"
 #include "Sound/SoundCue.h"
 #include "Components/BoxComponent.h"
 #include "Sound/SoundCue.h"
-#include "Particles/ParticleSystemComponent.h"
 #include "Components/AudioComponent.h"
 #include "RocketMovementComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystemInstanceController.h"
 AProjectileRocket::AProjectileRocket()
 {
-	RocketMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Rocket Mesh"));
-	RocketMesh->SetupAttachment(RootComponent);
-	RocketMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	ProjectileMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Rocket Mesh"));
+	ProjectileMesh->SetupAttachment(RootComponent);
+	ProjectileMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
 	RocketMovementComponent = CreateDefaultSubobject<URocketMovementComponent>(TEXT("RocketMovementComponent"));
 	RocketMovementComponent->bRotationFollowsVelocity = true;
 	RocketMovementComponent->SetIsReplicated(true);
@@ -26,22 +28,13 @@ void AProjectileRocket::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (!HasAuthority()) // already bound in authority
+	if (!HasAuthority())
 	{
 		CollisionBox->OnComponentHit.AddDynamic(this, &AProjectileRocket::OnHit);
 	}
 
-	if (TrailSystem)
-	{
-		TrailSystemComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-			TrailSystem,
-			GetRootComponent(),
-			FName(),
-			GetActorLocation(),
-			GetActorRotation(),
-			EAttachLocation::KeepWorldPosition,
-			false);
-	}
+	SpawnTrailSystem();
+
 	if (ProjectileLoop && LoopingSoundAttenuation)
 	{
 		ProjectileLoopComponent = UGameplayStatics::SpawnSoundAttached(
@@ -55,45 +48,21 @@ void AProjectileRocket::BeginPlay()
 			1.f,
 			0.f,
 			LoopingSoundAttenuation,
-			(USoundConcurrency *)nullptr,
-			false);
+			(USoundConcurrency*)nullptr,
+			false
+		);
 	}
 }
 
-void AProjectileRocket::DestroyTimerFinished()
+void AProjectileRocket::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
-	Destroy();
-}
-
-void AProjectileRocket::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult &Hit)
-{
-	APawn *FiringPawn = GetInstigator();
-	if (FiringPawn && HasAuthority())
+	if (OtherActor == GetOwner())
 	{
-		AController *FiringController = FiringPawn->GetController();
-		if (FiringController)
-		{
-			UGameplayStatics::ApplyRadialDamageWithFalloff(
-				this,						// World context object
-				Damage,						// BaseDamage
-				Damage / 2.f,				// MinimumDamage
-				GetActorLocation(),			// Origin
-				200.f,						// DamageInnerRadius
-				500.f,						// DamageOuterRadius
-				1.f,						// DamageFalloff
-				UDamageType::StaticClass(), // DamageTypeClass
-				TArray<AActor *>(),			// IgnoreActors
-				this,						// DamageCauser
-				FiringController			// InstigatorController
-			);
-		}
+		return;
 	}
+	ExplodeDamage();
 
-	GetWorldTimerManager().SetTimer(
-		DestroyTimer,
-		this,
-		&AProjectileRocket::DestroyTimerFinished,
-		DestroyTime);
+	StartDestroyTimer();
 
 	if (ImpactParticles)
 	{
@@ -103,9 +72,9 @@ void AProjectileRocket::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, 
 	{
 		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
 	}
-	if (RocketMesh)
+	if (ProjectileMesh)
 	{
-		RocketMesh->SetVisibility(false);
+		ProjectileMesh->SetVisibility(false);
 	}
 	if (CollisionBox)
 	{
@@ -123,4 +92,5 @@ void AProjectileRocket::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, 
 
 void AProjectileRocket::Destroyed()
 {
+
 }
