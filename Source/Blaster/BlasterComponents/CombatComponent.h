@@ -30,12 +30,18 @@ public:
 	void OnFinishReloadingAnim();
 	void FireButtonPressed(bool bPressed);
 
+	UFUNCTION(BlueprintCallable)
+	void ShotgunShellReload();
+
+	void JumpToShotgunEnd();
+
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bIsAiming);
 
 	UFUNCTION()
 	void OnRep_EquippedWeapon();
+	void UpdateShotgunAmmoValues();
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);

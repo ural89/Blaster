@@ -7,6 +7,7 @@
 #include "PlayerController/BlasterPlayerController.h"
 #include "Casing.h"
 #include "Net/UnrealNetwork.h"
+#include "Blaster/BlasterComponents/CombatComponent.h"
 
 AWeapon::AWeapon()
 {
@@ -121,6 +122,11 @@ void AWeapon::SpendRound()
 
 void AWeapon::OnRep_Ammo()
 {
+	BlasterOwnerCharacter = BlasterOwnerCharacter == nullptr ? Cast<ABlasterCharacter>(GetOwner()) : BlasterOwnerCharacter;
+	if (BlasterOwnerCharacter && BlasterOwnerCharacter->GetCombat() && IsFull())
+	{
+		BlasterOwnerCharacter->GetCombat()->JumpToShotgunEnd();
+	}
 	UpdateHUDAmmo();
 }
 void AWeapon::UpdateHUDAmmo()
@@ -160,6 +166,10 @@ void AWeapon::OnRep_Owner()
 	{
 		UpdateHUDAmmo();
 	}
+}
+bool AWeapon::IsFull()
+{
+	return Ammo == MagCapacity;
 }
 
 void AWeapon::SetWeaponState(EWeaponState State)
