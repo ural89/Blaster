@@ -163,6 +163,16 @@ void ABlasterCharacter::MulticastElim_Implementation()
 			ElimBotSpawnPoint,
 			GetActorRotation());
 	}
+	bool bHideSniperScope = IsLocallyControlled() && 
+		CombatComp && 
+		CombatComp->bAiming && 
+		CombatComp->EquippedWeapon && 
+		CombatComp->EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle;
+	UE_LOG(LogTemp, Warning, TEXT("Show sniper scope %i"), bHideSniperScope);
+	if (bHideSniperScope)
+	{
+		ShowSniperScopeWidget(false);
+	}
 }
 
 void ABlasterCharacter::BeginPlay()

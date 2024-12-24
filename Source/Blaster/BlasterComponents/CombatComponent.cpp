@@ -157,11 +157,17 @@ void UCombatComponent::FireTimeFinished()
 
 void UCombatComponent::SetAiming(bool bIsAiming)
 {
+	if (Character == nullptr || EquippedWeapon == nullptr)
+		return;
 	bAiming = bIsAiming;	  // since this is visual only, we can set localy for faster feedback
 	ServerSetAiming(bAiming); // RPC from this client to server
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+	}
+	if (Character->IsLocallyControlled() && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
+	{
+		Character->ShowSniperScopeWidget(bIsAiming);
 	}
 }
 
@@ -392,6 +398,10 @@ void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 	else
 	{
 		HUDPackage.CrosshairsColor = FLinearColor::White;
+	}
+	if (bAiming && EquippedWeapon && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
+	{
+		HUDPackage.CrosshairsColor = FLinearColor::Transparent;
 	}
 }
 void UCombatComponent::FireButtonPressed(bool bPressed)
