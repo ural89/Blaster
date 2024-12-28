@@ -389,6 +389,11 @@ int32 UCombatComponent::AmountToReload()
 	return 0;
 }
 
+void UCombatComponent::ThrowGrenade()
+{
+	CombatState = ECombatState::ECS_ThrowingGrenade;
+}
+
 void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
 {
 	FVector2D ViewportSize;

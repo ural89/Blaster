@@ -63,6 +63,11 @@ protected:
 	void HandleReload();
 	int32 AmountToReload();
 
+	void ThrowGrenade();
+
+	UFUNCTION(Server, Reliable)
+	void ServerThrowGrenade();
+
 private:
 	class ABlasterCharacter *Character;
 	class ABlasterPlayerController *Controller;

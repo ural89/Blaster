@@ -26,7 +26,7 @@ public:
 	void PlayFireMontage(bool bAiming);
 	void PlayReloadMontage();
 	void PlayElimMontage();
-
+	void PlayThrowGrenadeMontage();
 	void OnRep_ReplicatedMovement() override;
 	void Elim();
 	UFUNCTION(NetMulticast, Reliable)
@@ -52,6 +52,7 @@ protected:
 	void ReloadButtonPressed();
 	void AimButtonPressed();
 	void AimButtonReleased();
+	void GrenadeButtonPressed();
 	void UpdateAimOffset(float DeltaTime);
 	void CalculateAO_Pitch();
 	void SimProxiesTurn();
@@ -111,6 +112,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = CombatComp)
 	UAnimMontage *ElimMontage;
+
+	UPROPERTY(EditAnywhere, Category = CombatComp)
+	UAnimMontage *ThrowGrandeMontage;
 
 	void HideCameraIfCharacterClose();
 
