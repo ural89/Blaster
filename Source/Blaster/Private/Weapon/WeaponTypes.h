@@ -1,5 +1,9 @@
 #pragma once
 #define TRACE_LENGTH 80000.f
+#define CUSTOM_DEPTH_PURPLE 250
+#define CUSTOM_DEPTH_BLUE 251
+#define CUSTOM_DEPTH_TAN 252
+
 UENUM(BlueprintType) // blueprint type isjust in case we need to use in blueprint not necessary
 enum class EWeaponType : uint8
 {

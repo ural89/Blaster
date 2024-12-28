@@ -41,6 +41,7 @@ protected:
 		UPrimitiveComponent *OtherComp,
 		int32 OtherBodyIndex);
 
+	void EnableCustomDepth(bool bEnable);
 public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
