@@ -352,6 +352,10 @@ void ABlasterCharacter::AimButtonReleased()
 
 void ABlasterCharacter::GrenadeButtonPressed()
 {
+	if (CombatComp)
+	{
+		CombatComp->ThrowGrenade();
+	}
 }
 
 void ABlasterCharacter::UpdateTurnInPlace(float DeltaTime)

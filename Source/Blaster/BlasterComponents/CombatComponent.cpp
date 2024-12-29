@@ -232,6 +232,9 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 	if (Character == nullptr || WeaponToEquip == nullptr)
 		return;
 
+	if (CombatState != ECombatState::ECS_Unoccupied)
+		return;
+
 	if (EquippedWeapon)
 	{
 		EquippedWeapon->Dropped();
@@ -278,7 +281,7 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 
 void UCombatComponent::Reload()
 {
-	if (CurrentWeaponCariedAmmo > 0 && CombatState != ECombatState::ECS_Reloading)
+	if (CurrentWeaponCariedAmmo > 0 && CombatState == ECombatState::ECS_Unoccupied)
 	{
 		ServerReload();
 	}
@@ -364,6 +367,12 @@ void UCombatComponent::OnRep_CombatState()
 		{
 			Fire();
 		}
+	case ECombatState::ECS_ThrowingGrenade:
+		if (Character && !Character->IsLocallyControlled())
+		{
+			Character->PlayThrowGrenadeMontage();
+		}
+		break;
 	}
 }
 
@@ -392,6 +401,23 @@ int32 UCombatComponent::AmountToReload()
 void UCombatComponent::ThrowGrenade()
 {
 	CombatState = ECombatState::ECS_ThrowingGrenade;
+	if (Character)
+	{
+		Character->PlayThrowGrenadeMontage();
+	}
+	if (Character && !Character->HasAuthority()) // otherwise it will be called twice
+	{
+		ServerThrowGrenade();
+	}
+}
+
+void UCombatComponent::ServerThrowGrenade_Implementation()
+{
+	CombatState = ECombatState::ECS_ThrowingGrenade;
+	if (Character)
+	{
+		Character->PlayThrowGrenadeMontage();
+	}
 }
 
 void UCombatComponent::TraceUnderCrosshairs(FHitResult &TraceHitResult)
@@ -508,6 +534,10 @@ void UCombatComponent::JumpToShotgunEnd()
 	{
 		AnimInstance->Montage_JumpToSection(FName("ShotgunEnd"));
 	}
+}
+void UCombatComponent::ThrowGrenadeFinished() // called from animation
+{
+	CombatState = ECombatState::ECS_Unoccupied;
 }
 void UCombatComponent::InitializeCarriedAmmo()
 {
