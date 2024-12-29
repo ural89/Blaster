@@ -158,10 +158,7 @@ void UCombatComponent::FireTimeFinished()
 	{
 		Fire();
 	}
-	if (EquippedWeapon->IsEmpty())
-	{
-		Reload();
-	}
+	ReloadEmptyWeapon();
 }
 
 void UCombatComponent::SetAiming(bool bIsAiming)
@@ -228,9 +225,24 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 
 	EquippedWeapon = WeaponToEquip;
 	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped); // since EquippedWeapon is replicated it will set for everyone
+
 	AttachActorToRightHand(EquippedWeapon);
+
 	EquippedWeapon->SetOwner(Character); // this is replicated by default (Actors have virtual OnRep_Owner() method)
 	EquippedWeapon->UpdateHUDAmmo();
+
+	UpdateCarriedAmmo();
+	PlayEquipWeaponSound();
+	ReloadEmptyWeapon();
+
+	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+	Character->bUseControllerRotationYaw = true;
+}
+
+void UCombatComponent::UpdateCarriedAmmo()
+{
+	if (EquippedWeapon == nullptr)
+		return;
 	if (CarriedAmmoMap.Contains(EquippedWeapon->GetWeaponType()))
 	{
 		CurrentWeaponCariedAmmo = CarriedAmmoMap[EquippedWeapon->GetWeaponType()];
@@ -244,22 +256,11 @@ void UCombatComponent::EquipWeapon(AWeapon *WeaponToEquip) // Only called for se
 	{
 		Controller->SetHUDCarriedAmmo(CurrentWeaponCariedAmmo);
 	}
-	if (EquippedWeapon->EquipSound)
-	{
-		UGameplayStatics::PlaySoundAtLocation(
-			this,
-			EquippedWeapon->EquipSound,
-			Character->GetActorLocation());
-	}
-}
-
-void UCombatComponent::UpdateCarriedAmmo()
-{
 }
 
 void UCombatComponent::PlayEquipWeaponSound()
 {
-	if (EquippedWeapon->EquipSound)
+	if (Character && EquippedWeapon && EquippedWeapon->EquipSound)
 	{
 		UGameplayStatics::PlaySoundAtLocation(
 			this,
@@ -283,16 +284,25 @@ void UCombatComponent::DropEquippedWeapon()
 }
 void UCombatComponent::AttachActorToRightHand(AActor *ActorToAttach)
 {
-	if (Character == nullptr || ActorToAttach == nullptr) return;
+	if (Character == nullptr || Character->GetMesh() == nullptr || ActorToAttach == nullptr)
+		return;
 	const USkeletalMeshSocket *HandSocket =
 		Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
 	if (HandSocket)
 	{
-		HandSocket->AttachActor(EquippedWeapon, Character->GetMesh());
+		HandSocket->AttachActor(ActorToAttach, Character->GetMesh());
 	}
 }
 void UCombatComponent::AttachActorToLeftHand(AActor *ActorToAttach)
 {
+	if (Character == nullptr || Character->GetMesh() == nullptr || ActorToAttach == nullptr)
+		return;
+	const USkeletalMeshSocket *HandSocket =
+		Character->GetMesh()->GetSocketByName(FName("LeftHandSocket"));
+	if (HandSocket)
+	{
+		HandSocket->AttachActor(ActorToAttach, Character->GetMesh());
+	}
 }
 void UCombatComponent::Reload()
 {
