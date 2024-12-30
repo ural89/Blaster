@@ -178,7 +178,7 @@ private:
 	class ABlasterPlayerState *BlasterPlayerState;
 
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* AttachedGrenade;
+	UStaticMeshComponent *AttachedGrenade;
 
 public:
 	void SetOverlappingWeapon(class AWeapon *Weapon);
@@ -196,6 +196,7 @@ public:
 	FORCEINLINE float GetMaxHealth() const { return Health; }
 	FORCEINLINE UCombatComponent *GetCombat() const { return CombatComp; }
 	FORCEINLINE bool GetDisableGameplay() const { return bDisableGameplay; }
-	FORCEINLINE UAnimMontage* GetReloadMontage() const { return ReloadMontage; }
+	FORCEINLINE UAnimMontage *GetReloadMontage() const { return ReloadMontage; }
 	ECombatState GetCombatState() const;
+	FORCEINLINE UStaticMeshComponent *GetAttachedGrenade() const { return AttachedGrenade; }
 };
