@@ -129,6 +129,9 @@ private:
 	FTimerHandle FireTimer;
 	bool bCanFire = true;
 
+	FTimerHandle ThrowGrenadeTimer; //SInce i dont have anim for grenade i will set timer to finish
+	float GrenadeThrowFinishDurationSec = 1.f;
+
 	void StartFireTimer();
 	void FireTimeFinished();
 

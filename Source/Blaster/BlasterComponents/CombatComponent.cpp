@@ -458,6 +458,11 @@ void UCombatComponent::ThrowGrenade()
 		Character->PlayThrowGrenadeMontage();
 		AttachActorToLeftHand(EquippedWeapon);
 		ShowAttachedGrenade(true);
+		LaunchGrenade();
+	Character->GetWorldTimerManager().SetTimer(ThrowGrenadeTimer,
+											   this,
+											   &UCombatComponent::ThrowGrenadeFinished,
+											   GrenadeThrowFinishDurationSec);
 	}
 	if (Character && !Character->HasAuthority()) // otherwise it will be called twice
 	{
@@ -473,6 +478,11 @@ void UCombatComponent::ServerThrowGrenade_Implementation()
 		Character->PlayThrowGrenadeMontage();
 		AttachActorToLeftHand(EquippedWeapon);
 		ShowAttachedGrenade(true);
+	LaunchGrenade();
+	Character->GetWorldTimerManager().SetTimer(ThrowGrenadeTimer,
+											   this,
+											   &UCombatComponent::ThrowGrenadeFinished,
+											   GrenadeThrowFinishDurationSec);
 	}
 }
 void UCombatComponent::ShowAttachedGrenade(bool bShowGrenade)
