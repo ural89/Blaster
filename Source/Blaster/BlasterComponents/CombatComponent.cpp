@@ -306,7 +306,8 @@ void UCombatComponent::AttachActorToLeftHand(AActor *ActorToAttach)
 }
 void UCombatComponent::Reload()
 {
-	if (CurrentWeaponCariedAmmo > 0 && CombatState == ECombatState::ECS_Unoccupied)
+	if (CurrentWeaponCariedAmmo > 0 && CombatState == ECombatState::ECS_Unoccupied &&
+		!EquippedWeapon->IsFull())
 	{
 		ServerReload();
 	}
