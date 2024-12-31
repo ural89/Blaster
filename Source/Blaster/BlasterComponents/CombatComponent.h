@@ -40,6 +40,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void LaunchGrenade(); // this is called from animation
+
+	UFUNCTION(Server, Reliable)
+	void ServerLaunchGrenade(const FVector_NetQuantize &Target);
+
 protected:
 	virtual void BeginPlay() override;
 	void SetAiming(bool bIsAiming);
@@ -47,6 +51,14 @@ protected:
 	UFUNCTION()
 	void OnRep_EquippedWeapon();
 	void UpdateShotgunAmmoValues();
+	
+	UPROPERTY(ReplicatedUsing = OnRep_Grenades)
+	int32 Grenades = 4;
+	UFUNCTION()
+	void OnRep_Grenades();
+	UPROPERTY(EditAnywhere)
+	int32 MaxGrenades = 4;
+	void UpdateHUDGrenades();
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);
@@ -72,7 +84,7 @@ protected:
 
 	UFUNCTION(Server, Reliable)
 	void ServerThrowGrenade();
-	
+
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class AProjectile> GrenadeClass;
 
@@ -129,7 +141,7 @@ private:
 	FTimerHandle FireTimer;
 	bool bCanFire = true;
 
-	FTimerHandle ThrowGrenadeTimer; //SInce i dont have anim for grenade i will set timer to finish
+	FTimerHandle ThrowGrenadeTimer; // SInce i dont have anim for grenade i will set timer to finish
 	float GrenadeThrowFinishDurationSec = 1.f;
 
 	void StartFireTimer();
@@ -176,4 +188,7 @@ private:
 	void OnRep_CombatState();
 
 	void UpdateAmmoValues();
+
+public:
+	FORCEINLINE int32 GetGrenades() const { return Grenades; }
 };
