@@ -87,6 +87,9 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
 	class UCombatComponent *CombatComp;
 
+	UPROPERTY(VisibleAnywhere)
+	class UBuffComponent* Buff;
+
 	UFUNCTION(Server, Reliable)		 // this is RPC to Server from clients
 	void ServerEquipButtonPressed(); // definetion of this is .._Implementation() //RPCs can take parameters but not OnRep notifiers
 
