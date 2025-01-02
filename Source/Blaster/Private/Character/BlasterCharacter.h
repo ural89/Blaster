@@ -37,12 +37,12 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void ShowSniperScopeWidget(bool bShowScope);
+	void UpdateHUDHealth();
 
 protected:
 	virtual void BeginPlay() override;
 
 	void RotateInPlace(float DeltaTime);
-	void UpdateHUDHealth();
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void Turn(float Value);
@@ -139,7 +139,7 @@ private:
 	float Health = 100.f;
 
 	UFUNCTION()
-	void OnRep_Health();
+	void OnRep_Health(float LastHealth);
 
 	UPROPERTY()
 	class ABlasterPlayerController *BlasterPlayerController;
@@ -196,10 +196,12 @@ public:
 	FORCEINLINE bool ShouldRotateRootBone() const { return bRotateRootBone; }
 	FORCEINLINE bool IsElimmed() const { return bElimmed; }
 	FORCEINLINE float GetHealth() const { return Health; }
-	FORCEINLINE float GetMaxHealth() const { return Health; }
+	FORCEINLINE void SetHealth(float Amount) { Health = Amount; }
+	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
 	FORCEINLINE UCombatComponent *GetCombat() const { return CombatComp; }
 	FORCEINLINE bool GetDisableGameplay() const { return bDisableGameplay; }
 	FORCEINLINE UAnimMontage *GetReloadMontage() const { return ReloadMontage; }
 	ECombatState GetCombatState() const;
 	FORCEINLINE UStaticMeshComponent *GetAttachedGrenade() const { return AttachedGrenade; }
+	FORCEINLINE UBuffComponent* GetBuff() const { return Buff; }
 };

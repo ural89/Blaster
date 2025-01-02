@@ -6,7 +6,7 @@
 		},
 		{
 			"name": "UE5",
-			"path": "/home/ural/Linux_Unreal_Engine_5.3.2"
+			"path": "/mnt/archstoragenvme/UnrealEngine"
 		}
 	],
 	"settings": {
@@ -33,13 +33,13 @@
 					"Blaster",
 					"Linux",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -50,7 +50,7 @@
 					"Blaster",
 					"Linux",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -59,7 +59,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -70,14 +70,14 @@
 					"Blaster",
 					"Linux",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -88,13 +88,13 @@
 					"Blaster",
 					"Linux",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -105,7 +105,7 @@
 					"Blaster",
 					"Linux",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -114,7 +114,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -125,14 +125,14 @@
 					"Blaster",
 					"Linux",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -143,13 +143,13 @@
 					"Blaster",
 					"Linux",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -160,7 +160,7 @@
 					"Blaster",
 					"Linux",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -169,7 +169,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -180,14 +180,14 @@
 					"Blaster",
 					"Linux",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -198,13 +198,13 @@
 					"Blaster",
 					"Linux",
 					"Test",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -215,7 +215,7 @@
 					"Blaster",
 					"Linux",
 					"Test",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -224,7 +224,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -235,14 +235,14 @@
 					"Blaster",
 					"Linux",
 					"Test",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -253,13 +253,13 @@
 					"Blaster",
 					"Linux",
 					"Shipping",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -270,7 +270,7 @@
 					"Blaster",
 					"Linux",
 					"Shipping",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -279,7 +279,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -290,14 +290,14 @@
 					"Blaster",
 					"Linux",
 					"Shipping",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -308,13 +308,13 @@
 					"Blaster",
 					"LinuxArm64",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -325,7 +325,7 @@
 					"Blaster",
 					"LinuxArm64",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -334,7 +334,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -345,14 +345,14 @@
 					"Blaster",
 					"LinuxArm64",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -363,13 +363,13 @@
 					"Blaster",
 					"LinuxArm64",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -380,7 +380,7 @@
 					"Blaster",
 					"LinuxArm64",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -389,7 +389,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -400,14 +400,14 @@
 					"Blaster",
 					"LinuxArm64",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -418,13 +418,13 @@
 					"Blaster",
 					"LinuxArm64",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -435,7 +435,7 @@
 					"Blaster",
 					"LinuxArm64",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -444,7 +444,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -455,14 +455,14 @@
 					"Blaster",
 					"LinuxArm64",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -473,13 +473,13 @@
 					"Blaster",
 					"LinuxArm64",
 					"Test",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -490,7 +490,7 @@
 					"Blaster",
 					"LinuxArm64",
 					"Test",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -499,7 +499,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -510,14 +510,14 @@
 					"Blaster",
 					"LinuxArm64",
 					"Test",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -528,13 +528,13 @@
 					"Blaster",
 					"LinuxArm64",
 					"Shipping",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -545,7 +545,7 @@
 					"Blaster",
 					"LinuxArm64",
 					"Shipping",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -554,7 +554,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -565,14 +565,14 @@
 					"Blaster",
 					"LinuxArm64",
 					"Shipping",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -583,13 +583,13 @@
 					"BlasterEditor",
 					"Linux",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -600,7 +600,7 @@
 					"BlasterEditor",
 					"Linux",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -609,7 +609,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -620,14 +620,14 @@
 					"BlasterEditor",
 					"Linux",
 					"Debug",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -638,13 +638,13 @@
 					"BlasterEditor",
 					"Linux",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -655,7 +655,7 @@
 					"BlasterEditor",
 					"Linux",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -664,7 +664,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -675,14 +675,14 @@
 					"BlasterEditor",
 					"Linux",
 					"DebugGame",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -693,13 +693,13 @@
 					"BlasterEditor",
 					"Linux",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -710,7 +710,7 @@
 					"BlasterEditor",
 					"Linux",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex"
 				],
 				"problemMatcher": "$msCompile",
@@ -719,7 +719,7 @@
 				],
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			},
 			{
@@ -730,14 +730,14 @@
 					"BlasterEditor",
 					"Linux",
 					"Development",
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-waitmutex",
 					"-clean"
 				],
 				"problemMatcher": "$msCompile",
 				"type": "shell",
 				"options": {
-					"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+					"cwd": "/mnt/archstoragenvme/UnrealEngine"
 				}
 			}
 		]
@@ -748,100 +748,100 @@
 			{
 				"name": "Launch Blaster (Debug)",
 				"request": "launch",
-				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-Debug",
+				"program": "/home/ural/GitHub/Blaster/Binaries/Linux/Blaster-Linux-Debug",
 				"preLaunchTask": "Blaster Linux Debug Build",
 				"args": [
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (DebugGame)",
 				"request": "launch",
-				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-DebugGame",
+				"program": "/home/ural/GitHub/Blaster/Binaries/Linux/Blaster-Linux-DebugGame",
 				"preLaunchTask": "Blaster Linux DebugGame Build",
 				"args": [
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (Development)",
 				"request": "launch",
-				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame",
+				"program": "/home/ural/GitHub/Blaster/Binaries/Linux/Blaster",
 				"preLaunchTask": "Blaster Linux Development Build",
 				"args": [
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (Test)",
 				"request": "launch",
-				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-Test",
+				"program": "/home/ural/GitHub/Blaster/Binaries/Linux/Blaster-Linux-Test",
 				"preLaunchTask": "Blaster Linux Test Build",
 				"args": [
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
 				"name": "Launch Blaster (Shipping)",
 				"request": "launch",
-				"program": "/home/ural/Documents/GitHub/Blaster/Binaries/Linux/UnrealGame-Linux-Shipping",
+				"program": "/home/ural/GitHub/Blaster/Binaries/Linux/Blaster-Linux-Shipping",
 				"preLaunchTask": "Blaster Linux Shipping Build",
 				"args": [
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
 				"name": "Launch BlasterEditor (Debug)",
 				"request": "launch",
-				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor-Linux-Debug",
+				"program": "/mnt/archstoragenvme/UnrealEngine/Engine/Binaries/Linux/UnrealEditor-Linux-Debug",
 				"preLaunchTask": "BlasterEditor Linux Debug Build",
 				"args": [
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject"
+					"/home/ural/GitHub/Blaster/Blaster.uproject"
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
 				"name": "Launch BlasterEditor (DebugGame)",
 				"request": "launch",
-				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor-Linux-DebugGame",
+				"program": "/mnt/archstoragenvme/UnrealEngine/Engine/Binaries/Linux/UnrealEditor-Linux-DebugGame",
 				"preLaunchTask": "BlasterEditor Linux DebugGame Build",
 				"args": [
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject"
+					"/home/ural/GitHub/Blaster/Blaster.uproject"
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
 				"name": "Launch BlasterEditor (Development)",
 				"request": "launch",
-				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Binaries/Linux/UnrealEditor",
+				"program": "/mnt/archstoragenvme/UnrealEngine/Engine/Binaries/Linux/UnrealEditor",
 				"preLaunchTask": "BlasterEditor Linux Development Build",
 				"args": [
-					"/home/ural/Documents/GitHub/Blaster/Blaster.uproject"
+					"/home/ural/GitHub/Blaster/Blaster.uproject"
 				],
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2",
+				"cwd": "/mnt/archstoragenvme/UnrealEngine",
 				"type": "cppdbg",
-				"visualizerFile": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
+				"visualizerFile": "/mnt/archstoragenvme/UnrealEngine/Engine/Extras/VisualStudioDebugging/Unreal.natvis",
 				"showDisplayString": true
 			},
 			{
@@ -849,11 +849,11 @@
 				"type": "coreclr",
 				"request": "launch",
 				"preLaunchTask": "UnrealBuildTool Linux Development Build",
-				"program": "/home/ural/Linux_Unreal_Engine_5.3.2/Engine/Build/BatchFiles/RunUBT.bat",
+				"program": "/mnt/archstoragenvme/UnrealEngine/Engine/Build/BatchFiles/RunUBT.bat",
 				"args": [
 					"-projectfiles",
 					"-vscode",
-					"-project=/home/ural/Documents/GitHub/Blaster/Blaster.uproject",
+					"-project=/home/ural/GitHub/Blaster/Blaster.uproject",
 					"-game",
 					"-engine",
 					"-dotnet"
@@ -861,7 +861,7 @@
 				"console": "internalConsole",
 				"internalConsoleOptions": "openOnSessionStart",
 				"stopAtEntry": false,
-				"cwd": "/home/ural/Linux_Unreal_Engine_5.3.2"
+				"cwd": "/mnt/archstoragenvme/UnrealEngine"
 			}
 		]
 	}
