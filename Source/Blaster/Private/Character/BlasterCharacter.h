@@ -89,7 +89,7 @@ private:
 	class UCombatComponent *CombatComp;
 
 	UPROPERTY(VisibleAnywhere)
-	class UBuffComponent* Buff;
+	class UBuffComponent *Buff;
 
 	UFUNCTION(Server, Reliable)		 // this is RPC to Server from clients
 	void ServerEquipButtonPressed(); // definetion of this is .._Implementation() //RPCs can take parameters but not OnRep notifiers
@@ -144,9 +144,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float MaxShield = 100.f;
-
-	UPROPERTY(ReplicatedUsing = OnRep_Shield, VisibleAnywhere, Category = "Player Stats")
-	float Shield = 100.f;
+	
+	UPROPERTY(ReplicatedUsing = OnRep_Shield, EditAnywhere, Category = "Player Stats")
+	float Shield = 0.f;
 
 	UFUNCTION()
 	void OnRep_Shield(float LastShield);
@@ -208,10 +208,13 @@ public:
 	FORCEINLINE float GetHealth() const { return Health; }
 	FORCEINLINE void SetHealth(float Amount) { Health = Amount; }
 	FORCEINLINE float GetMaxHealth() const { return MaxHealth; }
+	FORCEINLINE float GetShield() const { return Shield; }
+	FORCEINLINE void SetShield(float Amount) { Shield = Amount; }
+	FORCEINLINE float GetMaxShield() const { return MaxShield; }
 	FORCEINLINE UCombatComponent *GetCombat() const { return CombatComp; }
 	FORCEINLINE bool GetDisableGameplay() const { return bDisableGameplay; }
 	FORCEINLINE UAnimMontage *GetReloadMontage() const { return ReloadMontage; }
 	ECombatState GetCombatState() const;
 	FORCEINLINE UStaticMeshComponent *GetAttachedGrenade() const { return AttachedGrenade; }
-	FORCEINLINE UBuffComponent* GetBuff() const { return Buff; }
+	FORCEINLINE UBuffComponent *GetBuff() const { return Buff; }
 };

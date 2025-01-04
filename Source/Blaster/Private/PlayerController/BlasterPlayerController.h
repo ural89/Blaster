@@ -27,6 +27,7 @@ public:
 	virtual void OnPossess(APawn *InPawn) override;
 	virtual void Tick(float DeltaTime) override;
 
+
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
 	virtual float GetServerTime();
 	virtual void ReceivedPlayer() override; // Sync with server clock as soon as possible
@@ -86,7 +87,6 @@ private:
 	UPROPERTY()
 	class UCharacterOverlay *CharacterOverlay;
 
-	bool bInitializeCharacterOverlay = false;
 
 	float HUDHealth;
 	float HUDMaxHealth;
@@ -95,4 +95,10 @@ private:
 	int32 HUDGrenades;
 	float HUDShield;
 	float HUDMaxShield;
+
+	bool bInitializeHealth = false;
+	bool bInitializeScore = false;
+	bool bInitializeDefeats = false;
+	bool bInitializeGrenades = false;
+	bool bInitializeShield = false;
 };
