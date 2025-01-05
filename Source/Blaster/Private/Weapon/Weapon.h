@@ -41,7 +41,6 @@ protected:
 		UPrimitiveComponent *OtherComp,
 		int32 OtherBodyIndex);
 
-	void EnableCustomDepth(bool bEnable);
 public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty> &OutLifetimeProps) const override;
@@ -52,6 +51,9 @@ public:
 	void Dropped();
 	void UpdateHUDAmmo();
 	void AddAmmo(int32 AmmoToAdd);
+
+	void EnableCustomDepth(bool bEnable);
+	bool bDestroyWeapon = false;
 
 public:
 	/// Textures for weapon crosshairs

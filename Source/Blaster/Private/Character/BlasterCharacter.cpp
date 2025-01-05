@@ -128,7 +128,14 @@ void ABlasterCharacter::Elim() // since this is called from game mode, this is o
 {
 	if (CombatComp && CombatComp->EquippedWeapon)
 	{
-		CombatComp->EquippedWeapon->Dropped();
+		if (CombatComp->EquippedWeapon->bDestroyWeapon)
+		{
+			CombatComp->EquippedWeapon->Destroy();
+		}
+		else
+		{
+			CombatComp->EquippedWeapon->Dropped();
+		}
 	}
 	MulticastElim();
 	GetWorldTimerManager().SetTimer(
@@ -195,6 +202,8 @@ void ABlasterCharacter::MulticastElim_Implementation()
 void ABlasterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	SpawDefaultWeapon();
+	UpdateHUDAmmo();
 
 	UpdateHUDHealth();
 	UpdateHUDShield();
@@ -231,6 +240,30 @@ void ABlasterCharacter::UpdateHUDShield()
 		BlasterPlayerController->SetHUDShield(Shield, MaxShield);
 	}
 }
+void ABlasterCharacter::UpdateHUDAmmo()
+{
+	BlasterPlayerController = BlasterPlayerController == nullptr ? Cast<ABlasterPlayerController>(Controller) : BlasterPlayerController;
+	if (BlasterPlayerController && CombatComp && CombatComp->EquippedWeapon)
+	{
+		BlasterPlayerController->SetHUDCarriedAmmo(CombatComp->CurrentWeaponCariedAmmo);
+		BlasterPlayerController->SetHUDWeaponAmmo(CombatComp->EquippedWeapon->GetAmmo());
+	}
+}
+void ABlasterCharacter::SpawDefaultWeapon()
+{
+	ABlasterGameMode* BlasterGameMode = Cast<ABlasterGameMode>(UGameplayStatics::GetGameMode(this));
+	UWorld* World = GetWorld();
+	if (BlasterGameMode && World && !bElimmed && DefaultWeaponClass)
+	{
+		AWeapon* StartingWeapon = World->SpawnActor<AWeapon>(DefaultWeaponClass);
+		StartingWeapon->bDestroyWeapon = true;
+		if (CombatComp)
+		{
+			CombatComp->EquipWeapon(StartingWeapon);
+		}
+	}
+}
+
 void ABlasterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);

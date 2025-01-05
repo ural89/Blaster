@@ -39,6 +39,9 @@ public:
 	void ShowSniperScopeWidget(bool bShowScope);
 	void UpdateHUDHealth();
 	void UpdateHUDShield();
+	void UpdateHUDAmmo();
+
+	void SpawDefaultWeapon();
 
 protected:
 	virtual void BeginPlay() override;
@@ -144,7 +147,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Player Stats")
 	float MaxShield = 100.f;
-	
+
 	UPROPERTY(ReplicatedUsing = OnRep_Shield, EditAnywhere, Category = "Player Stats")
 	float Shield = 0.f;
 
@@ -192,6 +195,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent *AttachedGrenade;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AWeapon> DefaultWeaponClass;
 
 public:
 	void SetOverlappingWeapon(class AWeapon *Weapon);

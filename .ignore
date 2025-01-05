@@ -1,8 +1,8 @@
-/.git
-/.vscode
-/Content
-/DerivedDataCache
-/Intermediate
 /Saved
+/DerivedDataCache
+/.git
+/Content
+/.vscode
+/Intermediate
 /Plugins/MultiplayerSessions/Content
 /Plugins/MultiplayerSessions/Intermediate
